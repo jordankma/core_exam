@@ -1,0 +1,145 @@
+{
+  "package": "vne",
+  "module": "news",
+  "description": "Permission route by group",
+  "details": [
+    {
+      "name": "Quản lý news",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "vne.news.news.manager",
+            "vne.news.news.data",
+            "vne.news.news.log"
+          ]
+        },
+        {
+          "name": "Create",
+          "routes": [
+            "vne.news.news.create",
+            "vne.news.news.add",
+            "vne.news.news.alias",
+            "vne.news.tag.ajax.add"
+          ]
+        },
+        {
+          "name": "Update",
+          "routes": [
+            "vne.news.news.show",
+            "vne.news.news.update"
+          ]
+        },
+        {
+          "name": "Delete",
+          "routes": [
+            "vne.news.news.delete",
+            "vne.news.news.confirm-delete"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quản lý news_cat",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "vne.news.cat.manager",
+            "vne.news.cat.data",
+            "vne.news.cat.log"
+          ]
+        },
+        {
+          "name": "Create",
+          "routes": [
+            "vne.news.cat.create",
+            "vne.news.cat.add"
+          ]
+        },
+        {
+          "name": "Update",
+          "routes": [
+            "vne.news.cat.show",
+            "vne.news.cat.update"
+          ]
+        },
+        {
+          "name": "Delete",
+          "routes": [
+            "vne.news.cat.delete",
+            "vne.news.cat.confirm-delete"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quản lý news_tag",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "vne.news.tag.manager",
+            "vne.news.tag.data",
+            "vne.news.tag.log"
+          ]
+        },
+        {
+          "name": "Create",
+          "routes": [
+            "vne.news.tag.create",
+            "vne.news.tag.add"
+          ]
+        },
+        {
+          "name": "Update",
+          "routes": [
+            "vne.news.tag.show",
+            "vne.news.tag.update"
+          ]
+        },
+        {
+          "name": "Delete",
+          "routes": [
+            "vne.news.tag.delete",
+            "vne.news.tag.confirm-delete"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quản lý trang tĩnh",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "vne.news.page.manager",
+            "vne.news.page.data",
+            "vne.news.page.log"
+          ]
+        },
+        {
+          "name": "Create",
+          "routes": [
+            "vne.news.page.create",
+            "vne.news.page.add"
+          ]
+        },
+        {
+          "name": "Update",
+          "routes": [
+            "vne.news.page.show",
+            "vne.news.page.update"
+          ]
+        },
+        {
+          "name": "Delete",
+          "routes": [
+            "vne.news.page.delete",
+            "vne.news.page.confirm-delete"
+          ]
+        }
+      ]
+    }
+  ]
+}

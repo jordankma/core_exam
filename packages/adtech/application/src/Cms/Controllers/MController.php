@@ -11,7 +11,7 @@ use Adtech\Core\App\Models\Setting;
 use Session;
 use Cache;
 use Auth;
-
+use Vne\News\App\Repositories\NewsRepository;
 // Member controller
 class MController extends BaseController
 {
@@ -108,9 +108,8 @@ class MController extends BaseController
             'template'  => config('site.desktop.template'),
             'skin'  => config('site.desktop.skin'),
             'mtemplate'  => config('site.mobile.template'),
-            'mskin'  => config('site.mobile.skin'),
+            'mskin'  => config('site.mobile.skin')
         ];
-
         view()->share($share);
     }
 

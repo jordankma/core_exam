@@ -1,0 +1,75 @@
+{
+  "package": "vne",
+  "module": "banner",
+  "description": "Permission route by group",
+  "details": [
+    {
+      "name": "Quản lý banner",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "vne.banner.banner.manage",
+            "vne.banner.banner.data",
+            "vne.banner.banner.log"
+          ]
+        },
+        {
+          "name": "Create",
+          "routes": [
+            "vne.banner.banner.create",
+            "vne.banner.banner.add"
+          ]
+        },
+        {
+          "name": "Update",
+          "routes": [
+            "vne.banner.banner.show",
+            "vne.banner.banner.update"
+          ]
+        },
+        {
+          "name": "Delete",
+          "routes": [
+            "vne.banner.banner.delete",
+            "vne.banner.banner.confirm-delete"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quản lý position",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "vne.banner.position.manage",
+            "vne.banner.position.data",
+            "vne.banner.position.log"
+          ]
+        },
+        {
+          "name": "Create",
+          "routes": [
+            "vne.banner.position.create",
+            "vne.banner.position.add"
+          ]
+        },
+        {
+          "name": "Update",
+          "routes": [
+            "vne.banner.position.show",
+            "vne.banner.position.update"
+          ]
+        },
+        {
+          "name": "Delete",
+          "routes": [
+            "vne.banner.position.delete",
+            "vne.banner.position.confirm-delete"
+          ]
+        }
+      ]
+    }
+  ]
+}
