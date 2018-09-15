@@ -79,7 +79,7 @@ Route::group(array('prefix' => ''), function() {
         Route::get('frontend/news/category', function () { })->name('news.frontend.cate')
             ->where('type','news')
             ->where('view','list')
-            ->where('as','Tin tức - Danh mục');
+            ->where('as','Tin tức - Theo danh mục');
 
         Route::get('frontend/news/detail', function () { })->name('news.frontend.detail')
             ->where('type','news')

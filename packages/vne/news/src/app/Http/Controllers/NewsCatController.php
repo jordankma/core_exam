@@ -62,7 +62,7 @@ class NewsCatController extends Controller
         $name = $request->name;
         $news_cat = new NewsCat();
         $news_cat->name = $name;
-        $news_cat->alias = self::stripUnicode($name);
+        $news_cat->alias = self::to_slug($name);
         $news_cat->created_at = new DateTime();
         $news_cat->updated_at = new DateTime();
         $news_cat->status = 1;
@@ -111,6 +111,7 @@ class NewsCatController extends Controller
 	public function update(NewsCatRequest $request){
 		$news_cat = $this->news_cat->find($request->news_cat_id);
 		$news_cat->name = $request->name;
+        $news_cat->alias = self::to_slug($request->name);
         $news_cat->parent = $request->parent_id;
 		if ($news_cat->save()) {
             activity('news_cat')

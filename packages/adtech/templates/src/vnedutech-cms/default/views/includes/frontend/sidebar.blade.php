@@ -1,5 +1,5 @@
 <!-- rating right -->
-@include('includes.frontend._rating_right')
+{{-- @include('includes.frontend._rating_right') --}}
 <!-- rating right end -->
 
 <!-- video right -->

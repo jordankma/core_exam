@@ -35,8 +35,10 @@
                         {{ $title }}
                     </h4>
                     <div class="pull-right">
-                        <a href="{{ route('vne.contact.demo.create') }}" class="btn btn-sm btn-default"><span
-                                    class="glyphicon glyphicon-plus"></span> {{ trans('vne-contact::language.buttons.create') }}</a>
+                        {{-- @if ($USER_LOGGED->canAccess('vne.contact.contact.create'))
+                        <a href="{{ route('vne.contact.contact.create') }}" class="btn btn-sm btn-default">
+                            <span class="glyphicon glyphicon-plus"></span> {{ trans('vne-contact::language.buttons.create') }}</a>
+                        @endif --}}
                     </div>
                 </div>
                 <br/>
@@ -46,9 +48,10 @@
                             <thead>
                             <tr class="filters">
                                 <th class="fit-content">{{ trans('adtech-core::common.sequence') }}</th>
-                                <th>{{ trans('vne-contact::language.table.demo.name') }}</th>
+                                <th>{{ trans('vne-contact::language.table.contact.name') }}</th>
+                                <th>{{ trans('vne-contact::language.table.contact.email') }}</th>
+                                <th>{{ trans('vne-contact::language.table.contact.content') }}</th>
                                 <th style="width: 120px">{{ trans('vne-contact::language.table.created_at') }}</th>
-                                <th style="width: 120px">{{ trans('vne-contact::language.table.updated_at') }}</th>
                                 <th>{{ trans('vne-contact::language.table.action') }}</th>
                             </tr>
                             </thead>
@@ -70,12 +73,13 @@
             var table = $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('vne.contact.demo.data') }}',
+                ajax: '{{ route('vne.contact.contact.data') }}',
                 columns: [
-                    { data: 'DT_Row_Index', name: 'id' },
+                    { data: 'DT_Row_Index', name: 'contact_id' },
                     { data: 'name', name: 'name' },
+                    { data: 'email', name: 'email' },
+                    { data: 'content', name: 'content'},
                     { data: 'created_at', name: 'created_at'},
-                    { data: 'updated_at', name: 'updated_at'},
                     { data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'fit-content'}
                 ]
             });

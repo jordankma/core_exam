@@ -140,6 +140,40 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Quản lý box",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "vne.news.box.manager",
+            "vne.news.box.data",
+            "vne.news.box.log"
+          ]
+        },
+        {
+          "name": "Create",
+          "routes": [
+            "vne.news.box.create",
+            "vne.news.box.add"
+          ]
+        },
+        {
+          "name": "Update",
+          "routes": [
+            "vne.news.box.show",
+            "vne.news.box.update"
+          ]
+        },
+        {
+          "name": "Delete",
+          "routes": [
+            "vne.news.box.delete",
+            "vne.news.box.confirm-delete"
+          ]
+        }
+      ]
     }
   ]
 }

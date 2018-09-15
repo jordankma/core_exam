@@ -11,8 +11,10 @@ return [
         "created_at" => "Created at",
         "updated_at" => "Updated at",
         "action" => "Actions",
-        "demo" => [
-            "name" => "Name"
+        "contact" => [
+            "name" => "Tên",
+            "email" => "Email",
+            "content" => "Nội dung",
         ]
     ],
     "buttons" => [
