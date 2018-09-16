@@ -22,8 +22,13 @@ class NewsfrontendController extends Controller
         $this->_user = Auth::user();
     }
 
-    public function list(Request $request){
-        $list_news = $this->news->paginate(10);   
+    public function list(Request $request,$alias  = null){
+        if($alias==null){
+            $list_news = $this->news->paginate(10);  
+        } else {
+            $list_news = $this->news->getNewsByBox($alias,10);    
+        }
+
         $data = [
             'list_news' => $list_news     
         ];

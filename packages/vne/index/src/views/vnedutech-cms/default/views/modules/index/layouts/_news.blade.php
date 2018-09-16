@@ -12,12 +12,12 @@
 				</h2>
 				<div class="content">
 					<div class="img-cover">
-						<a href="#" class="img-cover__wrapper">
+						<a href="{{ URL::to('chi-tiet',$alias) }}" class="img-cover__wrapper">
 							<img src="{{ $element->image }}" alt="">
 						</a>
 					</div>
 					<div class="info">
-						<div class="date">{{ $element->created_at }}</div>
+						<div class="date">{{ date_format($element->created_at,"Y/m/d") }}</div>
 						<div class="description">{{ $element->desc }}</div>
 						<div class="copyright"><i class="ii ii-bachelor-blue"></i> {{ $element->create_by }}</div>
 					</div>
@@ -26,7 +26,6 @@
 			@endforeach
 			@endif
 		</div>
-		{{-- <a href="" class="btn btn-primary">Còn rất nhiều tin mới. Xem thêm ngay!</a> --}}
-    	{{$tin_tuc_chung->links()}}
+		<a href="" id="load_more_news" class="btn btn-primary">Còn rất nhiều tin mới. Xem thêm ngay!</a>
 	</div>
 </section>
