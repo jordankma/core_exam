@@ -35,10 +35,9 @@ class IndexController extends Controller
         $videonoibat = config('site.news_box.videonoibat');    
         $tintucchung = config('site.news_box.tintucchung');    
         $biendaovietnamtailieuthamkhaochocuocthi = config('site.news_box.biendaovietnamtailieuthamkhaochocuocthi');
-
         $thong_bao_ban_to_chuc = $this->news->getNewsByBox($thongbaobtc,2);
         $bien_dao_viet_nam = $this->news->getNewsByBox($biendaovietnamtailieuthamkhaochocuocthi,2);
-        $tin_tuc_chung = $this->news->getNewsByBox($tintucchung,5);
+        $tin_tuc_chung = $this->news->getNewsByBox($tintucchung,1);
         $video_noi_bat = $this->news->getNewsByBox($videonoibat,5);
 
         $banners = Banner::all();
@@ -49,10 +48,30 @@ class IndexController extends Controller
             'thong_bao_ban_to_chuc' => $thong_bao_ban_to_chuc,
             'bien_dao_viet_nam' => $bien_dao_viet_nam,
             'tin_tuc_chung' => $tin_tuc_chung,
-            'video_noi_bat' => $video_noi_bat
+            'video_noi_bat' => $video_noi_bat,
+            'last_page_tin_tuc_chung' => $tin_tuc_chung->lastPage()
 
         ];
         return view('VNE-INDEX::modules.index.index',$data);
-    }
+    } 
 
+    public function getNewByBox(Request $request,$alias){
+        $list_news = $this->news->getNewsByBox($alias,1);
+        $list_news_json = array();
+        if(!empty($list_news)){
+            foreach ($list_news as $key => $news) {
+                $list_news_json[] = [
+                    'news_id' => $news->news_id,
+                    'title_alias' => $news->title_alias,
+                    'title' => $news->title,
+                    'image' => $news->image,
+                    'created_at' => date_format($news->created_at,"Y/m/d"),
+                    'desc' => $news->desc,
+                    'create_by' => $news->create_by
+                ];
+            }
+        }
+        return json_encode($list_news_json);
+             
+    }
 }
