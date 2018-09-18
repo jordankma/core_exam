@@ -46,7 +46,7 @@
                     @if (session()->has('count_login'))
                         @if (session()->get('count_login') > 4)
                         <div class="form-group">
-                            <div class="g-recaptcha" data-sitekey="6LeQL28UAAAAAIUGcNTy1HzD7g9dseSVmXvmQTT2" data-callback="YourOnSubmitFn"></div>
+                            <div class="g-recaptcha" data-sitekey="6LcPz3AUAAAAAIkzsuAsQCXJU1nkkJMm6Tr58I30" data-callback="YourOnSubmitFn"></div>
                         </div>
                         @endif
                     @endif

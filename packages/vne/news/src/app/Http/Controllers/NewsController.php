@@ -60,14 +60,16 @@ class NewsController extends Controller
      * Chức năng : get list news
      */
 	public function manager(Request $request){
-		$list_news_cat = $this->news_cat->all();
+        $list_news_cat = $this->news_cat->all();
+		$list_news_box = $this->news_box->all();
 		$params =[
-    		'name'=>$request->name,
-    		'news_time'=>$request->news_time,
-    		'news_cat'=>$request->news_cat,
+    		'name'=> $request->name,
+    		'news_time'=> $request->news_time,
+            'news_cat'=> $request->news_cat,
+    		'news_box'=> $request->news_box,
     		'is_hot'=> $request->is_hot
     	];
-		return view('VNE-NEWS::modules.news.news.manager',compact('list_news_cat','params'));
+		return view('VNE-NEWS::modules.news.news.manager',compact('list_news_cat','list_news_box','params'));
 	}
 	public function create(){
 		// $list_news_cat = $this->news_cat->all();
@@ -425,10 +427,11 @@ class NewsController extends Controller
     	$params =[
     		'name'=>$request->name,
     		'news_time'=>$request->news_time,
-    		'news_cat'=>$request->news_cat,
+            'news_cat'=>$request->news_cat,
+    		'news_box'=>$request->news_box,
     		'is_hot'=> $request->is_hot
     	];
-    	if($request->name!=null || $request->news_time!=null || $request->news_cat!=null || $request->is_hot!=null){
+    	if($request->name!=null || $request->news_time!=null || $request->news_cat!=null || $request->is_hot!=null || $request->news_box!=null){
     		$list_news = $this->news->getListNews($params);
     	}
     	else{

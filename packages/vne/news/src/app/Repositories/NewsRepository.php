@@ -48,6 +48,12 @@ class NewsRepository extends Repository
                 $query->where('vne_news_cat.news_cat_id', $params['news_cat']);
             });
         }
+        if (!empty($params['news_box']) && $params['news_box'] != null) {
+            $q->with('getBoxs')
+            ->whereHas('getBoxs', function ($query) use ($params) {
+                $query->where('vne_news_box.news_box_id', $params['news_box']);
+            });
+        }
         $data = $q->select('vne_news.*', DB::raw('@rownum  := @rownum  + 1 AS rownum'))->get(); 
         return $data;
     }
@@ -77,6 +83,14 @@ class NewsRepository extends Repository
         
         $result = News::whereHas('getBoxs', function ($query) use ($alias) {
             $query->where('vne_news_box.alias', $alias);
+        })->paginate($limit, ['*'], $alias);
+        return $result;
+    }
+
+    public function getNewsByCate($alias,$limit) {
+        
+        $result = News::whereHas('getCats', function ($query) use ($alias) {
+            $query->where('vne_news_cat.alias', $alias);
         })->paginate($limit, ['*'], $alias);
         return $result;
     }

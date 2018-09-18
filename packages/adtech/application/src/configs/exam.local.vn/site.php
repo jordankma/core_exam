@@ -67,8 +67,8 @@ return [
     | Website backend url
     |--------------------------------------------------------------------------
     */
-    'url_storage' => 'http://files.dhcd.vnedutech.vn',
-    'url_static' => 'http://static.dhcd.vnedutech.vn',
+    'url_storage' => 'http://exam.local.vn',
+    'url_static' => 'http://exam.local.vn',
     'api_prefix' => '/resource/dev/get',
     'admin_prefix' => '/admin',
     'homepage' => [
@@ -114,4 +114,16 @@ return [
         'app_key' => '',
         'url_message' => '',
     ],
+    'news_box' => [
+        'thongbaobtc' => 'thongbaobtc',
+        'biendaovietnamtailieuthamkhaochocuocthi' => 'biendaovietnamtailieuthamkhaochocuocthi',
+        'videonoibat' => 'videonoibat',
+        'tintucchung' => 'tintucchung'
+    ],
+    'news_cat' => [
+        'thongbaobtc' => 'thong-bao-btc',
+        'biendaovietnamtailieuthamkhaochocuocthi' => 'bien-dao-viet-nam-tai-lieu-tham-khao-cho-cuoc-thi',
+        'videonoibat' => 'videonoibat',
+        'tintucchung' => 'tintucchung'
+    ]
 ];

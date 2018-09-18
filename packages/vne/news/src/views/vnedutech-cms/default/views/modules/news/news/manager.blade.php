@@ -68,6 +68,19 @@
                                             @endif
                                         </select>
                                     </div>
+                                </div> 
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" >{{ trans('vne-news::language.table.list_news.box') }}</label>
+                                    <div class="col-md-8">
+                                        <select class="form-control" name="news_box">
+                                            <option></option>
+                                            @if(!empty($list_news_box))
+                                            @foreach($list_news_box as $news_box)
+                                                <option value="{{$news_box->news_box_id}}">{{$news_box->name}}</option>
+                                            @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
                                 </div>            
                             </div>
                             <div class="col-md-6">
@@ -150,7 +163,7 @@
             var table = $('#table').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{!! route('vne.news.news.data', ['name' => $params['name'],'news_time'=>$params['news_time'],'news_cat'=>$params['news_cat'],'is_hot'=>$params['is_hot']]) !!}',
+                ajax: '{!! route('vne.news.news.data', ['name' => $params['name'],'news_time'=>$params['news_time'],'news_cat'=>$params['news_cat'],'is_hot'=>$params['is_hot'],'news_box'=>$params['news_box']]) !!}',
                 columns: [
                     { data: 'DT_Row_Index', name: 'news_id' },
                     { data: 'title', name: 'title' },

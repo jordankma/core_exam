@@ -42,6 +42,7 @@ return [
             "title"=>"Tiêu đề",
             "author"=>"Người tạo",
             "category"=>"Chuyên mục",
+            "box"=>"Chọn box",
             "status"=>"Trạng thái",
             'is_hot'=>"Tin hot",
             'priority'=> "Sắp xếp",

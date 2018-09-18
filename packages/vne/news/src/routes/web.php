@@ -26,6 +26,8 @@ Route::group(array('prefix' => $adminPrefix), function() {
             Route::post('update', 'NewsCatController@update')->where('news_cat_id', '[0-9]+')->name('vne.news.cat.update');
             Route::get('delete', 'NewsCatController@delete')->name('vne.news.cat.delete');
             Route::get('confirm-delete', 'NewsCatController@getModalDelete')->name('vne.news.cat.confirm-delete');
+
+            Route::get('api/list', 'NewsCatController@getCateApi')->name('vne.api.news.category');
         });
 
         //route new tag 

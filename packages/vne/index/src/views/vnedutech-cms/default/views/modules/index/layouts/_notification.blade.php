@@ -1,7 +1,7 @@
 <section class="section notification">
 	<div class="notification-item">
 		@php 
-			$alias = config('site.news_box.thongbaobtc');
+			$alias = config('site.news_cat.thongbaobtc');
 		@endphp
 		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list',$alias)}}">Thông báo BTC</a></h2>
 		<div class="list">
@@ -20,7 +20,7 @@
 	</div>
 	<div class="notification-item">
 		@php 
-			$alias = config('site.news_box.biendaovietnamtailieuthamkhaochocuocthi');
+			$alias = config('site.news_cat.biendaovietnamtailieuthamkhaochocuocthi');
 		@endphp
 		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list',$alias)}}">Biển đảo việt nam (Tài liệu tham khảo cho cuộc thi)</a></h2>
 		<div class="list">

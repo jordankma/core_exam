@@ -26,9 +26,8 @@ class NewsfrontendController extends Controller
         if($alias==null){
             $list_news = $this->news->paginate(10);  
         } else {
-            $list_news = $this->news->getNewsByBox($alias,10);    
+            $list_news = $this->news->getNewsByCate($alias,10);    
         }
-
         $data = [
             'list_news' => $list_news     
         ];
