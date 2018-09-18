@@ -5,8 +5,7 @@
 
 {{-- page styles --}}
 @section('header_styles')
-    {{--<link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/css/bootstrap-switch.css') }}" rel="stylesheet" type="text/css"/>--}}
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/pages/blog.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/css/pages/blog.css') }}" rel="stylesheet" type="text/css">
     <!--end of page css-->
 @stop
 
@@ -95,12 +94,4 @@
 {{-- page level scripts --}}
 @section('footer_scripts')
     <!-- begining of page js -->
-    {{--<script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/js/bootstrap-switch.js') }}" type="text/javascript"></script>--}}
-    {{--<script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>--}}
-    {{--<script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/js/pages/add_role.js') }}" type="text/javascript"></script>--}}
-    <script>
-        $(function () {
-            // $("[name='permission_locked'], [name='status']").bootstrapSwitch();
-        })
-    </script>
 @stop

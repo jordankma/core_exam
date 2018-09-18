@@ -21,7 +21,7 @@ class CreateAdtechCoreMenusLocaleTable extends Migration
             $table->string('name');
 
             $table->unique(['menu_id','locale']);
-            $table->foreign('menu_id')->references('menu_id')->on('adtech_core_menus')->onDelete('cascade');
+            $table->foreign('menu_id')->references('menu_id')->on('adtech_core_menus');
         });
     }
 

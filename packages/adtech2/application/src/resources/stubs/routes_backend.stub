@@ -1,0 +1,16 @@
+<?php
+$adminPrefix = config('site.admin_prefix');
+Route::group(array('prefix' => $adminPrefix), function() {
+    Route::group(['middleware' => ['adtech.auth', 'adtech.acl']], function () {
+
+        Route::get('vendor_name/package_name/demo/log', 'DemoController@log')->name('vendor_name.package_name.demo.log');
+        Route::get('vendor_name/package_name/demo/data', 'DemoController@data')->name('vendor_name.package_name.demo.data');
+        Route::get('vendor_name/package_name/demo/manage', 'DemoController@manage')->name('vendor_name.package_name.demo.manage');
+        Route::get('vendor_name/package_name/demo/create', 'DemoController@create')->name('vendor_name.package_name.demo.create');
+        Route::post('vendor_name/package_name/demo/add', 'DemoController@add')->name('vendor_name.package_name.demo.add');
+        Route::get('vendor_name/package_name/demo/show', 'DemoController@show')->name('vendor_name.package_name.demo.show');
+        Route::put('vendor_name/package_name/demo/update', 'DemoController@update')->name('vendor_name.package_name.demo.update');
+        Route::get('vendor_name/package_name/demo/delete', 'DemoController@delete')->name('vendor_name.package_name.demo.delete');
+        Route::get('vendor_name/package_name/demo/confirm-delete', 'DemoController@getModalDelete')->name('vendor_name.package_name.demo.confirm-delete');
+    });
+});

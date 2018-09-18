@@ -17,7 +17,7 @@ Route::group([
     Route::get('login', 'Auth\LoginController@login');
 
     Route::group(['middleware' => ['jwt.auth']], function () {
-        Route::get('logout', 'Auth\LoginController@logout');
+        Route::get('logout', 'Auth\LoginController@logout')->where('as', 'Đăng xuất');
         Route::get('refresh', 'Auth\LoginController@refresh');
         Route::get('me', 'Auth\LoginController@me');
     });

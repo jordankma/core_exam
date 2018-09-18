@@ -5,10 +5,10 @@
 
 {{-- page level styles --}}
 @section('header_styles')
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2-bootstrap.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/css/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/pages/tables.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2-bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/css/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/css/pages/tables.css') }}" rel="stylesheet" type="text/css"/>
 @stop
 
 
@@ -55,6 +55,7 @@
                                 <th class="fit-content">{{ trans('adtech-core::common.sequence') }}</th>
                                 <th>{{ trans('adtech-core::common.locale.name') }}</th>
                                 <th>{{ trans('adtech-core::common.locale.alias') }}</th>
+                                <th>{{ trans('adtech-core::common.locale.currency') }}</th>
                                 <th>{{ trans('adtech-core::common.locale.icon') }}</th>
                                 <th>{{ trans('adtech-core::common.locale.status') }}</th>
                                 <th style="width: 120px">{{ trans('adtech-core::common.created_at') }}</th>
@@ -72,9 +73,9 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts')
-    <script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/js/select2.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/jquery.dataTables.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/js/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
 
     <script>
         $(function () {
@@ -86,6 +87,7 @@
                     { data: 'DT_Row_Index', name: 'locale_id' },
                     { data: 'name', name: 'name' },
                     { data: 'alias', name: 'alias' },
+                    { data: 'currency', name: 'currency' },
                     { data: 'icon', name: 'icon', className: 'fit-content'},
                     { data: 'status', name: 'status', className: 'fit-content'},
                     { data: 'created_at', name: 'created_at'},

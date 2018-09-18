@@ -4,7 +4,7 @@ namespace Adtech\Core\App\Http\Controllers\Auth;
 
 use Adtech\Application\Cms\Controllers\Controller as Controller;
 use Illuminate\Http\Request;
-use Auth;
+use Validator, Auth;
 
 class LoginController extends Controller
 {
@@ -24,28 +24,42 @@ class LoginController extends Controller
      */
     private function _authenticate(Request $request)
     {
-        $routePrefix = $request->route()->getPrefix();
-        $email = $request->input('email');
-        $password = $request->input('password');
-        $remember = $request->input('remember', false);
-        if ($this->_guard()->attempt(['email' => $email, 'password' => $password], $remember)) {
-            $request->session()->regenerateToken();
-            \Session::flash('flash_messenger', trans('adtech-core::messages.login_success'));
-            $routeName = $routePrefix == config('site.admin_prefix') ? 'backend.homepage' : 'frontend.homepage';
-            shell_exec('cd ../ && /egserver/php/bin/php artisan view:clear');
-            return redirect()->intended(route($routeName));
-        } else {
-            $request->session()->regenerateToken();
-            \Session::flash('flash_messenger', trans('adtech-core::messages.login_failed'));
-            return redirect()->back()
-                ->withInput($request->only('email', 'remember'))
-                ->withErrors([
-                    'inputEmail' => trans('adtech-core::messages.login_failed'),
-                    'inputPassword' => trans('adtech-core::messages.login_failed')
-                ]);
+        $count_login = 0;
+        if ($request->session()->has('count_login')) {
+            $count_login = $request->session()->get('count_login');
         }
 
-        return null;
+        $validator = Validator::make($request->all(), [
+            'g-recaptcha-response'=>'required|recaptcha',
+        ]);
+        if (!$validator->fails() || $count_login < 5) {
+
+            $routePrefix = $request->route()->getPrefix();
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $remember = $request->input('remember', false);
+            if ($this->_guard()->attempt(['email' => $email, 'password' => $password], $remember)) {
+                $request->session()->regenerateToken();
+                $request->session()->forget('count_login');
+                \Session::flash('flash_messenger', trans('adtech-core::messages.login_success'));
+                $routeName = $routePrefix == config('site.admin_prefix') ? 'backend.homepage' : 'frontend.homepage';
+                return redirect()->intended(route($routeName));
+            }
+        }
+
+        if ($request->session()->has('count_login')) {
+            $request->session()->put('count_login', $request->session()->get('count_login') + 1);
+        } else {
+            $request->session()->put('count_login', 1);
+        }
+        $request->session()->regenerateToken();
+        \Session::flash('flash_messenger', trans('adtech-core::messages.login_failed'));
+        return redirect()->back()
+            ->withInput($request->only('email', 'remember'))
+            ->withErrors([
+                'inputEmail' => trans('adtech-core::messages.login_failed'),
+                'inputPassword' => trans('adtech-core::messages.login_failed')
+            ]);
     }
 
     public function login(Request $request)
@@ -59,14 +73,14 @@ class LoginController extends Controller
             return $this->_authenticate($request);
         }
 
-        return view('modules.core.auth.login');
+        return view('ADTECH-CORE::modules.core.auth.login');
     }
 
     public function logout(Request $request)
     {
         $this->_guard()->logout();
 
-        $request->session()->flush();
+//        $request->session()->flush();
 
         //$request->session()->regenerate();
 

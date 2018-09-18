@@ -10,7 +10,8 @@
           "name": "View list",
           "routes": [
             "adtech.core.role.manage",
-            "adtech.core.role.data"
+            "adtech.core.role.data",
+            "adtech.core.package.download"
           ]
         },
         {
@@ -109,14 +110,25 @@
           "name": "View list",
           "routes": [
             "adtech.core.package.manage",
-            "adtech.core.package.data"
+            "adtech.core.package.data",
+            "adtech.core.api.manage",
+            "adtech.core.api.log",
+            "adtech.core.api.data",
+            "adtech.core.api.create",
+            "adtech.core.api.add",
+            "adtech.core.api.show",
+            "adtech.core.api.update",
+            "adtech.core.api.showdata"
           ]
         },
         {
           "name": "Create",
           "routes": [
             "adtech.core.package.create",
-            "adtech.core.package.add"
+            "adtech.core.package.add",
+            "adtech.core.api.datademo",
+            "adtech.core.api.delete",
+            "adtech.core.api.confirm-delete"
           ]
         },
         {
@@ -164,6 +176,17 @@
           "routes": [
             "adtech.core.menu.delete",
             "adtech.core.menu.confirm-delete"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Quản lý chung (Dashboard, Language, ...)",
+      "groups": [
+        {
+          "name": "View list",
+          "routes": [
+            "backend.homepage"
           ]
         }
       ]

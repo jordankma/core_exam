@@ -5,14 +5,14 @@
 
 {{-- page level styles --}}
 @section('header_styles')
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/css/all.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/css/line/line.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/css/all.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/css/line/line.css') }}" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/css/dataTables.bootstrap.css') }}"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/pages/tables.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/css/bootstrap-switch.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/toastr/css/toastr.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/pages/toastr.css') }}" rel="stylesheet"/>
+          href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/css/dataTables.bootstrap.css') }}"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/css/pages/tables.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/css/bootstrap-switch.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/toastr/css/toastr.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/css/pages/toastr.css') }}" rel="stylesheet"/>
 @stop
 
 
@@ -64,14 +64,14 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts')
-    <script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/js/icheck.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/jquery.dataTables.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/js/icheck.js') }}"></script>
+    <script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/datatables/js/dataTables.bootstrap.js') }}"></script>
 
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/toastr/js/toastr.min.js') }}"></script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/js/icheck.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/toastr/js/pages/ui-toastr.js') }}"></script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/js/bootstrap-switch.js') }}" type="text/javascript"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/toastr/js/toastr.min.js') }}"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/iCheck/js/icheck.js') }}" type="text/javascript"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/toastr/js/pages/ui-toastr.js') }}"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/js/bootstrap-switch.js') }}" type="text/javascript"></script>
     <script>
         $(function () {
             var table = $('#table').DataTable({

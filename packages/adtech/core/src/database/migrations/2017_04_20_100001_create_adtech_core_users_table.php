@@ -32,7 +32,7 @@ class CreateAdtechCoreUsersTable extends Migration
         });
 
         DB::connection('mysql_core')->table('adtech_core_users')->insert([
-            'email' => 'diennh@vnedutech.com',
+            'email' => 'diennh@vnedutech.vn',
             'password' => Hash::make('123456'),
             'contact_name' => 'Electric',
             'salt' => 'sal',

@@ -56,7 +56,7 @@ class MenuController extends Controller
             }
 
             if ($alias != '') {
-                if (null != Menu::where('alias', $alias)->where('domain_id', $domain_id)->first()) {
+                if (null != Menu::where('alias', $alias)->where('group', $group)->where('type', $type)->where('domain_id', $domain_id)->first()) {
                     return redirect()->route('adtech.core.menu.manage', ['domain_id' => $domain_id])->with('error', trans('adtech-core::messages.error.create'));
                 }
             }
@@ -73,9 +73,16 @@ class MenuController extends Controller
             $menu->save();
 
             if ($menu->menu_id) {
-
-                Cache::forget('menuGroups' . $domain_id);
                 Cache::forget('menus' . $domain_id);
+                Cache::forget('api_menus_frontend_' . $domain_id);
+                Cache::forget('api_menus_frontend_home_' . $domain_id);
+                Cache::forget('api_menus_frontend_member_' . $domain_id);
+
+                Cache::forget('data_api_menu_all_files_' . $domain_id);
+                Cache::forget('data_api_api_menus_frontend_' . $domain_id);
+                Cache::forget('data_api_api_menus_frontend_home_' . $domain_id);
+                Cache::forget('data_api_api_menus_frontend_member_' . $domain_id);
+                Cache::forget('data_api_api_menus_frontend_bottom_' . $domain_id);
 
                 activity('menu')
                     ->performedOn($menu)
@@ -151,8 +158,17 @@ class MenuController extends Controller
 
         if ($menu->delete()) {
 
-            Cache::forget('menuGroups' . $menu->domain_id);
+//            Cache::forget('menuGroups' . $menu->domain_id);
             Cache::forget('menus' . $menu->domain_id);
+            Cache::forget('api_menus_frontend_' . $menu->domain_id);
+            Cache::forget('api_menus_frontend_home_' . $menu->domain_id);
+            Cache::forget('api_menus_frontend_member_' . $menu->domain_id);
+
+            Cache::forget('data_api_menu_all_files_' . $menu->domain_id);
+            Cache::forget('data_api_api_menus_frontend_' . $menu->domain_id);
+            Cache::forget('data_api_api_menus_frontend_home_' . $menu->domain_id);
+            Cache::forget('data_api_api_menus_frontend_member_' . $menu->domain_id);
+            Cache::forget('data_api_api_menus_frontend_bottom_' . $menu->domain_id);
 
             activity('menu')
                 ->performedOn($menu)
@@ -177,10 +193,10 @@ class MenuController extends Controller
             $type = $request->input('type');
         }
 
-        shell_exec('cd ../ && /egserver/php/bin/php artisan view:clear');
-        shell_exec('cd ../ && /egserver/php/bin/php artisan route:clear');
-        shell_exec('cd ../ && /egserver/php/bin/php artisan config:clear');
-//        shell_exec('cd ../ && /egserver/php/bin/composer dump-autoload');
+        shell_exec('cd ../ && php artisan view:clear');
+//        shell_exec('cd ../ && php artisan route:clear');
+//        shell_exec('cd ../ && php artisan config:clear');
+//        shell_exec('cd ../ && php /egserver/php/bin/composer dump-autoload');
 
         return view('ADTECH-CORE::modules.core.menu.manage', compact('domains', 'domain_id', 'type'));
     }
@@ -215,7 +231,10 @@ class MenuController extends Controller
                 $checkDisplay = '';
             }
             if ($typeData == 'tintuc' && $typeView == 'detail') {
-//                $listCate = app('Dhcd\News\App\Http\Controllers\NewsCatController')->getCateApi();
+                $route_params = $menu->route_params;
+                $checkDisplayDetail = '';
+            }
+            if ($typeData == 'tailieu' && $typeView == 'detail') {
                 $route_params = $menu->route_params;
                 $checkDisplayDetail = '';
             }
@@ -299,8 +318,16 @@ class MenuController extends Controller
 
         if ($menu->save()) {
 
-            Cache::forget('menuGroups' . $domain_id);
             Cache::forget('menus' . $domain_id);
+            Cache::forget('api_menus_frontend_' . $domain_id);
+            Cache::forget('api_menus_frontend_home_' . $domain_id);
+            Cache::forget('api_menus_frontend_member_' . $domain_id);
+
+            Cache::forget('data_api_menu_all_files_' . $domain_id);
+            Cache::forget('data_api_api_menus_frontend_' . $domain_id);
+            Cache::forget('data_api_api_menus_frontend_home_' . $domain_id);
+            Cache::forget('data_api_api_menus_frontend_member_' . $domain_id);
+            Cache::forget('data_api_api_menus_frontend_bottom_' . $domain_id);
 
             activity('menu')
                 ->performedOn($menu)
@@ -382,14 +409,14 @@ class MenuController extends Controller
                     return $name;
                 })
                 ->editColumn('icon', function ($menus) {
-                    $iconName = ($menus->icon != '') ? $menus->icon : 'question';
+                    $iconName = ($menus->icon == '') ? 'question' : (strrpos($menus->icon, '/') > 0) ? config('site.url_storage') . $menus->icon : $menus->icon;
 
                     if (strrpos($iconName, '/') > 0) {
                         $icon = '<img id="holder2" src="'.$iconName.'" style="max-height:40px;">';
                     } else {
                         $arrColor = ['#4089C7', '#00BB8D', '#58BEDC', '#F99928', '#F06E6B', '#A7B4BA'];
                         $colorItem = $arrColor[rand(0, 5)];
-                        $icon = '<i class="livicon" data-name="' . $iconName . '" data-size="18" data-loop="true" data-c="' . $colorItem . '" data-hc="' . $colorItem . '"></i>';
+                        $icon = '<i class="livicon" data-name="question" data-size="18" data-loop="true" data-c="' . $colorItem . '" data-hc="' . $colorItem . '"></i>';
                     }
 
                     return $icon;

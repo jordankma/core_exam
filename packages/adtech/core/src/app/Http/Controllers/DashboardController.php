@@ -11,31 +11,30 @@ use Auth;
 
 class DashboardController extends Controller
 {
-    public function index(Request $request)
+    public function backend(Request $request)
     {
-//        $users = $blogs = [];
-//        $analytics_error = $pageVisits = $blog_count = $visitors = $user_count = $month_visits = $year_visits = rand(100, 1000);
-//        return view('ADTECH-CORE::modules.core.dashboard.index',
-//            compact('analytics_error', 'users', 'blogs', 'pageVisits', 'blog_count', 'visitors', 'user_count', 'month_visits', 'year_visits'));
-
-//        if ($request->session()->has('tab')) {
-//            if ($request->session()->get('tab') != '') {
-//                $request->session()->put('tab', '');
-//                return redirect()->refresh();
-//            }
-//        }
+//        $client = new \GuzzleHttp\Client();
+//        $pathFile = base_path('public/files/chap01.pdf');
+//        $res = $client->request('GET', 'http://localhost:8079/split?path=' . $pathFile);
+//        echo $res->getBody();die();
 
         return view('ADTECH-CORE::modules.core.dashboard.backend');
     }
 
-    public function home(Request $request)
+    public function frontend(Request $request)
     {
-        return view('ADTECH-CORE::modules.core.dashboard.frontend');
+        return redirect()->route('backend.homepage');
+//        return view('ADTECH-CORE::modules.core.dashboard.frontend');
     }
 
     public function filemanage()
     {
-        return view('ADTECH-CORE::modules.core.file.manage');
+        if (env('APP_URL') == 'http://files.dhcd.vnedutech.vn') {
+            $domain = '/admin/laravel-filemanager';
+        } else {
+            $domain = 'http://dhcd-release.vnedutech.vn/administrator/laravel-filemanager';
+        }
+        return view('ADTECH-CORE::modules.core.file.manage', compact('domain'));
     }
 
     public function fileuploadtest(UploadRequest $request)

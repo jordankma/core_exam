@@ -26,7 +26,6 @@
 
     <!-- Main content -->
     <section class="content paddingleft_right15">
-
-        <iframe src="{{ route('adtech.core.file.manager') }}" width="100%" height="800px" frameborder="0"></iframe>
+        <iframe src="{{ $domain }}" width="100%" height="600px" frameborder="0"></iframe>
     </section>
 @stop

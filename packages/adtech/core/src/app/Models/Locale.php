@@ -19,7 +19,7 @@ class Locale extends Model
 
     protected $primaryKey = 'locale_id';
 
-    protected $fillable = ['name', 'alias', 'icon', 'domain_id'];
+    protected $fillable = ['name', 'alias', 'icon', 'domain_id', 'currency'];
 
     protected $dates = ['deleted_at'];
 }

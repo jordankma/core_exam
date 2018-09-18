@@ -4,24 +4,23 @@
     {{--<meta charset="utf-8">--}}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Forgot_password | Welcome to Josh Frontend</title>
+    <title>{{ trans('adtech-core::titles.login.forgot_password') }} {{ (!empty($SETTING['title'])) ? '| ' . $SETTING['title'] : '' }}</title>
     <!--global css starts-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/bootstrap.min.css') }}">
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/css/bootstrapValidator.min.css') }}" rel="stylesheet"/>
-    <link rel="shortcut icon" href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/images/favicon.png') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/images/favicon.png') }}" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/css/bootstrap.min.css') }}">
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/css/bootstrapValidator.min.css') }}" rel="stylesheet"/>
+    <link rel="icon" href="{{ (!empty($SETTING['favicon'])) ? asset($SETTING['favicon']) : '' }}" type="image/png" sizes="32x32">
     <!--end of global css-->
     <!--page level css starts-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/frontend/forgot.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/css/frontend/forgot.css') }}">
     <!--end of page level css-->
 </head>
 <body>
 <div class="container">
     <div class="row">
         <div class="box animation flipInX">
-            <img src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/images/josh-new.png') }}" alt="logo" class="img-responsive mar">
-            <h3 class="text-primary">Forgot Password</h3>
-            <p>Enter your email to reset your password</p>
+            <img src="{{ (!empty($SETTING['logo'])) ? asset($SETTING['logo']) : '' }}" alt="logo" class="img-responsive mar"><br>
+            <h3 class="text-primary">{{ trans('adtech-core::titles.login.forgot_password') }}</h3>
+            <p>{{ trans('adtech-core::titles.login.forgot_password_mess') }}</p>
             <div id="notific">
             @include('includes.notifications')
             </div>
@@ -29,24 +28,23 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                 <div class="form-group">
                     <label class="sr-only"></label>
-                    <input type="email" class="form-control email" name="email" placeholder="Email"
+                    <input type="email" class="form-control email" name="inputEmail" placeholder="Email"
                            value="{!! old('email') !!}">
-                    {{--<span class="help-block">{{ $errors->first('email', ':message') }}</span>--}}
                 </div>
                 <div class="form-group">
-                    <input class="form-control btn btn-primary btn-block" type="submit" value="Reset Your Password">
+                    <input class="form-control btn btn-primary btn-block" type="submit" value="{{ trans('adtech-core::buttons.reset_password') }}">
                 </div>
             </form>
 
-            Back to login page?<a href="{{ route('adtech.core.auth.login') }}"> Click here</a>
+            {{ trans('adtech-core::titles.login.comeback_login') }}<a href="{{ route('adtech.core.auth.login') }}"> {{ trans('adtech-core::titles.login.click_here') }}</a>
         </div>
     </div>
 </div>
 <!--global js starts-->
-<script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/js/jquery.min.js') }}"></script>
-<script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>
-<script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/js/bootstrap.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/js/frontend/forgotpwd_custom.js') }}"></script>
+<script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/js/jquery.min.js') }}"></script>
+<script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>
+<script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/js/frontend/forgotpwd_custom.js') }}"></script>
 <!--global js end-->
 </body>
 </html>

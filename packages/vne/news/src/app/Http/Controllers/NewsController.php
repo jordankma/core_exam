@@ -387,9 +387,9 @@ class NewsController extends Controller
             Cache::forget('cache_api_news');
             Cache::forget('cache_news');
 
-            NewsHasTagRepository::where('news_id', $news_id)->delete();
-            NewsHasCatRepository::where('news_id', $news_id)->delete();
-            NewsHasBoxRepository::where('news_id', $news_id)->delete();
+            NewsHasTag::where('news_id', $news_id)->delete();
+            NewsHasCat::where('news_id', $news_id)->delete();
+            NewsHasBox::where('news_id', $news_id)->delete();
 
             activity('news')
                 ->performedOn($news)

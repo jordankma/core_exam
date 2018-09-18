@@ -7,7 +7,7 @@
 @section('header_styles')
     <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/css/bootstrap-switch.css') }}" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/pages/blog.css') }}" rel="stylesheet" type="text/css">
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/ckeditor/js/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
 @stop
 <!--end of page css-->
 

@@ -31,6 +31,7 @@
   array (
     'title_here' => 'Nhập tiêu đề trang tại đây...',
     'logo_link_here' => 'Liên kết logo tại đây...',
+    'app_version_here' => 'Phiên bản app tại đây...',
     'company_name_here' => 'Nhập tên công ty tại đây...',
     'address_here' => 'Nhập địa chỉ công ty tại đây...',
     'email_here' => 'Nhập email tại đây...',
@@ -38,6 +39,8 @@
     'hotline_here' => 'Nhập số đường dây nóng tại đây...',
     'ga_code_here' => 'Nhập mã GA tại đây...',
     'chat_code_here' => 'Nhập mã chat tại đây...',
+    'slogan_here' => 'Nhập mã chat tại đây...',
+    'hello_txt_here' => 'Nhập mã chat tại đây...',
   ),
   'domain' =>
   array (
@@ -51,6 +54,7 @@
     'alias' => 'Alias',
     'icon' => 'Icon',
     'status' => 'Trạng thái',
+    'currency' => 'Tiền tệ',
     'name_here' => 'Nhập ngôn ngữ tại đây...',
       'alias_here' => 'Nhập tên miền viết tắt tại đây...',
   ),

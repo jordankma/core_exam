@@ -19,6 +19,7 @@ class CreateAdtechCoreLocalesTable extends Migration
             $table->string('name');
             $table->string('alias')->unique();
             $table->string('icon')->nullable();
+            $table->string('currency', 3)->nullable();
             $table->integer('domain_id', false, true)->index();
             $table->tinyInteger('status', false, true)->default(1);
             $table->timestamps();

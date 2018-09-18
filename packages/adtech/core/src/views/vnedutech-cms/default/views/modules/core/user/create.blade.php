@@ -6,10 +6,10 @@
 {{-- page styles --}}
 @section('header_styles')
     <!--page css -->
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/css/bootstrap-switch.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2.min.css') }}" type="text/css" rel="stylesheet">
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/pages/wizard.css') }}" rel="stylesheet">
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/css/bootstrap-switch.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/css/pages/wizard.css') }}" rel="stylesheet">
     <!--end of page css-->
 @stop
 
@@ -149,15 +149,15 @@
 
 {{-- page level scripts --}}
 @section('footer_scripts')
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/js/select2.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapwizard/jquery.bootstrap.wizard.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/js/bootstrap-switch.js') }}" type="text/javascript"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/select2/js/select2.js') }}" type="text/javascript"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapwizard/jquery.bootstrap.wizard.js') }}" type="text/javascript"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/js/bootstrap-switch.js') }}" type="text/javascript"></script>
     <script>
         var check_user_available = '{{ route('adtech.core.user.checkExits') }}';
         $(function () {
             $("[name='permission_locked'], [name='status']").bootstrapSwitch();
         })
     </script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/js/pages/add_user.js') }}"></script>
+    <script src="{{ config('site.url_static') . ('/vendor/' . $group_name . '/' . $skin . '/js/pages/add_user.js') }}"></script>
 @stop

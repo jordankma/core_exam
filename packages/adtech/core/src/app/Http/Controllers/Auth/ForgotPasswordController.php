@@ -68,6 +68,6 @@ class ForgotPasswordController extends Controller
             }
         }
 
-        return view('modules.core.auth.forgotpwd');
+        return view('ADTECH-CORE::modules.core.auth.forgotpwd');
     }
 }

@@ -1,6 +1,9 @@
 <section class="section notification">
 	<div class="notification-item">
-		<h2 class="headline">Thông báo BTC</h2>
+		@php 
+			$alias = config('site.news_box.thongbaobtc');
+		@endphp
+		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list',$alias)}}">Thông báo BTC</a></h2>
 		<div class="list">
 			@if(!empty($thong_bao_ban_to_chuc))
 			@foreach ($thong_bao_ban_to_chuc as $element)
@@ -16,7 +19,10 @@
 		</div>
 	</div>
 	<div class="notification-item">
-		<h2 class="headline">Biển đảo việt nam (Tài liệu tham khảo cho cuộc thi)</h2>
+		@php 
+			$alias = config('site.news_box.biendaovietnamtailieuthamkhaochocuocthi');
+		@endphp
+		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list',$alias)}}">Biển đảo việt nam (Tài liệu tham khảo cho cuộc thi)</a></h2>
 		<div class="list">
 			@if(!empty($bien_dao_viet_nam))
 			@foreach ($bien_dao_viet_nam as $element)

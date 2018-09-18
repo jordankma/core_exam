@@ -15,6 +15,7 @@ class CreateAdtechCoreUsersRoleTable extends Migration
     public function up()
     {
         Schema::connection('mysql_core')->create('adtech_core_users_role', function (Blueprint $table) {
+            $table->increments('users_role_id');
             $table->integer('user_id', false, true);
             $table->integer('role_id', false, true);
 
@@ -22,8 +23,8 @@ class CreateAdtechCoreUsersRoleTable extends Migration
             $table->softDeletes();
             $table->engine = 'InnoDB';
 
-            $table->foreign('user_id')->references('user_id')->on('adtech_core_users')->onDelete('cascade');
-            $table->foreign('role_id')->references('role_id')->on('adtech_core_roles')->onDelete('cascade');
+            $table->foreign('user_id')->references('user_id')->on('adtech_core_users');
+            $table->foreign('role_id')->references('role_id')->on('adtech_core_roles');
         });
 
         DB::connection('mysql_core')->table('adtech_core_users_role')->insert([

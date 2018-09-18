@@ -13,7 +13,7 @@ class News extends Model
      *
      * @var string
      */
-    protected $table = 'Vne_news';
+    protected $table = 'vne_news';
 
     protected $primaryKey = 'news_id';
     protected static $cat;

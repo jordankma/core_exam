@@ -10,7 +10,7 @@
     <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/css/pages/blog.css') }}" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/jasny-bootstrap/css/jasny-bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/bootstrap-multiselect/css/bootstrap-multiselect.css') }}">
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/ckeditor/js/ckeditor.js') }}" type="text/javascript"></script>
+    
     {{-- <link href="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vne/news/css/news/add.css') }}" rel="stylesheet" type="text/css"/> --}}
     <style type="text/css">
         .multiselect-container .active a{
@@ -200,6 +200,7 @@
     <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vne/news/js/news/add.js') }}" type="text/javascript" ></script>
     <script src="{{ asset('/vendor/laravel-filemanager/js/lfm.js') }}" type="text/javascript" ></script>
     <script src="{{ asset('/vendor/laravel-filemanager/js/lfm2.js') }}" type="text/javascript" ></script>
+    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
     <!--end of page js-->
     <script>
     </script>

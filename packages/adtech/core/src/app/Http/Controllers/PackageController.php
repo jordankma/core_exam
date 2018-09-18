@@ -237,11 +237,11 @@ class PackageController extends Controller
                             //migrate + seed
 
                             self::setAppurl();
-                            $db_connection = ($package->package_alias == 'adtech') ? "mysql_core" : "mysql_" . $package->package_alias;
+                            $db_connection = "mysql_" . $package->package_alias;
                             $pathDatabase = 'packages/' . $package->package_alias . '/' . $package->module_alias . '/src/database/migrations';
                             if ($this->files->isDirectory('../' . $pathDatabase)) {
-//                            shell_exec('cd ../ && /egserver/php/bin/php artisan migrate:refresh --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
                                 shell_exec('cd ../ && php artisan migrate:refresh --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
+//                                shell_exec('cd ../ && php artisan migrate:refresh --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
                             }
                         }
                     }
@@ -296,7 +296,7 @@ class PackageController extends Controller
                             $arrAutoload_psr4[$str_psr4] = 'packages/' . $package->package_alias . '/' . $package->module_alias . '/src/';
 
                             $composerObject->repositories = $repositories;
-                            $composerObject->require = array_merge((array) $require, $arrRequire);
+//                            $composerObject->require = array_merge((array) $require, $arrRequire);
                             $composerObject->autoload__dev->classmap = $autoload_dev_classmap;
                             $composerObject->autoload->psr__4 = array_merge((array) $autoload_psr4, $arrAutoload_psr4);
 
@@ -314,13 +314,13 @@ class PackageController extends Controller
                         $db_connection = "mysql_" . $package->package_alias;
                         $pathDatabase = 'packages/' . $package->package_alias . '/' . $package->module_alias . '/src/database/migrations';
                         if ($this->files->isDirectory('../' . $pathDatabase)) {
-//                        shell_exec('cd ../ && /egserver/php/bin/php artisan migrate --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
+//                            shell_exec('cd ../ && php artisan migrate --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
 //                            shell_exec('cd ../ && php artisan migrate --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
                         }
                         // Dump autoload.
 //                        $this->composer->dumpAutoloads();
-//                        shell_exec('cd ../ && /egserver/php/bin/composer dump-autoload');
                         shell_exec('cd ../ && composer dump-autoload');
+//                        shell_exec('cd ../ && composer dump-autoload');
 
                         //bung file /views/publics module
                         \Artisan::call('vendor:publish', [
@@ -391,7 +391,7 @@ class PackageController extends Controller
                     $autoload_psr4 = (object) $arrAutoload_psr4;
                     $autoload_dev_classmap = $arrAutoload_dev_classmap;
 
-                    $composerObject->require = $require;
+//                    $composerObject->require = $require;
                     $composerObject->repositories = $repositoriesEmpty;
                     $composerObject->autoload__dev->classmap = array_values($autoload_dev_classmap);
                     $composerObject->autoload->psr__4 = $autoload_psr4;
@@ -404,7 +404,7 @@ class PackageController extends Controller
                 $db_connection = "mysql_" . $package->package_alias;
                 $pathDatabase = 'packages/' . $package->package_alias . '/' . $package->module_alias . '/src/database/migrations';
                 if ($this->files->isDirectory('../' . $pathDatabase)) {
-//                shell_exec('cd ../ && /egserver/php/bin/php artisan migrate:reset --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
+//                    shell_exec('cd ../ && php artisan migrate:reset --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
 //                    shell_exec('cd ../ && php artisan migrate:reset --path="' . $pathDatabase . '" --database="' . $db_connection . '"');
                 }
                 //Delete folder package
@@ -441,7 +441,7 @@ class PackageController extends Controller
                     }
                 }
                 $myfile .= '.tar.gz';
-                shell_exec('cd ../ && tar -zcvf public/' . $myfile . '' . $mydir);
+                shell_exec('cd ../ && tar -zcvf public/' . $myfile . ' ' . $mydir);
 
                 header("Cache-Control: public");
                 header("Content-Description: File Transfer");
@@ -736,14 +736,17 @@ class PackageController extends Controller
         }
 
         //
-        $packages = Package::with('domains')
+        $packages = Package::with(['domains' => function ($query) use ($domain_id) {
+            $query->where('adtech_core_domains_package.domain_id', $domain_id);
+            $query->where('adtech_core_domains_package.deleted_at', null);
+        }])
             ->whereHas('domains', function ($query) use ($domain_id) {
                 $query->where('adtech_core_domains_package.domain_id', $domain_id);
                 $query->where('adtech_core_domains_package.deleted_at', null);
             })
             ->get();
 
-        $arrModules = [];
+        $arrModules = ["adtech" => ["core"]];
         if ($packages && count($packages) > 0) {
             foreach ($packages as $k => $package) {
                 if (count($package->domains) > 0) {
@@ -760,41 +763,42 @@ class PackageController extends Controller
             }
         }
 
-        $newString = '';
-        foreach ($arrModules as $k => $modules) {
-            $newString .= $k . '.' . implode(',', $modules) . '_';
+        $domain = $this->domain->find($domain_id);
+        if (null != $domain) {
+            $host = $domain->name;
+            $variable = 'APP_MODULES_' . strtoupper(str_replace('.', '_', $host));
+            $path = base_path('modules/' . $variable . '.json');
+            $this->files->put($path, json_encode($arrModules));
         }
-        $newString = substr($newString, 0, -1);
-        $path = base_path('.env');
-        if (file_exists($path)) {
-            $domain = $this->domain->find($domain_id);
-            if (null != $domain) {
-                $host = $domain->name;
-                $variable = 'APP_MODULES_' . strtoupper(str_replace('.', '_', $host));
-                if (strpos(file_get_contents($path), $variable . '=') > 0) {
-                    file_put_contents($path, str_replace(
-                        $variable . '=' . env($variable), $variable . '=' . $newString,
-                        file_get_contents($path)
-                    ));
-                } else {
-                    file_put_contents($path, file_get_contents($path) . "\r\n" . $variable . '=' . $newString);
-                }
-            }
-        }
+
+//        $newString = '';
+//        foreach ($arrModules as $k => $modules) {
+//            $newString .= $k . '.' . implode(',', $modules) . '_';
+//        }
+//        $newString = substr($newString, 0, -1);
+//        $path = base_path('.env');
+//        if (file_exists($path)) {
+//            $domain = $this->domain->find($domain_id);
+//            if (null != $domain) {
+//                $host = $domain->name;
+//                $variable = 'APP_MODULES_' . strtoupper(str_replace('.', '_', $host));
+//                if (strpos(file_get_contents($path), $variable . '=') > 0) {
+//                    file_put_contents($path, str_replace(
+//                        $variable . '=' . env($variable), $variable . '=' . $newString,
+//                        file_get_contents($path)
+//                    ));
+//                } else {
+//                    file_put_contents($path, file_get_contents($path) . "\r\n" . $variable . '=' . $newString);
+//                }
+//            }
+//        }
         \Artisan::call('config:clear');
 
         return Datatables::of($packages)
             ->editColumn('status', function ($packages) use ($domain_id) {
                 $status = '';
                 if (count($packages->domains) > 0) {
-//                    $package = $packages->domains[count($packages->domains) - 1];
-                    $package = null;
-                    foreach ($packages->domains as $item) {
-                        if ($item->domain_id == $domain_id) {
-                            $package = $item;
-                            break;
-                        }
-                    }
+                    $package = $packages->domains[count($packages->domains) - 1];
                     if (null != $package) {
                         if ($package->pivot->status == 1) {
                             if ($this->user->canAccess('adtech.core.package.confirm-status')) {

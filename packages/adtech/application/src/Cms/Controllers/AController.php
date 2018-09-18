@@ -8,8 +8,8 @@ class AController extends BaseController
 {
     public function my_simple_crypt( $string, $action = 'e' ) {
         // you may change these values to your own
-        $secret_key = 't+m:*meo6h}b?{~';
-        $secret_iv = '*[Py49<>n@-VYr1';
+        $secret_key = env('SECRET_KEY');
+        $secret_iv = env('SECRET_IV');
 
         $output = false;
         $encrypt_method = "AES-256-CBC";

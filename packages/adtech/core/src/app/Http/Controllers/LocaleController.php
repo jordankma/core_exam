@@ -102,6 +102,7 @@ class LocaleController extends Controller
         if (null != $locale) {
             $locale->name = $request->input('name');
             $locale->alias = $request->input('alias');
+            $locale->currency = $request->input('currency');
             $locale->icon = $request->input('icon');
             $locale->status = ($request->has('status')) ? 1 : 0;
 

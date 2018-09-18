@@ -31,7 +31,6 @@ class AuthMiddleware
                 return redirect()->guest(route('adtech.core.auth.login'));
             }
         }
-
         return $next($request);
     }
 }
