@@ -89,45 +89,45 @@
                         <img id="holder1" src="{{ config('site.url_storage') . $favicon }}" style="margin-top:15px;max-height:100px;">
                         <br><br>
 
-                        {{--<label>Logo link</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::text('logo_link', $logo_link, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.logo_link_here'))) !!}--}}
-                        {{--</div>--}}
+                        <label>Logo link</label>
+                        <div class="form-group">
+                            {!! Form::text('logo_link', $logo_link, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.logo_link_here'))) !!}
+                        </div>
+                        
+                        <label>Company Name</label>
+                        <div class="form-group">
+                            {!! Form::text('company_name', $company_name, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.company_name_here'))) !!}
+                        </div>
 
-                        {{--<label>Company Name</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::text('company_name', $company_name, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.company_name_here'))) !!}--}}
-                        {{--</div>--}}
+                        <label>Address</label>
+                        <div class="form-group">
+                            {!! Form::text('address', $address, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.address_here'))) !!}
+                        </div>
 
-                        {{--<label>Address</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::text('address', $address, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.address_here'))) !!}--}}
-                        {{--</div>--}}
+                        <label>Email</label>
+                        <div class="form-group">
+                            {!! Form::text('email', $email, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.email_here'))) !!}
+                        </div>
 
-                        {{--<label>Email</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::text('email', $email, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.email_here'))) !!}--}}
-                        {{--</div>--}}
+                        <label>Phone number</label>
+                        <div class="form-group">
+                            {!! Form::text('phone', $phone, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.phone_here'))) !!}
+                        </div>
 
-                        {{--<label>Phone number</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::text('phone', $phone, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.phone_here'))) !!}--}}
-                        {{--</div>--}}
+                        <label>Hotline</label>
+                        <div class="form-group">
+                            {!! Form::text('hotline', $hotline, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.hotline_here'))) !!}
+                        </div>
 
-                        {{--<label>Hotline</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::text('hotline', $hotline, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.hotline_here'))) !!}--}}
-                        {{--</div>--}}
+                        <label>GA Code</label>
+                        <div class="form-group">
+                            {!! Form::textarea('ga_code', $ga_code, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.ga_code_here'))) !!}
+                        </div>
 
-                        {{--<label>GA Code</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::textarea('ga_code', $ga_code, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.ga_code_here'))) !!}--}}
-                        {{--</div>--}}
-
-                        {{--<label>Chat Code</label>--}}
-                        {{--<div class="form-group">--}}
-                            {{--{!! Form::textarea('chat_code', $chat_code, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.chat_code_here'))) !!}--}}
-                        {{--</div>--}}
+                        <label>Chat Code</label>
+                        <div class="form-group">
+                            {!! Form::textarea('chat_code', $chat_code, array('class' => 'form-control', 'placeholder'=> trans('adtech-core::common.setting.chat_code_here'))) !!}
+                        </div>
 
 
                     </div>

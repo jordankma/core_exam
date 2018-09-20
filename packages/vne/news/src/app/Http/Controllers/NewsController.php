@@ -85,7 +85,7 @@ class NewsController extends Controller
 		return view('VNE-NEWS::modules.news.news.create',$data);
 	}
 	public function add(NewsRequest $request){
-		$create_by = $this->user->email;
+		$create_by = $this->user->contact_name;
 		$title = $request->input('title');
 		$news_cat = $request->input('news_cat');
         $news_tag = $request->input('news_tag');

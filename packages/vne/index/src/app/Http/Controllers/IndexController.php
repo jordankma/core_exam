@@ -35,13 +35,14 @@ class IndexController extends Controller
         $videonoibat = config('site.news_box.videonoibat');    
         $tintucchung = config('site.news_box.tintucchung');    
         $biendaovietnamtailieuthamkhaochocuocthi = config('site.news_box.biendaovietnamtailieuthamkhaochocuocthi');
-        $thong_bao_ban_to_chuc = $this->news->getNewsByBox($thongbaobtc,2);
-        $bien_dao_viet_nam = $this->news->getNewsByBox($biendaovietnamtailieuthamkhaochocuocthi,2);
+        $thong_bao_ban_to_chuc = $this->news->getNewsByBox($thongbaobtc,10);
+        $bien_dao_viet_nam = $this->news->getNewsByBox($biendaovietnamtailieuthamkhaochocuocthi,10);
         $tin_tuc_chung = $this->news->getNewsByBox($tintucchung,1);
         $video_noi_bat = $this->news->getNewsByBox($videonoibat,5);
 
         $banners = Banner::all();
 
+        $list_news_member = array();
 
         $data = [
             'banners' => $banners,
@@ -49,7 +50,8 @@ class IndexController extends Controller
             'bien_dao_viet_nam' => $bien_dao_viet_nam,
             'tin_tuc_chung' => $tin_tuc_chung,
             'video_noi_bat' => $video_noi_bat,
-            'last_page_tin_tuc_chung' => $tin_tuc_chung->lastPage()
+            'last_page_tin_tuc_chung' => $tin_tuc_chung->lastPage(),
+            'list_news_member' => $list_news_member
 
         ];
         return view('VNE-INDEX::modules.index.index',$data);

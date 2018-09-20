@@ -2,16 +2,26 @@
 
 {{-- Page title --}}
 @section('title'){{ $title = trans('vne-index::language.titles.index') }}@stop
-
+@section('header_styles')
+	<meta property="og:locale" content="vi_VN" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Cuộc thi tìm hiểu về biển đảo việt nam" />
+	<meta property="og:description" content="Cuộc thi tìm hiểu về biển đảo việt nam" />
+	<meta property="og:url" content="http://timhieubiendao.daknong.vn/" />
+	<meta property="og:site_name" content="Cuộc thi tìm hiểu về biển đảo việt nam" />
+	<meta property="og:image" content="http://timhieubiendao.daknong.vn/files/photos/anh_tin_tuc/new2.png" />
+	<meta property="og:image:secure_url" content="http://timhieubiendao.daknong.vn/files/photos/anh_tin_tuc/new2.png" />
+	<link rel="canonical" href="http://timhieubiendao.daknong.vn/" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:description" content="Cuộc thi tìm hiểu về biển đảo việt nam" />
+	<meta name="twitter:title" content="Cuộc thi tìm hiểu về biển đảo việt nam" />
+	<meta name="twitter:image" content="http://timhieubiendao.daknong.vn/files/photos/anh_tin_tuc/new2.png" />
+@stop
 @section('content')
 <!-- main -->
-		{{-- @php
-		echo '<pre>';
-		print_r($MENU_LEFT);
+		<marquee id="marquee" behavior="scroll" direction="left" style="font-size: 22px">{{ $SETTING['slogan'] }} </marquee>
 
-		@endphp --}}
 		<main class="main">
-
 			<!-- hero -->
 			@include('VNE-INDEX::modules.index.layouts._slide')
 			<!-- hero end -->

@@ -50,7 +50,7 @@ class PageController extends Controller
 		return view('VNE-NEWS::modules.news.page.create');
 	}
 	public function add(NewsRequest $request){
-		$create_by = $this->user->email;
+		$create_by = $this->user->contact_name;
 		$title = $request->input('title');
 		$content = $request->input('content');
 		$type_page = 'page';

@@ -11,19 +11,18 @@
 				<div class="headline">Ban Tổ chức Cuộc thi</div>
 				<div class="info-inner">
 					<div class="block">
-						<h2 class="name">Ban Tuyên giáo Tỉnh ủy Đắk Nông<br>
-							Phòng Tuyên truyền, Báo chí – Xuất bản</h2>
+						<h2 class="name">{{ $SETTING['company_name'] }}</h2>
 						<ul class="info-contact">
 							<li><i class="fa fa-phone"></i> {{ $SETTING['phone'] }} </li>
 							<li><i class="fa fa-email"></i> {{ $SETTING['email'] }} </li>
 						</ul>
 					</div>
 					<div class="block">
-						<h2 class="name"> {{ $SETTING['company_name'] }} </h2>
+						<h2 class="name"> Công ty cổ phần dịch vụ công nghệ giáo dục Việt Nam (VNEDUTECH) </h2>
 						<ul class="info-contact">
-							<li><i class="fa fa-address"></i> {{ $SETTING['address'] }} </li>
-							<li><i class="fa fa-phone"></i> Hỗ trợ kỹ thuật: {{ $SETTING['hotline'] }} (8h - 22h hàng ngày)</li>
-							<li><i class="fa fa-email"></i> {{ $SETTING['email'] }} </li>
+							<li><i class="fa fa-address"></i> Tầng 3, Tòa Nhà 25T1, Hoàng Đạo Thúy, Trung Hòa, Cầu Giấy, Hà Nội </li>
+							<li><i class="fa fa-phone"></i> Hỗ trợ kỹ thuật: 1900636444  (8h - 22h hàng ngày)</li>
+							<li><i class="fa fa-email"></i> contact@vnedutech.vn </li>
 						</ul>
 					</div>
 				</div>

@@ -8,9 +8,15 @@
 
 <!-- facebook right -->
 <section class="section facebook-right">
-	<iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Ffacebook&tabs=timeline&width=340&height=270&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=226666764204714"
-	  width="100%" height="270" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"
-	  allow="encrypted-media"></iframe>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v3.1';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+  	<div class="fb-page" data-href="https://www.facebook.com/Cu%E1%BB%99c-thi-T%C3%ACm-hi%E1%BB%83u-bi%E1%BB%83n-%C4%91%E1%BA%A3o-Vi%E1%BB%87t-Nam-2246377042259703/" data-tabs="timeline" data-height="300" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/Cu%E1%BB%99c-thi-T%C3%ACm-hi%E1%BB%83u-bi%E1%BB%83n-%C4%91%E1%BA%A3o-Vi%E1%BB%87t-Nam-2246377042259703/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/Cu%E1%BB%99c-thi-T%C3%ACm-hi%E1%BB%83u-bi%E1%BB%83n-%C4%91%E1%BA%A3o-Vi%E1%BB%87t-Nam-2246377042259703/">Cuộc thi Tìm hiểu biển đảo Việt Nam</a></blockquote></div>
 </section>
 <!-- facebook right end -->
 
