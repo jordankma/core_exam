@@ -33,7 +33,7 @@
 									@if(!empty($list_news))
 									@foreach ($list_news as $element)
 									@php 
-										$alias = $element->title_alias . '_' . $element->news_id .'.html';
+										$alias = $element->title_alias .'.html';
 									@endphp
 									<figure class="news-item">
 										<h2 class="title">

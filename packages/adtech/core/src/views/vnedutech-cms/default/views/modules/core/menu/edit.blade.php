@@ -1462,12 +1462,11 @@
             if (route_name in listRouteType && route_name in listRouteView) {
                 typeData = listRouteType[route_name];
                 typeView = listRouteView[route_name];
-
                 switch(typeData + '-' + typeView) {
-                    case 'tintuc-list':
-                        txtUrl = '{{ Illuminate\Support\Facades\Route::has('dhcd.api.news.category') ? route('dhcd.api.news.category') : '' }}';
+                    case 'news-list':
+                        txtUrl = '{{ Illuminate\Support\Facades\Route::has('vne.api.news.category') ? route('vne.api.news.category') : '' }}';
                         break;
-                    case 'tintuc-detail':
+                    case 'news-detail':
                         txtUrl = '';
                         txtModal = 'tintuc-detail';
                         break;

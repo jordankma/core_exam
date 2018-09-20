@@ -1433,7 +1433,6 @@
             txtUrl = '';
             txtModal = '';
             var route_name = e.options[e.selectedIndex].value;
-            console.log(route_name);
             removeOptions(document.getElementById("category_name"));
             $("#boxParams_detail").css('display', 'none');
             $("#boxParams_detail").attr('value', '');
@@ -1444,8 +1443,6 @@
             if (route_name in listRouteType && route_name in listRouteView) {
                 typeData = listRouteType[route_name];
                 typeView = listRouteView[route_name];
-                console.log(typeData);
-                console.log(typeView);
                 switch(typeData + '-' + typeView) {
                     case 'news-list':
                         txtUrl = '{{ Illuminate\Support\Facades\Route::has('vne.api.news.category') ? route('vne.api.news.category') : '' }}';

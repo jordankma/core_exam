@@ -4,7 +4,7 @@
 			@if(!empty($tin_tuc_chung))
 			@foreach ($tin_tuc_chung as $element)
 			@php 
-				$alias = $element->title_alias . '_' . $element->news_id .'.html';
+				$alias = $element->title_alias . '.html';
 			@endphp
 			<figure class="news-item">
 				<h2 class="title">

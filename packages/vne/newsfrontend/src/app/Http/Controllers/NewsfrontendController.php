@@ -34,8 +34,8 @@ class NewsfrontendController extends Controller
         return view('VNE-NEWSFRONTEND::modules.newsfrontend.list',$data);                  
     }
 
-    public function detail(Request $request,$alias,$news_id){
-        $news = $this->news->find($news_id);  
+    public function detail(Request $request,$alias){
+        $news = News::where('title_alias',$alias)->first();  
         $data = [
             'news' => $news     
         ];

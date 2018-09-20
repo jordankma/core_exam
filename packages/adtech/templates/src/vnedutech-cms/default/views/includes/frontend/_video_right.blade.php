@@ -6,7 +6,7 @@
 	@if(!empty($video_noi_bat))
 	@foreach ($video_noi_bat as $element)
 	@php 
-		$alias = $element->title_alias . '_' . $element->news_id .'.html';
+		$alias = $element->title_alias . '.html';
 	@endphp
 	@if($loop->index==0)
 	<div class="video-item">

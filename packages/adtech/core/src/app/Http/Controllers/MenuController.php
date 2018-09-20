@@ -222,15 +222,15 @@ class MenuController extends Controller
             $checkDisplay = 'display: none';
             $checkDisplayDetail = 'display: none';
             $listCate = new Collection();
-            if ($typeData == 'tintuc' && $typeView == 'list') {
-                $listCate = app('Dhcd\News\App\Http\Controllers\NewsCatController')->getCateApi();
+            if ($typeData == 'news' && $typeView == 'list') {
+                $listCate = app('Vne\News\App\Http\Controllers\NewsCatController')->getCateApi();
                 $checkDisplay = '';
             }
             if ($typeData == 'tailieu' && $typeView == 'list') {
                 $listCate = app('Dhcd\Document\App\Http\Controllers\DocumentCateController')->getListCategory();
                 $checkDisplay = '';
             }
-            if ($typeData == 'tintuc' && $typeView == 'detail') {
+            if ($typeData == 'news' && $typeView == 'detail') {
                 $route_params = $menu->route_params;
                 $checkDisplayDetail = '';
             }
