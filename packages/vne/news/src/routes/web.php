@@ -75,17 +75,3 @@ Route::group(array('prefix' => $adminPrefix), function() {
 
     });
 });
-
-Route::group(array('prefix' => ''), function() {
-    Route::group(['middleware' => []], function () {
-        Route::get('frontend/news/category', function () { })->name('news.frontend.cate')
-            ->where('type','news')
-            ->where('view','list')
-            ->where('as','Tin tức - Theo danh mục');
-
-        Route::get('frontend/news/detail', function () { })->name('news.frontend.detail')
-            ->where('type','news')
-            ->where('view','detail')
-            ->where('as','Tin tức - Chi tiết');
-    });
-});

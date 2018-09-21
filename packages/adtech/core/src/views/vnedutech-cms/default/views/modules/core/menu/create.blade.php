@@ -1475,8 +1475,8 @@
                                 response.forEach(function(element) {
                                     var x = document.getElementById("category_name");
                                     var option = document.createElement("option");
-                                    if (typeof element.news_cat_id != 'undefined') {
-                                        option.value = element.news_cat_id;
+                                    if (typeof element.alias != 'undefined') {
+                                        option.value = element.alias;
                                     }
                                     if (typeof element.document_cate_id != 'undefined' && typeof element.alias != 'undefined') {
                                         option.value = element.alias;

@@ -21,7 +21,7 @@ function showCategories($categories, $parent_id = 0, $char = '')
         foreach ($cate_child as $key => $item)
         {
             // Hiển thị tiêu đề chuyên mục
-            $url = $item->route_name != '#' ? route($item->route_name) : '#';
+            $url = ($item->route_name != '#') ? ($item->route_params) ? route($item->route_name, [$item->route_params]) : route($item->route_name) : '#';
             echo '<li class="nav-item">';
             echo '<a href="'.$url.'" class="nav-link">'.$item->name.'</a>';
             // Tiếp tục đệ quy để tìm chuyên mục con của chuyên mục đang lặp

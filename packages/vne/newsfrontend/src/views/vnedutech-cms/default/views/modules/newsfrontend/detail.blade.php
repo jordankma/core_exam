@@ -2,7 +2,21 @@
 
 {{-- Page title --}}
 @section('title'){{ $title = $news->title }}@stop
-
+@section('header_styles')
+	<meta property="og:locale" content="vi_VN" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="{{ $news->title }}" />
+	<meta property="og:description" content="{{ $news->title }}" />
+	<meta property="og:url" content="http://timhieubiendao.daknong.vn/" />
+	<meta property="og:site_name" content="{{ $news->title }}" />
+	<meta property="og:image" content="{{ $news->image }}" />
+	<meta property="og:image:secure_url" content="{{ $news->image }}" />
+	<link rel="canonical" href="http://timhieubiendao.daknong.vn/" />
+	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:description" content="{{ $news->title }}" />
+	<meta name="twitter:title" content="{{ $news->title }}" />
+	<meta name="twitter:image" content="{{ $news->image }}" />
+@stop
 @section('content')
 <!-- main -->
 		<main class="main">

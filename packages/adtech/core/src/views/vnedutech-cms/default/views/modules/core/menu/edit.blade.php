@@ -70,8 +70,8 @@
                             <div class="form-group">
                                 <select class="form-control select2" title="Select category name..." name="route_params" id="category_name">
                                     @foreach($listCate as $category)
-                                        @if (isset($category->news_cat_id))
-                                        <option value="{{ $category->news_cat_id }}" {{ ($category->news_cat_id == $menu->route_params) ? ' selected="selected"' : '' }}>{{ $category->name }}</option>
+                                        @if (isset($category->alias))
+                                        <option value="{{ $category->alias }}" {{ ($category->alias == $menu->route_params) ? ' selected="selected"' : '' }}>{{ $category->name }}</option>
                                         @endif
                                         @if (isset($category->document_cate_id))
                                             <option value="{{ $category->alias }}" {{ ($category->alias == $menu->route_params) ? ' selected="selected"' : '' }}>{{ $category->name }}</option>
@@ -1493,8 +1493,8 @@
                                 response.forEach(function(element) {
                                     var x = document.getElementById("category_name");
                                     var option = document.createElement("option");
-                                    if (typeof element.news_cat_id != 'undefined') {
-                                        option.value = element.news_cat_id;
+                                    if (typeof element.alias != 'undefined') {
+                                        option.value = element.alias;
                                     }
                                     if (typeof element.document_cate_id != 'undefined' && typeof element.alias != 'undefined') {
                                         option.value = element.alias;
