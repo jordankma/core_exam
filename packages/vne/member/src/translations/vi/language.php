@@ -13,12 +13,7 @@ return [
             "create" => "Thêm nhóm người dùng",
             "update" => "Cập nhật nhóm người dùng",
             "add_member" => "Thêm người dùng vào nhóm"
-        ],
-        "position" => [
-            "manage" => "Quản lý chức vụ",
-            "create" => "Thêm chức vụ",
-            "update" => "Cập nhật chức vụ"
-        ],
+        ]
     ],
     "table" => [
         "id" => "#",
@@ -29,9 +24,8 @@ return [
         "member" => [
             "name"=> "Tên",
             "u_name"=> "Username",
-            "position_current"=> "Chức vụ hiện tại",
-            "position"=> "Chọn chức vụ được bầu",
-            "group"=> "Đoàn",
+            "group"=> "Nhóm",
+            "object"=> "Đối tượng",
             "address"=> "Địa chỉ",
             "trinh_do_chuyen_mon"=> "Học hàm học vị chuyên môn cao nhất",
             "trinh_do_ly_luan"=> "Lý luận Chính trị"
@@ -52,25 +46,22 @@ return [
     "form" => [
         "title" => [
             "name" => "Tên",
-            "u_name" => "Username",
             "gender" => "Giới tính",
+            "u_name" => "Username",
             "password" => "Mật khẩu",
             "conf_password" => "Xác nhận mật khẩu",
             "avatar" => "Ảnh đại diện",
             "address" => "Địa chỉ",
             "don_vi" => "Đơn vị",
-            "birthday" => "Năm sinh",
+            "birthday" => "Ngày sinh",
             "phone" => "Số điện thoại",
-            "position" => "Chọn chức vụ được bầu",
-            "doan" => "Đoàn",
-            "position_current" => "Những chức vụ hiện tại",
-            "trinh_do_ly_luan" => "Trình độ lý luận",
-            "trinh_do_chuyen_mon" => "Trình độ chuyên môn",
             "email" => "Email",
-            "dan_toc" => "Dân tộc",
-            "ton_giao" => "Tôn giáo",
-            "ngay_vao_dang" => "Ngày vào đảng",
-            "ngay_vao_doan" => "Ngày vào đoàn"
+            "object" => "Đối tượng",
+            "city" => "Thành phố",
+            "district" => "Quận huyện",
+            "school" => "Trường",
+            "class" => "Lớp",
+            "table" => "Bảng"
         ],
         "title_group" => [
             "name" => "Tên nhóm",
@@ -100,27 +91,12 @@ return [
             "address" => "Nhập địa chỉ",
             "birthday" => "Chọn ngày sinh",
             "phone" => "Nhập số điện thoại",
-            "position_text" => "Nhập chức vụ",
-            "position_current" => "Nhập những chức vụ hiện tại",
-            "position_select" => "Chọn chức vụ",
-            "doan_select" => "Chọn đoàn",
-            "trinh_do_ly_luan_text" => "Trình độ lý luận...",
-            "trinh_do_ly_luan_select" => "Chọn trình độ lý luận...",
-            "trinh_do_chuyen_mon_text" => "Trình độ chuyên môn...",
-            "trinh_do_chuyen_mon_select" => "Chọn trình độ chuyên môn...",
             "email" => "Nhập địa chỉ mail",
-            "dan_toc" => "Dân tộc...",
-            "ton_giao" => "Tôn giáo...",
-            "ngay_vao_dang" => "Ngày vào đảng...",
-            "ngay_vao_doan" => "Ngày vào đoàn...",
-            "don_vi" => "Đơn vị...",
+            "object" => "Chọn đối tượng"
         ],
         "group" => [
             "name" => "Nhập tên nhóm",
             "desc" => "Nhập mô tả"
-        ],
-        "position" => [
-            "name" => "Nhập tên chức vụ"
         ]
     ],
     "messages" => [

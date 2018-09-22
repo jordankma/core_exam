@@ -29,16 +29,18 @@ Route::group(array('prefix' => $adminPrefix), function() {
         Route::get('vne/member/member/block', 'MemberController@block')->name('vne.member.member.block');
         Route::get('vne/member/member/confirm-block', 'MemberController@getModalBlock')->name('vne.member.member.confirm-block');
 
+        Route::post('vne/member/member/check-username-exist', 'MemberController@checkUserNameExist')->name('vne.member.member.check-username-exist');
         Route::post('vne/member/member/check-email-exist', 'MemberController@checkEmailExist')->name('vne.member.member.check-email-exist');
         Route::post('vne/member/member/check-phone-exist', 'MemberController@checkPhoneExist')->name('vne.member.member.check-phone-exist');
-
-        Route::get('vne/member/member/sync/{type}','MemberController@sync');
         //import export member excel
         Route::get('vne/member/member/excel/get/import', 'MemberController@getImport')->name('vne.member.member.excel.get.import')->where('as','Upload excel');
         Route::post('vne/member/member/excel/post/import', 'MemberController@postImport')->name('vne.member.member.excel.post.import');
+        //thanh pho quan huyen
+        Route::get('vne/member/member/get/district', 'MemberController@getDistrict')->name('vne.member.member.get.district');
+        Route::get('vne/member/member/get/school', 'MemberController@getSchool')->name('vne.member.member.get.school');
+        Route::get('vne/member/member/get/class', 'MemberController@getClass')->name('vne.member.member.get.class');
+
         //group member 
-        
-        Route::get('vne/member/group/sync/{type}','GroupController@sync');
         
         Route::get('vne/member/group/log', 'GroupController@log')->name('vne.member.group.log');
         Route::get('vne/member/group/data', 'GroupController@data')->name('vne.member.group.data');

@@ -1,17 +1,17 @@
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h4 class="modal-title" id="user_delete_confirm_title">{{ trans('dhcd-member::confirm.' . $model .'.'.$type. '.title') }}</h4>
+  <h4 class="modal-title" id="user_delete_confirm_title">{{ trans('vne-member::confirm.' . $model .'.'.$type. '.title') }}</h4>
 </div>
 <div class="modal-body">
     @if($error)
         <div>{!! $error !!}</div>
     @else
-        {{ trans('dhcd-member::confirm.' . $model . '.' . $type . '.body') }}
+        {{ trans('vne-member::confirm.' . $model . '.' . $type . '.body') }}
     @endif
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('dhcd-member::confirm.cancel') }}</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('vne-member::confirm.cancel') }}</button>
   @if(!$error)
-    <a href="{{ $confirm_route }}" type="button" class="btn btn-danger">{{ trans('dhcd-member::confirm.confirm') }}</a>
+    <a href="{{ $confirm_route }}" type="button" class="btn btn-danger">{{ trans('vne-member::confirm.confirm') }}</a>
   @endif
 </div>

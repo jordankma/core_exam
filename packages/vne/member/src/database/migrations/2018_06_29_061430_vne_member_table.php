@@ -25,6 +25,7 @@ class VneMemberTable extends Migration
             $table->string('email')->unique()->nullable();
 
 
+            $table->integer('position_id',false,true)->nullable();
             $table->integer('city_id',false,true)->nullable();
             $table->integer('district_id',false,true)->nullable();
             $table->integer('school_id',false,true)->nullable();
@@ -32,7 +33,8 @@ class VneMemberTable extends Migration
             $table->integer('table_id',false,true)->nullable();
             
             
-            $table->tinyInteger('status', false, true)->comment('trang thai')->default(1);
+            $table->tinyInteger('status', false, true)->comment('trang thai')->default(0);
+            $table->tinyInteger('is_reg', false, true)->comment('0 chua nhap thong tin 1 da nhap')->default(0);
             
             $table->rememberToken();
             $table->timestamps();

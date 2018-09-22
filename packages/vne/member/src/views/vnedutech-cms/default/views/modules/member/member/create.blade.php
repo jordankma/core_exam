@@ -55,17 +55,34 @@
                                         <label>{{trans('vne-member::language.form.title.name') }} <span style="color: red">(*)</span></label>
                                         <input type="text" name="name" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.name')}}">
                                     </div>
+                                    <label>{{trans('vne-member::language.form.title.gender') }}</label>
                                     <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.doan') }} <span style="color: red">(*)</span></label><br>
-                                        <select id="group" class="form-control" name="group_id[]" multiple="multiple" placeholder="{{trans('vne-member::language.placeholder.member.doan_select')}}">
-                                            @if(!empty($list_group))
-                                                @foreach($list_group as $group)
-                                                    <option value="{{$group->group_id}}" >{{$group->name}}</option>     
-                                                @endforeach
-                                            @endif
-                                        </select>
+                                        <label class="radio-inline" for="female">
+                                        <input type="radio" id="female" name="gender" value="female" checked="checked">
+                                        Female</label>
+                                        <label class="radio-inline" for="male"> 
+                                        <input type="radio" id="male" name="gender" value="male" >
+                                        Male</label>
                                     </div>
-                                    <label>{{trans('vne-member::language.form.title.avatar') }}</label>
+                                    <div class="form-group">
+                                        <label>{{trans('vne-member::language.form.title.u_name') }} <span style="color: red">(*)</span></label>
+                                        <input type="text" name="u_name" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.u_name')}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{{trans('vne-member::language.form.title.password') }} <span style="color: red">(*)</span></label>
+                                        <input type="password" name="password" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.password')}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>{{trans('vne-member::language.form.title.conf_password') }} <span style="color: red">(*)</span></label>
+                                        <input type="password" name="conf_password" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.conf_password')}}">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{{trans('vne-member::language.form.title.birthday') }}</label>
+                                        <input type="text" name="birthday" class="form-control" id="birthday" placeholder="{{trans('vne-member::language.placeholder.member.birthday')}}">
+                                    </div>
+                                    <label>{{trans('vne-member::language.form.title.avatar') }} <span style="color: red">(*)</span> </label>
                                     <div class="form-group input-group">
                                         <span class="input-group-btn">
                                             <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
@@ -73,25 +90,8 @@
                                             </a>
                                         </span>
                                         <input id="thumbnail" class="form-control" type="text"  name="avatar">
-                                        <img src="" id="holder" style="margin-top:15px;max-height:100px;">
                                     </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <label>{{trans('vne-member::language.form.title.position_current') }}</label>
-                                    <div class="form-group">
-                                        <input type="text" name="position_current" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.position_current')}}">
-                                    </div>
-                                    <label>{{trans('vne-member::language.form.title.position') }}</label>
-                                    <div class="form-group">
-                                        <select class="form-control select2" id="position_select" name="position_id" placeholder="{{trans('vne-member::language.placeholder.member.position_select')}}">
-                                            <option value="0">Chọn chức vụ</option> 
-                                            @if(!empty($list_position))
-                                                @foreach($list_position as $position)
-                                                    <option value="{{$position->position_id}}">{{$position->name}}</option>     
-                                                @endforeach
-                                            @endif                
-                                        </select>
-                                    </div>
+                                    <img src="" id="holder" style="margin-top:15px;max-height:100px;">
                                     <div class="form-group">
                                         <label> {{trans('vne-member::language.form.title.email') }} </label>
                                         <input type="text" name="email" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.email')}}">
@@ -106,81 +106,68 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="info">
                             <div class="row">
-                                <!-- /.col-sm-8 -->
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.address') }}</label>
-                                        <textarea class="form-control" name="address" placeholder="{{trans('vne-member::language.placeholder.member.address')}}"></textarea>
-                                    </div>
-                                    <label>{{trans('vne-member::language.form.title.gender') }}</label>
-                                    <div class="form-group">
-                                        <label class="radio-inline" for="female">
-                                        <input type="radio" id="female" name="gender" value="female" checked="checked">
-                                        Female</label>
-                                        <label class="radio-inline" for="male"> 
-                                        <input type="radio" id="male" name="gender" value="male" >
-                                        Male</label>
-                                    </div>
-                                    <label>{{trans('vne-member::language.form.title.trinh_do_ly_luan') }}</label>
-                                    <div class="form-group input-group">
-                                        <input type="text" name="trinh_do_ly_luan" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.trinh_do_ly_luan_text')}}" id="trinh_do_ly_luan_text" style="display: none" disabled>
-                                        <select class="form-control select2" id="trinh_do_ly_luan_select" name="trinh_do_ly_luan" placeholder="{{trans('vne-member::language.placeholder.member.trinh_do_ly_luan_select')}}">
-                                            @if(!empty($list_trinh_do_ly_luan))
-                                                @foreach($list_trinh_do_ly_luan as $trinh_do_ly_luan)
-                                                    <option value="{{$trinh_do_ly_luan->trinh_do_ly_luan}}">{{$trinh_do_ly_luan->trinh_do_ly_luan}}</option>     
+                                        <label>{{trans('vne-member::language.form.title.object') }} </label><br>
+                                        <select id="object" class="form-control" name="object_id" placeholder="{{trans('vne-member::language.placeholder.member.object')}}">
+                                            @if(!empty($list_object))
+                                                @foreach($list_object as $object)
+                                                    <option value="{{$object->object_id}}" >{{$object->name}}</option>     
                                                 @endforeach
-                                            @endif                 
+                                            @endif
                                         </select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" id="change-type-trinh-do-ly-luan">
-                                                <i class="fa fa-random"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <label>{{trans('vne-member::language.form.title.trinh_do_chuyen_mon') }}</label>
-                                    <div class="form-group input-group">
-                                        <input type="text" name="trinh_do_chuyen_mon" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.trinh_do_chuyen_mon_text')}}" id="trinh_do_chuyen_mon_text" style="display: none" disabled>
-                                        <select class="form-control select2" id="trinh_do_chuyen_mon_select" name="trinh_do_chuyen_mon" placeholder="{{trans('vne-member::language.placeholder.member.trinh_do_chuyen_mon_select')}}">
-                                            @if(!empty($list_trinh_do_chuyen_mon))
-                                                @foreach($list_trinh_do_chuyen_mon as $trinh_do_chuyen_mon)
-                                                    <option value="{{$trinh_do_chuyen_mon->trinh_do_chuyen_mon}}">{{$trinh_do_chuyen_mon->trinh_do_chuyen_mon}}</option>     
-                                                @endforeach
-                                            @endif                 
-                                        </select>
-                                        <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button" id="change-type-trinh-do-chuyen-mon">
-                                                <i class="fa fa-random"></i>
-                                            </button>
-                                        </span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.dan_toc') }}</label>
-                                        <input type="text" name="dan_toc" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.dan_toc')}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.ton_giao') }}</label>
-                                        <input type="text" name="ton_giao" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.ton_giao')}}">
-                                    </div>
+                                    </div> 
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.don_vi') }}</label>
-                                        <textarea class="form-control" name="don_vi" placeholder="{{trans('vne-member::language.placeholder.member.don_vi')}}"></textarea>
-                                    </div>
+                                        <label>{{trans('vne-member::language.form.title.table') }} </label><br>
+                                        <select id="table" class="form-control" name="table_id">
+                                            <option value="0" >Chọn bảng</option>
+                                            @if(!empty($list_table))
+                                                @foreach($list_table as $table)
+                                                    <option value="{{$table->table_id}}" >{{$table->name}}</option>     
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>    
+                                </div>
+                                <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.ngay_vao_doan') }}</label>
-                                        <input type="text" name="ngay_vao_doan" class="form-control" id="ngay_vao_doan" placeholder="{{trans('vne-member::language.placeholder.member.ngay_vao_doan')}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.ngay_vao_dang') }}</label>
-                                        <input type="text" name="ngay_vao_dang" class="form-control" id="ngay_vao_dang" placeholder="{{trans('vne-member::language.placeholder.member.ngay_vao_dang')}}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label>{{trans('vne-member::language.form.title.birthday') }}</label>
-                                        <input type="text" name="birthday" class="form-control" id="birthday" placeholder="{{trans('vne-member::language.placeholder.member.birthday')}}">
+                                        <label>{{trans('vne-member::language.form.title.city') }} </label><br>
+                                        <select id="city" class="form-control" name="city_id" >
+                                            <option value="0" >Chọn bảng</option>
+                                            @if(!empty($list_city))
+                                                @foreach($list_city as $city)
+                                                    <option value="{{$city->city_id}}" >{{$city->name}}</option>     
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
-                                <!-- /.col-sm-8 -->
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>{{trans('vne-member::language.form.title.district') }} </label><br>
+                                        <select id="district" class="form-control" name="district_id">
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>{{trans('vne-member::language.form.title.school') }} </label><br>
+                                        <select id="school" class="form-control" name="school_id">
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>{{trans('vne-member::language.form.title.class') }} </label><br>
+                                        <select id="class" class="form-control" name="class_id">
+                                            
+                                        </select>
+                                    </div>
+                                </div>
                             </div>    
                         </div>
                         <!-- /.tab-pane -->
@@ -216,43 +203,6 @@
     <!--end of page js-->
     <script>
         $(function () {
-            $('#group').multiselect({
-                buttonWidth: '100%',
-                nonSelectedText: 'Chọn đoàn',
-                enableFiltering: true,
-                numberDisplayed:100
-            });
-            var check_lyluan = 0;
-            $('body').on('click','#change-type-trinh-do-ly-luan',function(e){
-                if (check_lyluan % 2 == 0) {
-                    $("#trinh_do_ly_luan_text").css('display', 'block');
-                    $('#trinh_do_ly_luan_text').prop('disabled', false);
-                    $('#trinh_do_ly_luan_select').prop('disabled', true);
-                    $("#trinh_do_ly_luan_select").css('display', 'none');
-                } else {
-                    $("#trinh_do_ly_luan_text").css('display', 'none');
-                    $('#trinh_do_ly_luan_text').prop('disabled', true);
-                    $('#trinh_do_ly_luan_select').prop('disabled', false);
-                    $("#trinh_do_ly_luan_select").css('display', 'block');
-                }
-                check_lyluan++;
-            });
-            var check_chuyenmon = 0;
-            $('body').on('click','#change-type-trinh-do-chuyen-mon',function(e){
-                if (check_chuyenmon % 2 == 0) {
-                    $("#trinh_do_chuyen_mon_text").css('display', 'block');
-                    $('#trinh_do_chuyen_mon_text').prop('disabled', false);
-                    $('#trinh_do_chuyen_mon_select').prop('disabled', true);
-                    $("#trinh_do_chuyen_mon_select").css('display', 'none');
-                } else {
-                    $("#trinh_do_chuyen_mon_text").css('display', 'none');
-                    $('#trinh_do_chuyen_mon_text').prop('disabled', true);
-                    $('#trinh_do_chuyen_mon_select').prop('disabled', false);
-                    $("#trinh_do_chuyen_mon_select").css('display', 'block');
-                }
-                check_chuyenmon++;
-            });    
-
             // var domain = "/admin/laravel-filemanager/";
             $('#lfm').filemanager('image');
             $('#form-add-member').bootstrapValidator({
@@ -269,6 +219,33 @@
                                 min: 3,
                                 max: 100,
                                 message: 'Tên phải từ 3 đến 100 kí tự'
+                            }
+                        }
+                    },
+                    u_name: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Trường này không được bỏ trống'
+                            },
+                            regexp: {
+                                regexp: '^[a-zA-Z0-9_]+$',
+                                message: 'Username chỉ gồm số hoặc chữ'
+                            },
+                            stringLength: {
+                                min: 3,
+                                max: 100,
+                                message: 'Tên đăng nhập phải từ 3 đến 100 kí tự'
+                            },
+                            remote: {
+                                // headers: {
+                                //     'X-CSRF-TOKEN': $('input[name=_token]').val()//$('meta[name="csrf-token"]').attr('content')
+                                // },
+                                data: {
+                                    '_token': $('meta[name=csrf-token]').prop('content')
+                                },
+                                type: 'post',
+                                message: 'Tên đăng nhập đã tồn tại',
+                                url: '{{route('vne.member.member.check-username-exist')}}',
                             }
                         }
                     },
@@ -316,9 +293,132 @@
                                 message: 'Trường này không được bỏ trống'
                             }
                         }
+                    },
+                    password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Trường này không được bỏ trống'
+                            },
+                            regexp: {
+                                regexp: "^(?=.*[a-z])(?=.*[A-Z])(?=.*)(?=.*[#$^+=!*()@%&]).{8,}$",
+                                message: 'Mật khẩu phải chứa 8 ký tự : chứa ít nhất 1 số, 1 chữ viết hoa, 1 chữ viết thường, 1 ký tự đặc biệt'
+                            }
+                        }
+                    },
+                    conf_password: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Trường này không được bỏ trống'
+                            },
+                            identical: {
+                                field: 'password',
+                                message: 'Mật khẩu không khớp nhau'
+                            }
+                        }
                     }
                 }
-            });   
+            });  
+            
+            $('#birthday').datetimepicker({
+                format: 'YYYY-MM-DD'
+            }); 
+
+            $('#table').select2({ 
+                placeholder: "Chọn bảng",
+                width: '100%',
+                dropdownAutoWidth: true,
+                theme: "bootstrap"
+            });
+            $('#city').select2({ 
+                placeholder: "Chọn thành phố",
+                width: '100%',
+                dropdownAutoWidth: true,
+                theme: "bootstrap"
+            });
+            $('#object').select2({ 
+                placeholder: "Select a state",
+                width: '100%',
+                dropdownAutoWidth: true,
+                theme: "bootstrap"
+            });
+
+            $("body").on('change', '#city', function () {
+                var city_id = $(this).val();
+                $.ajax({
+                    url: "{{ route('vne.member.member.get.district') }}",
+                    type: 'GET',
+                    cache: false,
+                    data: {
+                        'city_id': city_id
+                    },
+                    success: function (data, status) {
+                        var data = JSON.parse(data);
+                        var str = '<option value="0" >Chọn quận huyện</option>';
+                        for(i = 0; i<data.length; i++) {
+                            str += '<option value="' + data[i].district_id + '" >' + data[i].name + '</option>';
+                        }   
+                        $('#district').html('');
+                        $('#district').append(str);
+                        $('#district').select2({
+                            width: '100%',
+                            dropdownAutoWidth: true,
+                            theme: "bootstrap"
+                        }); 
+                    }
+                }, 'json');
+            });
+
+            $("body").on('change', '#district', function () {
+                var district_id = $(this).val();
+                $.ajax({
+                    url: "{{ route('vne.member.member.get.school') }}",
+                    type: 'GET',
+                    cache: false,
+                    data: {
+                        'district_id': district_id
+                    },
+                    success: function (data, status) {
+                        var data = JSON.parse(data);
+                        var str = '<option value="0" >Chọn trường</option>';
+                        for(i = 0; i<data.length; i++) {
+                            str += '<option value="' + data[i].school_id + '" >' + data[i].name + '</option>';
+                        }   
+                        $('#school').html('');
+                        $('#school').append(str);
+                        $('#school').select2({
+                            width: '100%',
+                            dropdownAutoWidth: true,
+                            theme: "bootstrap"
+                        }); 
+                    }
+                }, 'json');
+            });
+
+            $("body").on('change', '#school', function () {
+                var school_id = $(this).val();
+                $.ajax({
+                    url: "{{ route('vne.member.member.get.class') }}",
+                    type: 'GET',
+                    cache: false,
+                    data: {
+                        'school_id': school_id
+                    },
+                    success: function (data, status) {
+                        var data = JSON.parse(data);
+                        var str = '<option value="0" >Chọn lớp</option>';
+                        for(i = 0; i<data.length; i++) {
+                            str += '<option value="' + data[i].class_id + '" >' + data[i].name + '</option>';
+                        }   
+                        $('#class').html('');
+                        $('#class').append(str);
+                        $('#class').select2({
+                            width: '100%',
+                            dropdownAutoWidth: true,
+                            theme: "bootstrap"
+                        }); 
+                    }
+                }, 'json');
+            });
         })
     </script>
 @stop
