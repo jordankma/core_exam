@@ -35,16 +35,12 @@ class MemberController extends Controller
 
     public function create()
     {
-        $list_group = Group::all();
 
         $list_object = DB::table('vne_object')->get();
-        
         $list_city = DB::table('vne_city')->get();
-        
         $list_table = DB::table('vne_table')->get();
         
         $data = [
-            'list_group' => $list_group,
             'list_object' => $list_object,
             'list_city' => $list_city,
             'list_table' => $list_table
@@ -70,6 +66,8 @@ class MemberController extends Controller
             $members->u_name = $request->input('u_name');
             $members->password = bcrypt($request->input('password'));
             $members->email = $request->input('email');
+            $members->birthday = $request->input('birthday');
+            $members->avatar = $request->input('avatar');
             $members->phone = $request->input('phone');
             $members->gender = $request->input('gender');
             $members->object_id = $request->input('object_id');
@@ -100,28 +98,25 @@ class MemberController extends Controller
 
     public function show(MemberRequest $request)
     {
-        $list_position = Position::all();
-        $list_group = Group::all();
-        $list_trinh_do_ly_luan = Member::select('trinh_do_ly_luan')->groupBy('trinh_do_ly_luan')->get();
-        $list_trinh_do_chuyen_mon = Member::select('trinh_do_chuyen_mon')->groupBy('trinh_do_chuyen_mon')->get();
         $member_id = $request->input('member_id');
-        $list_group_id = array();
-        $group_has_member = GroupHasMember::where('member_id', $member_id)->get();
-        if(!empty($group_has_member)){
-            foreach ($group_has_member as $key => $value) {
-                $list_group_id[] = $value['group_id'];
-            } 
-        }
         $member = $this->member->find($member_id);
+        
+        $class_old = DB::table('vne_classes')->where('class_id',$member->class_id)->first();
+        $list_object = DB::table('vne_object')->get();
+        $list_table = DB::table('vne_table')->get();
+        $list_city = DB::table('vne_city')->get();
+        $list_district = DB::table('vne_district')->where('city_id',$member->city_id)->get();
+        $list_school =  DB::table('vne_school')->where('district_id',$member->district_id)->get();
+
         $data = [
             'member' => $member,
-            'list_position' => $list_position,
-            'list_trinh_do_ly_luan' => $list_trinh_do_ly_luan,
-            'list_trinh_do_chuyen_mon' => $list_trinh_do_chuyen_mon,
-            'list_group' => $list_group,
-            'list_group_id' => $list_group_id
+            'class_old' => $class_old,
+            'list_object' => $list_object,
+            'list_table' => $list_table,
+            'list_city' => $list_city,
+            'list_district' => $list_district,
+            'list_school' => $list_school,
         ];
-
         return view('VNE-MEMBER::modules.member.member.edit', $data);
     }
 
@@ -133,67 +128,20 @@ class MemberController extends Controller
         if (!$validator->fails()) { 
             $member_id = $request->input('member_id');
             $member = $this->member->find($member_id);
-            $name = $request->input('name');
-            $email = $request->input('email');
-            $phone = $request->input('phone');
-            $position_id = $request->input('position_id');
-            $group_id = $request->input('group_id');
-            $position_current = $request->input('position_current');
-            $trinh_do_ly_luan = $request->input('trinh_do_ly_luan');
-            $trinh_do_chuyen_mon = $request->input('trinh_do_chuyen_mon');
-            $address = $request->input('address'); 
-            $don_vi = $request->input('don_vi'); 
-            $gender = $request->input('gender'); 
-            $dan_toc = $request->input('dan_toc'); 
-            $ton_giao = $request->input('ton_giao'); 
-            $token = $request->input('_token');
-            $birthday = $request->input('birthday'); 
-            $ngay_vao_dang = $request->input('ngay_vao_dang'); 
-            $ngay_vao_doan = $request->input('ngay_vao_doan'); 
-            $avatar = !empty($request->input('avatar')) ? $request->input('avatar') :'';
-
-            $member->name = $name;
-            $member->email = $email;
-            $member->phone = $phone;
-            $member->position_id = $position_id;
-            $member->position_current = $position_current;
-            $member->trinh_do_ly_luan = $trinh_do_ly_luan;
-            $member->trinh_do_chuyen_mon = $trinh_do_chuyen_mon;
-            $member->address = $address;
-            $member->don_vi = $don_vi;
-            $member->gender = $gender;
-            $member->dan_toc = $dan_toc;
-            $member->ton_giao = $ton_giao;
-            $member->token = $token;
-            $member->birthday = $birthday;
-            $member->ngay_vao_dang = $ngay_vao_dang;
-            $member->ngay_vao_doan = $ngay_vao_doan;
-            $member->avatar = $avatar;
+            $member->token = $request->input('token');   
+            $member->name = $request->input('name');
+            $member->birthday = $request->input('birthday');
+            $member->avatar = $request->input('avatar');
+            $member->gender = $request->input('gender');
+            $member->object_id = $request->input('object_id');
+            $member->table_id = $request->input('table_id');
+            $member->city_id = $request->input('city_id');
+            $member->district_id = $request->input('district_id');
+            $member->school_id = $request->input('school_id');
+            $member->class_id = $request->input('class_id');
             $member->updated_at = new DateTime();
+
             if ($member->save()) {
-                DB::table('vne_group_has_member')->where(['member_id' => $member_id])->delete();
-                if(!empty($group_id)){
-                    $data_insert = array();
-                    foreach ($group_id as $key => $g_i) {
-                        if (!GroupHasMember::where([
-                            'group_id' => $g_i,
-                            'member_id' => $member_id,
-                        ])->exists()
-                        )
-                        {
-                            $data_insert[] = [
-                                'group_id' => $g_i,
-                                'member_id' => $member_id
-                            ];
-                        }
-                    }
-                }
-                if(!empty($data_insert)){
-                    DB::table('vne_group_has_member')->insert($data_insert);
-                }
-                Cache::forget('member');
-                $member_elastic = new MemberElastic();
-                $member_elastic->saveDocument($member->member_id);
                 activity('member')
                     ->performedOn($member)
                     ->withProperties($request->all())

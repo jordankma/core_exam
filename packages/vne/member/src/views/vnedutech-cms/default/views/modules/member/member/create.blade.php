@@ -251,6 +251,9 @@
                     },
                     phone: {
                         validators: {
+                            notEmpty: {
+                                message: 'Trường này không được bỏ trống'
+                            },
                             regexp: {
                                 regexp: "(09|01[2|6|8|9])+([0-9]{8})",
                                 message: 'Số điện thoại không đúng định dạng'
@@ -270,6 +273,9 @@
                     },
                     email: {
                         validators: {
+                            notEmpty: {
+                                message: 'Trường này không được bỏ trống'
+                            },
                             emailAddress: {
                                 message: 'Email không đúng định dạng'
                             },

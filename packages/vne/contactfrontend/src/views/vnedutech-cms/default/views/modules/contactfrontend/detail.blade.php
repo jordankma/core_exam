@@ -76,7 +76,6 @@
 @stop
 
 @section('footer_scripts')
-	<script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#form-contact').bootstrapValidator({

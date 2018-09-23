@@ -75,6 +75,8 @@
                             <tr class="filters">
                                 <th class="fit-content">#</th>
                                 <th>{{ trans('vne-member::language.table.member.name') }}</th>
+                                <th>{{ trans('vne-member::language.table.member.u_name') }}</th>
+                                <th>{{ trans('vne-member::language.table.member.email') }}</th>
                                 <th class="fit-content">{{ trans('vne-member::language.table.action') }}</th>
                             </tr>
                             </thead>
@@ -100,6 +102,8 @@
                 columns: [
                     { data: 'DT_Row_Index', name: 'member_id' },
                     { data: 'name', name: 'name' },
+                    { data: 'u_name', name: 'u_name' },
+                    { data: 'email', name: 'email' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'fit-content'}
                 ]
             });

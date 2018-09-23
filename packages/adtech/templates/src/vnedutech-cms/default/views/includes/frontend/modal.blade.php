@@ -11,94 +11,13 @@
 					<li class="nav-item js-toggle-registration"><i class="fa fa-user"></i> Đăng ký</li>
 				</ul>
 				<nav class="slideout-navbar">
-					<ul class="nav">
-						<li class="nav-item">
-							<a href="" class="nav-link">Giới thiệu</a>
-							<ul>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-								</li>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-									<ul>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="" class="nav-link">Tự luận</a>
-							<ul>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-								</li>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-									<ul>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="" class="nav-link">Tra cứu</a>
-							<ul>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-								</li>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-									<ul>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="" class="nav-link">Văn bản</a>
-							<ul>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-								</li>
-								<li class="nav-item">
-									<a href="" class="nav-link">Demo</a>
-									<ul>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-										<li class="nav-item">
-											<a href="" class="nav-link">Demo</a>
-										</li>
-									</ul>
-								</li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a href="" class="nav-link">Tin tức</a>
-						</li>
-						<li class="nav-item">
-							<a href="" class="nav-link">Liên hệ</a>
-						</li>
-					</ul>
+					@php 
+						showCategories($MENU_LEFT); 
+					@endphp
 				</nav>
 				<div class="contact">
-					<p class="phone">Hỗ trợ: 02613 545 662</p>
-					<p class="email">Email: timhieubiendao@gmail.com</p>
+					<p class="phone">Hỗ trợ: {{ $SETTING['phone'] }}</p>
+					<p class="email">Email: {{ $SETTING['email'] }}</p>
 				</div>
 
 			</div>
@@ -110,18 +29,19 @@
 			<div class="logo">
 				<img src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/images/egroup-logo.png?t=').time() }}" alt="">
 			</div>
-			<form action="" class="form">
+			<form action="{{ route('vne.member.auth.login')}}" method="post" class="form" id="form-login">
+				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<p>Đã là thành viên?</p>
 				<div class="form-group">
-					<input type="username" class="form-control" placeholder="Email/Username">
+					<input type="text" name="username" class="form-control" placeholder="Email/Username">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="password">
+					<input type="password" name="password" class="form-control" placeholder="password">
 				</div>
-				<div class="form-group form-check">
-					<input type="checkbox" class="form-check-input">
-					<label class="form-check-label">Ghi nhớ đăng nhập</label>
-				</div>
+				{{-- <div class="form-group form-check">
+					<input type="checkbox" name="remember" class="form-check-input" id="check_renember">
+					<label class="form-check-label" for="check_renember">Ghi nhớ đăng nhập</label>
+				</div> --}}
 				<button type="submit" class="btn btn-success">Đăng nhập</button>
 			</form>
 			<div class="bottom">
@@ -134,20 +54,21 @@
 			<div class="logo">
 				<img src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/images/egroup-logo.png?t=').time() }}" alt="">
 			</div>
-			<form action="" class="form">
+			<form action="{{ route('vne.member.member.register') }}" method="post" class="form" id="form-register">
 				<p>Thành viên mới?</p>
+				<input type="hidden" name="_token" value="{!! csrf_token() !!}">
 				<div class="form-group">
-					<input type="username" class="form-control" placeholder="Email/Username">
-					<small>(Tên đăng nhập viết liền không dấu, không chứa kí tự đặc biệt)</small>
+					<input type="username" name="u_name" class="form-control" placeholder="Email/Username">
+					{{-- <small>(Tên đăng nhập viết liền không dấu, không chứa kí tự đặc biệt)</small> --}}
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Mật khẩu">
+					<input type="password" name="password_reg" class="form-control" placeholder="Mật khẩu">
 				</div>
 				<div class="form-group">
-					<input type="password" class="form-control" placeholder="Xác nhận mật khẩu">
+					<input type="password" name="conf_password" class="form-control" placeholder="Xác nhận mật khẩu">
 				</div>
 				<div class="form-group">
-					<input type="phone" class="form-control" placeholder="Số điện thoại">
+					<input type="phone" name="phone" class="form-control" placeholder="Số điện thoại">
 				</div>
 				<button type="submit" class="btn btn-success">Đăng ký</button>
 			</form>

@@ -4,10 +4,17 @@ namespace Vne\Member\App\Http\Controllers\Auth;
 
 use Adtech\Application\Cms\Controllers\MController as Controller;
 use Illuminate\Http\Request;
-use Auth;
+use Vne\Member\App\Models\Member;
+use Auth,Validator,DateTime;
 
 class LoginController extends Controller
 {
+    private $messages = array(
+        'name.regex' => "Sai định dạng",
+        'required' => "Bắt buộc",
+        'numeric'  => "Phải là số",
+        'phone.regex' =>'Sai định dạng'
+    );
     /**
      * Get the guard to be used during authentication.
      *
@@ -24,6 +31,7 @@ class LoginController extends Controller
      */
     private function _authenticate(Request $request)
     {
+        $data['status'] = false;
         $routePrefix = $request->route()->getPrefix();
         $u_name = $request->input('u_name');
         $password = $request->input('password');
@@ -31,18 +39,22 @@ class LoginController extends Controller
         if ($this->_guard()->attempt(['u_name' => $u_name, 'password' => $password], $remember)) {
             $request->session()->regenerateToken();
             shell_exec('cd ../ && /egserver/php/bin/php artisan view:clear');
-            \Session::flash('flash_messenger', trans('adtech-core::messages.login_success'));
-            $routeName = 'frontend.homepage';
-            return redirect()->intended(route($routeName));
+            $data['status'] = true;
+            $data['messeger'] = "Đăng nhập thành công";
+            return json_encode($data);
+            // \Session::flash('flash_messenger', trans('adtech-core::messages.login_success'));
+            // $routeName = 'frontend.homepage';
+            // return redirect()->intended(route($routeName));
         } else {
             $request->session()->regenerateToken();
-            \Session::flash('flash_messenger', trans('adtech-core::messages.login_failed'));
-            return redirect()->back()
-                ->withInput($request->only('u_name'))
-                ->withErrors([
-                    'inputUname' => trans('adtech-core::messages.login_failed'),
-                    'inputPassword' => trans('adtech-core::messages.login_failed')
-                ]);
+            return json_encode($data);
+            // \Session::flash('flash_messenger', trans('adtech-core::messages.login_failed'));
+            // return redirect()->back()
+            //     ->withInput($request->only('u_name'))
+            //     ->withErrors([
+            //         'inputUname' => trans('adtech-core::messages.login_failed'),
+            //         'inputPassword' => trans('adtech-core::messages.login_failed')
+            //     ]);
         }
 
         return null;
@@ -51,15 +63,15 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         if ($this->user) {
-            $routeName = 'frontend.homepage';
-            return redirect()->intended(route($routeName));
+            $data['status'] = true;
+            return json_encode($data);
         }
 
         if ($request->isMethod('post')) {
             return $this->_authenticate($request);
         }
-
-        return view('VNE-MEMBER::modules.member.auth.login');
+        $routeName = 'index';
+        return redirect()->intended(route($routeName));
     }
 
     public function logout(Request $request)
@@ -73,5 +85,29 @@ class LoginController extends Controller
         \Session::flash('flash_messenger', trans('adtech-core::messages.logout_success'));
 
         return redirect(route('vne.member.auth.login'));
+    }
+
+    public function register(Request $request){
+        $data['status'] = false;
+        $validator = Validator::make($request->all(), [
+            'u_name' => 'required|unique:vne_member,u_name|min:3|max:50',
+            'password' => 'required',
+            'phone' => 'required|unique:vne_member,phone'
+        ], $this->messages);
+        if (!$validator->fails()) {
+            $member = new Member();
+            $member->u_name = $request->input('u_name');
+            $member->password = bcrypt($request->input('password'));
+            $member->phone = $request->input('phone');
+            $member->created_at = new DateTime();
+            $member->updated_at = new DateTime();
+            if($member->save()){
+                $data['status'] = true;
+                $data['messeger'] = "Đăng ký thành công mời bạn đăng nhập";
+            }
+            return json_encode($data);
+        } else {
+            return $validator->messages();
+        }
     }
 }

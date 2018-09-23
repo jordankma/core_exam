@@ -28,7 +28,7 @@ class AuthMiddleware
                 ];
                 return response(json_encode($response), 401);
             } else {
-                return redirect()->guest(route('dhcd.member.auth.login'));
+                return redirect()->guest(route('vne.member.auth.login'));
             }
         }
 

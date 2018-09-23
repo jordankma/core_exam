@@ -24,6 +24,7 @@ return [
         "member" => [
             "name"=> "Tên",
             "u_name"=> "Username",
+            "email"=> "Email",
             "group"=> "Nhóm",
             "object"=> "Đối tượng",
             "address"=> "Địa chỉ",

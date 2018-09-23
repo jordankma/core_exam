@@ -56,6 +56,8 @@
 {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> --}}
 <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/js/vendor/slick.min.js?t=').time() }}"></script>
 <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/js/main.js?t=').time() }}"></script>
+<script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/js/login.js?t=').time() }}"></script>
 <!-- end of global js -->
 <!-- begin page level js -->
 @yield('footer_scripts')

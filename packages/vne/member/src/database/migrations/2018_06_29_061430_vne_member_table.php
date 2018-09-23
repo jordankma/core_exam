@@ -19,6 +19,7 @@ class VneMemberTable extends Migration
             $table->string('name');
             $table->string('u_name')->nullable();
             $table->string('password')->nullable();
+            $table->string('avatar')->nullable();
             $table->string('gender')->nullable();
             $table->string('birthday')->nullable();
             $table->string('phone')->unique()->nullable();

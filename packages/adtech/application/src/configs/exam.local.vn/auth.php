@@ -47,7 +47,7 @@ return [
         ],
         'member' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'members',
         ],
     ],
 
@@ -72,6 +72,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => Adtech\Core\App\Models\User::class,
+        ],
+        'members' => [
+            'driver' => 'eloquent',
+            'model' => Vne\Member\App\Models\Member::class,
         ],
 
 //        'users' => [
