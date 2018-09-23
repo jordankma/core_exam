@@ -7,8 +7,13 @@
 		<div class="slideout js-slideout">
 			<div class="inner">
 				<ul class="nav">
-					<li class="nav-item js-toggle-login"><i class="fa fa-user"></i> Đăng nhập</li>
-					<li class="nav-item js-toggle-registration"><i class="fa fa-user"></i> Đăng ký</li>
+					@if($USER_LOGGED)
+						<li class="nav-item"><i class="fa fa-user"></i> {{ $USER_LOGGED->u_name }}</li>
+						<li class="nav-item"><i class="fa fa-user"></i> <a href="{{ route('vne.member.auth.logout') }}">Đăng xuất</a></li>
+					@else
+						<li class="nav-item js-toggle-login"><i class="fa fa-user"></i> Đăng nhập</li>
+						<li class="nav-item js-toggle-registration"><i class="fa fa-user"></i> Đăng ký</li>
+					@endif
 				</ul>
 				<nav class="slideout-navbar">
 					@php 
