@@ -136,7 +136,7 @@
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.city') }} </label><br>
                                         <select id="city" class="form-control" name="city_id" >
-                                            <option value="0" >Chọn bảng</option>
+                                            <option value="0" >Chọn thành phố</option>
                                             @if(!empty($list_city))
                                                 @foreach($list_city as $city)
                                                     <option value="{{$city->city_id}}" @if($city->city_id == $member->city_id) selected="" @endif>{{$city->name}}</option>     

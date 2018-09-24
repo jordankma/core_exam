@@ -4,7 +4,6 @@
 body {
   @extend .body-text;
   font-family: $f-roboto;
-  font-size: .75rem;
   line-height: 1.6;
   background: $c-white;
   color: $c-dark;
@@ -115,4 +114,11 @@ body {
   border-radius: $round;
   border: 1px solid $c-light;
   background: $c-white;
+}
+
+.adv {
+  img {
+    width: 100%;
+    max-width: 100%;
+  }
 }

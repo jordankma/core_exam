@@ -112,12 +112,19 @@
             display: flex;
           }
         }
+        @media (min-width: $breakpoints-lg) {
+          &::after,
+          &::before {
+            display: none;
+          }
+        }
         .dropdown {
           position: absolute;
           background: $c-green;
           top: 100%;
           left: 0;
           display: flex;
+          width: 100%;
           color: $c-white;
           display: none;
           z-index: 5;

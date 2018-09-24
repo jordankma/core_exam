@@ -175,7 +175,7 @@ var infoDistricts = $('.search-results .detail-list .item .detail-col-6');
 var infoCitys = $('.search-results .detail-list .item .detail-col-7');
 
 if (searchResults) {
-  if ($(window).width() <= 1024) {
+  if ($(window).width() < 1024) {
     for (var i = 0; i < searchResultsItems.length; i++) {
       var searchResultsItem = searchResultsItems[i];
       $('<div class="dropdown"><ul class="dropdown-title"></ul><ul class="dropdown-info"></ul></div>').appendTo(searchResultsItem);

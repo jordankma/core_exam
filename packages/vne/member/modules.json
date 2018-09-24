@@ -1,5 +1,5 @@
 {
-  "package": "dhcd",
+  "package": "vne",
   "module": "member",
   "description": "Permission route by group",
   "details": [
@@ -9,109 +9,35 @@
         {
           "name": "View list",
           "routes": [
-            "dhcd.member.member.manage",
-            "dhcd.member.member.data"
+            "vne.member.member.manage",
+            "vne.member.member.data"
           ]
         },
         {
           "name": "Create",
           "routes": [
-            "dhcd.member.member.create",
-            "dhcd.member.member.add",
-            "dhcd.member.member.country-district",
-            "dhcd.member.member.check-username-exist",
-            "dhcd.member.member.check-email-exist",
-            "dhcd.member.member.check-phone-exist",
-            "dhcd.member.member.excel.get.import",
-            "dhcd.member.member.excel.post.import"
+            "vne.member.member.create",
+            "vne.member.member.add",
+            "vne.member.member.country-district",
+            "vne.member.member.check-username-exist",
+            "vne.member.member.check-email-exist",
+            "vne.member.member.check-phone-exist",
+            "vne.member.member.excel.get.import",
+            "vne.member.member.excel.post.import"
           ]
         },
         {
           "name": "Update",
           "routes": [
-            "dhcd.member.member.show",
-            "dhcd.member.member.update"
+            "vne.member.member.show",
+            "vne.member.member.update"
           ]
         },
         {
           "name": "Delete",
           "routes": [
-            "dhcd.member.member.delete",
-            "dhcd.member.member.confirm-delete"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Quản lý nhóm người dùng",
-      "groups": [
-        {
-          "name": "View list",
-          "routes": [
-            "dhcd.member.group.manage",
-            "dhcd.member.group.data",
-            "dhcd.member.group.log",
-            "dhcd.member.group.manage.add.member",
-            "dhcd.member.group.add.member",
-            "dhcd.member.group.data.member",
-            "dhcd.member.group.delete.member",
-            "dhcd.member.group.confirm-delete.member",
-            "dhcd.member.group.search.member"
-          ]
-        },
-        {
-          "name": "Create",
-          "routes": [
-            "dhcd.member.group.create",
-            "dhcd.member.group.add"
-          ]
-        },
-        {
-          "name": "Update",
-          "routes": [
-            "dhcd.member.group.show",
-            "dhcd.member.group.update"
-          ]
-        },
-        {
-          "name": "Delete",
-          "routes": [
-            "dhcd.member.group.delete",
-            "dhcd.member.group.confirm-delete"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Quản lý chức vụ",
-      "groups": [
-        {
-          "name": "View list",
-          "routes": [
-            "dhcd.member.position.manage",
-            "dhcd.member.position.data",
-            "dhcd.member.position.log"
-          ]
-        },
-        {
-          "name": "Create",
-          "routes": [
-            "dhcd.member.position.create",
-            "dhcd.member.position.add"
-          ]
-        },
-        {
-          "name": "Update",
-          "routes": [
-            "dhcd.member.position.show",
-            "dhcd.member.position.update"
-          ]
-        },
-        {
-          "name": "Delete",
-          "routes": [
-            "dhcd.member.position.delete",
-            "dhcd.member.position.confirm-delete"
+            "vne.member.member.delete",
+            "vne.member.member.confirm-delete"
           ]
         }
       ]

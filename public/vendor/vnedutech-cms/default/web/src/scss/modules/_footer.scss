@@ -9,8 +9,11 @@
   border-top: 5px solid $c-blue1;
   .branb {
     text-align: center;
+    img {
+      max-width: 100%;
+    }
     @media (min-width: $breakpoints-lg) {
-      left: 83.333333%;
+      left: 75%;
     }
     p {
       margin: 10px 0 0 0;
@@ -18,7 +21,7 @@
   }
   .info {
     @media (min-width: $breakpoints-lg) {
-      right: 16.666667%;
+      right: 25%;
     }
     .headline {
       margin: 0;

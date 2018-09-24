@@ -81,7 +81,7 @@ class NewsRepository extends Repository
 
     public function getNewsByBox($alias,$limit) {
         
-        $result = News::whereHas('getBoxs', function ($query) use ($alias) {
+        $result = News::orderBy('news_id', 'desc')->whereHas('getBoxs', function ($query) use ($alias) {
             $query->where('vne_news_box.alias', $alias);
         })->paginate($limit, ['*'], $alias);
         return $result;

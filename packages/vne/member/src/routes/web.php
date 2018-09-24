@@ -20,6 +20,11 @@ Route::group(array('prefix' => $adminPrefix), function() {
     Route::post('vne/member/member/check-username-exist', 'MemberController@checkUserNameExist')->name('vne.member.member.check-username-exist');
     Route::post('vne/member/member/check-email-exist', 'MemberController@checkEmailExist')->name('vne.member.member.check-email-exist');
     Route::post('vne/member/member/check-phone-exist', 'MemberController@checkPhoneExist')->name('vne.member.member.check-phone-exist');
+    //thanh pho quan huyen
+    Route::get('vne/member/member/get/district', 'MemberController@getDistrict')->name('vne.member.member.get.district');
+    Route::get('vne/member/member/get/school', 'MemberController@getSchool')->name('vne.member.member.get.school');
+    Route::get('vne/member/member/get/class', 'MemberController@getClass')->name('vne.member.member.get.class');
+    
     Route::group(['middleware' => ['adtech.auth', 'adtech.acl']], function () {
         //member
         Route::get('vne/member/member/log', 'MemberController@log')->name('vne.member.member.log');
@@ -37,10 +42,6 @@ Route::group(array('prefix' => $adminPrefix), function() {
         //import export member excel
         Route::get('vne/member/member/excel/get/import', 'MemberController@getImport')->name('vne.member.member.excel.get.import')->where('as','Upload excel');
         Route::post('vne/member/member/excel/post/import', 'MemberController@postImport')->name('vne.member.member.excel.post.import');
-        //thanh pho quan huyen
-        Route::get('vne/member/member/get/district', 'MemberController@getDistrict')->name('vne.member.member.get.district');
-        Route::get('vne/member/member/get/school', 'MemberController@getSchool')->name('vne.member.member.get.school');
-        Route::get('vne/member/member/get/class', 'MemberController@getClass')->name('vne.member.member.get.class');
     });
 
 });

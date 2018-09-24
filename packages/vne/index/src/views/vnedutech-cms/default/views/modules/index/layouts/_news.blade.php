@@ -1,7 +1,7 @@
+@if(!empty($tin_tuc_chung))
 <section class="section news">
 	<div class="news-wrapper">
 		<div class="news-list">
-			@if(!empty($tin_tuc_chung))
 			@foreach ($tin_tuc_chung as $element)
 			@php 
 				$alias = $element->title_alias . '.html';
@@ -24,8 +24,8 @@
 				</div>
 			</figure>
 			@endforeach
-			@endif
 		</div>
 		<a href="" id="load_more_news" class="btn btn-primary">Còn rất nhiều tin mới. Xem thêm ngay!</a>
 	</div>
 </section>
+@endif

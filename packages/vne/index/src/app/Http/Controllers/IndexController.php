@@ -12,7 +12,7 @@ use Validator,Auth,Config;
 use Adtech\Core\App\Models\Menu;
 use Vne\Banner\App\Models\Banner;
 use Vne\News\App\Models\News;
-
+use Vne\Member\App\Models\Member;
 use Vne\News\App\Repositories\NewsRepository;
 
 class IndexController extends Controller
@@ -37,13 +37,12 @@ class IndexController extends Controller
         $biendaovietnamtailieuthamkhaochocuocthi = config('site.news_box.biendaovietnamtailieuthamkhaochocuocthi');
         $thong_bao_ban_to_chuc = $this->news->getNewsByBox($thongbaobtc,10);
         $bien_dao_viet_nam = $this->news->getNewsByBox($biendaovietnamtailieuthamkhaochocuocthi,10);
-        $tin_tuc_chung = $this->news->getNewsByBox($tintucchung,1);
+        $tin_tuc_chung = $this->news->getNewsByBox($tintucchung,4);
         $video_noi_bat = $this->news->getNewsByBox($videonoibat,5);
 
         $banners = Banner::all();
 
-        $list_news_member = array();
-
+        $list_news_member = Member::orderBy('member_id', 'desc')->with('city','school','classes')->limit(10)->get();
         $data = [
             'banners' => $banners,
             'thong_bao_ban_to_chuc' => $thong_bao_ban_to_chuc,
@@ -58,7 +57,7 @@ class IndexController extends Controller
     } 
 
     public function getNewByBox(Request $request,$alias){
-        $list_news = $this->news->getNewsByBox($alias,1);
+        $list_news = $this->news->getNewsByBox($alias,4);
         $list_news_json = array();
         if(!empty($list_news)){
             foreach ($list_news as $key => $news) {

@@ -54,15 +54,27 @@ class Member extends Model implements AuthenticatableContract, CanResetPasswordC
     //     return [];
     // }
 
-    public function getPosition(){
-        return $this->hasOne('Dhcd\Member\App\Models\Position', 'position_id', 'position_id');
+    public function city(){
+        return $this->hasOne('Vne\Member\App\Models\City', 'city_id', 'city_id');
     }
 
-    public function group(){
-        return $this->belongsToMany('Dhcd\Member\App\Models\Group', 'dhcd_group_has_member', 'member_id', 'group_id');    
+    public function district(){
+        return $this->hasOne('Vne\Member\App\Models\District', 'district_id', 'district_id');
+    }
+    
+    public function school(){
+        return $this->hasOne('Vne\Member\App\Models\School', 'school_id', 'school_id');
+    }
+    
+    public function classes(){
+        return $this->hasOne('Vne\Member\App\Models\Classes', 'class_id', 'class_id');
     }
 
-    public function documentCate(){
-        return $this->belongsToMany('Dhcd\Document\App\Models\DocumentCate', 'dhcd_document_cate_has_member', 'member_id', 'document_cate_id');
+    public function table(){
+        return $this->hasOne('Vne\Member\App\Models\Table', 'table_id', 'table_id');
+    }
+
+    public function object(){
+        return $this->hasOne('Vne\Member\App\Models\Object', 'object_id', 'object_id');
     }
 }

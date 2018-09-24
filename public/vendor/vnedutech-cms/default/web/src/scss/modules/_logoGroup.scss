@@ -53,6 +53,8 @@
   .carousel-item {
     padding: 0 15px;
     text-align: center;
+    text-decoration: none;
+    color: $c-dark;
     .logo {
       height: 70px;
       position: relative;

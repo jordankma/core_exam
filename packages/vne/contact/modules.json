@@ -1,16 +1,17 @@
 {
   "package": "package",
   "module": "module",
-  "description": "Permission route by group",
+  "description": "Quản lý contact",
   "details": [
     {
-      "name": "Controller 01",
+      "name": "Quản lý contact",
       "groups": [
         {
           "name": "View list",
           "routes": [
-            "package.module.controller.method",
-            "router name 02"
+            "vne.contact.contact.log",
+            "vne.contact.contact.data",
+            "vne.contact.contact.manage"
           ]
         },
         {
@@ -30,41 +31,8 @@
         {
           "name": "Delete",
           "routes": [
-            "router name 07",
-            "router name 08"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Controller 02",
-      "groups": [
-        {
-          "name": "View list",
-          "routes": [
-            "router name 11",
-            "router name 12"
-          ]
-        },
-        {
-          "name": "Create",
-          "routes": [
-            "router name 13",
-            "router name 14"
-          ]
-        },
-        {
-          "name": "Update",
-          "routes": [
-            "router name 15",
-            "router name 16"
-          ]
-        },
-        {
-          "name": "Delete",
-          "routes": [
-            "router name 17",
-            "router name 18"
+            "vne.contact.contact.delete",
+            "vne.contact.contact.confirm-delete"
           ]
         }
       ]

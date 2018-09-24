@@ -24,7 +24,7 @@ class NewsfrontendController extends Controller
 
     public function list(Request $request,$alias  = null){
         if($alias==null){
-            $list_news = $this->news->paginate(10);  
+            $list_news = News::orderBy('news_id', 'desc')->paginate(10);  
         } else {
             $list_news = $this->news->getNewsByCate($alias,10);    
         }
