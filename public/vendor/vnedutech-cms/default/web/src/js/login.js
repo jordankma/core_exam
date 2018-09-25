@@ -107,7 +107,7 @@ $(document).ready(function() {
         var url = '/login';
         $.post(url, {_token: _crsfToken, u_name: u_name, password: password}, function (result) {
             if (!result.status) {
-                alert('1');
+                alert('Tài khoản hoặc mật khẩu không đúng!');
                 return false;
             }else{
                 location.reload(true);

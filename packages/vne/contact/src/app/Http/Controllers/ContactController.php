@@ -27,6 +27,8 @@ class ContactController extends Controller
 
     public function manage()
     {
+        echo '<pre>';
+        print_r(phpinfo()); die;
         return view('VNE-CONTACT::modules.contact.contact.manage');
     }
 

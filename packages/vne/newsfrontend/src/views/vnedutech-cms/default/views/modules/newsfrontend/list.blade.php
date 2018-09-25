@@ -2,7 +2,16 @@
 
 {{-- Page title --}}
 @section('title'){{ $title = trans('vne-newsfrontend::language.titles.index') }}@stop
-
+@section('header_styles')
+	<style type="text/css">
+		.pagination{
+			display: inline !important;
+		}
+		.pagination .page-item{
+			float: left !important;
+		}
+	</style>
+@stop
 @section('content')
 <!-- main -->
 		<main class="main">
@@ -58,7 +67,9 @@
 							</div>
 						</section>
 						<!-- new end -->
-
+						<!-- pagination -->
+						{{$list_news->links()}}
+						<!-- pagination end -->
 					</div>
 					<div class="col-lg-4 right-main">
 

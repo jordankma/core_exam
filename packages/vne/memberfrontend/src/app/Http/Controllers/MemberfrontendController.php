@@ -26,6 +26,27 @@ class MemberfrontendController extends Controller
         $this->member = $memberRepository;
     }
 
+    public function list(Request $request)
+    {
+        $list_object = DB::table('vne_object')->get();
+        $list_table = DB::table('vne_table')->get();
+        $list_city = DB::table('vne_city')->get();
+        $list_district = DB::table('vne_district')->get();
+        $list_school =  DB::table('vne_school')->get();
+        $list_class =  DB::table('vne_classes')->get();
+        $list_member = Member::orderBy('member_id','desc')->paginate(5);
+        $data = [
+            'list_member' => $list_member,
+            'list_object' => $list_object,
+            'list_table' => $list_table,
+            'list_city' => $list_city,
+            'list_district' => $list_district,
+            'list_school' => $list_school,
+            'list_class' => $list_class
+        ];
+        return view('VNE-MEMBERFRONTEND::modules.memberfrontend.list',$data);
+    }
+
     public function show(Request $request)
     {
         $member = Auth::guard('member')->user();
