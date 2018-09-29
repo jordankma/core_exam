@@ -27,7 +27,7 @@ class IndexController extends Controller
     {
         parent::__construct();
         $this->news = $newsRepository;
-        $this->_user = Auth::user();
+        $this->_user = Auth::guard('member')->user();
     }
     public function index()
     {
@@ -42,7 +42,7 @@ class IndexController extends Controller
 
         $banners = Banner::all();
 
-        $list_news_member = Member::orderBy('member_id', 'desc')->with('city','school','classes')->limit(10)->get();
+        $list_news_member = Member::orderBy('member_id', 'desc')->where('is_reg',1)->with('city','school','classes')->limit(8)->get();
         $data = [
             'banners' => $banners,
             'thong_bao_ban_to_chuc' => $thong_bao_ban_to_chuc,
@@ -74,5 +74,19 @@ class IndexController extends Controller
         }
         return json_encode($list_news_json);
              
+    }
+    public function getTryExam(Request $request){
+        $uid = Auth::guard('member')->user()->member_id;
+        $game_token = 'minhnt' . $uid;
+        $ip_port = 'http://123.30.174.148:4555';
+        $src = 'thi-thu';
+        $src = $src.'?game_token='.$game_token.'&uid='.$uid.'&ip_port='.$ip_port;
+        $data = [
+            'game_token' => $game_token,
+            'uid' => $uid,
+            'ip_port' => $ip_port,
+            'src' => $src
+        ];
+        return view('VNE-INDEX::modules.index.contest.index',$data);
     }
 }

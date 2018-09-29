@@ -2,7 +2,7 @@
 <section class="new-user" style="background-image: url({{ asset('/vendor/' . $group_name . '/' . $skin . '/web/images/bg.png?t=' . time()) }});">
 	<div class="container">
 		<h2 class="headline">Thành viên mới nhất</h2>
-		<div class="row">.
+		<div class="row">
 			@foreach ($list_news_member as $element)
 			<div class="col-md-6 col-lg-3 user-item">
 				<div class="wrapper">

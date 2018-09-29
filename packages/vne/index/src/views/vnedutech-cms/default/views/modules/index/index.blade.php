@@ -87,7 +87,7 @@
 			            	var data = JSON.parse(data);
 			            	var str = '';
 			            	for(i = 0; i<data.length; i++) {
-			            		var alias = data[i].title_alias + '_' + data[i].news_id +'.html';
+			            		var alias = data[i].title_alias +'.html';
 			            		str += '<figure class="news-item">'
 									+		'<h2 class="title">'
 									+			'<a href="/chi-tiet/'+ alias +'">'+data[i].title+'</a>'
@@ -125,7 +125,7 @@
 			            	var data = JSON.parse(data);
 			            	var str = '';
 			            	for(i = 0; i<data.length; i++) {
-			            		var alias = data[i].title_alias + '_' + data[i].news_id +'.html';
+			            		var alias = data[i].title_alias +'.html';
 			            		str += '<figure class="news-item">'
 									+		'<h2 class="title">'
 									+			'<a href="/chi-tiet/'+ alias +'">'+data[i].title+'</a>'

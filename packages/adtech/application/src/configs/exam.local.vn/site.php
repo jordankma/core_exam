@@ -125,5 +125,6 @@ return [
         'biendaovietnamtailieuthamkhaochocuocthi' => 'bien-dao-viet-nam-tai-lieu-tham-khao-cho-cuoc-thi',
         'videonoibat' => 'videonoibat',
         'tintucchung' => 'tintucchung'
-    ]
+    ],
+    'city_id_default' => 62
 ];

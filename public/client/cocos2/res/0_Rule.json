@@ -1,0 +1,372 @@
+{
+  "ID": "0064d5d6-8b7b-4df0-988f-68d760f4b145",
+  "Version": "3.10.0.0",
+  "Name": "0_Rule",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 14,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/bg.jpg",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 640.4398,
+              "Y": 400.563
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5003,
+              "Y": 0.5007
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "LeftMargin": 0.4398,
+            "RightMargin": -0.4397,
+            "TopMargin": -0.563,
+            "BottomMargin": 0.563,
+            "Tag": 2,
+            "ActionTag": -1981505857,
+            "Size": {
+              "X": 1280.0,
+              "Y": 800.0
+            },
+            "Name": "spr_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/logo.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 204.7282,
+              "Y": 758.5496
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.1599,
+              "Y": 0.9482
+            },
+            "PreSize": {
+              "X": 0.3,
+              "Y": 0.0812
+            },
+            "LeftMargin": 12.7282,
+            "RightMargin": 883.2718,
+            "TopMargin": 8.9504,
+            "BottomMargin": 726.0496,
+            "Tag": 17,
+            "ActionTag": -49174511,
+            "Size": {
+              "X": 384.0,
+              "Y": 65.0
+            },
+            "Name": "spr_logo",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/bg_rule.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 640.4396,
+              "Y": 399.1971
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5003,
+              "Y": 0.499
+            },
+            "PreSize": {
+              "X": 0.5445,
+              "Y": 0.31
+            },
+            "LeftMargin": 291.9396,
+            "RightMargin": 291.0604,
+            "TopMargin": 276.8029,
+            "BottomMargin": 275.1971,
+            "Tag": 37,
+            "Children": [
+              {
+                "IsCustomSize": true,
+                "FontSize": 20,
+                "LabelText": "1. Thí sinh trải qua 20 câu hỏi trắc nghiệm\n2. Thời gian của vòng thi là 10 phút\n3. Trả lời đúng được 10 điểm, trả lời sai không có điểm",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "font/UVNVan_B.TTF",
+                  "Plist": ""
+                },
+                "VerticalAlignmentType": "VT_Center",
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 0.5,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 369.8636,
+                  "Y": 131.5934
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {
+                  "R": 16,
+                  "G": 36,
+                  "B": 135
+                },
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 0.5307,
+                  "Y": 0.5306
+                },
+                "PreSize": {
+                  "X": 0.8608,
+                  "Y": 0.6855
+                },
+                "LeftMargin": 69.8636,
+                "RightMargin": 27.1365,
+                "TopMargin": 31.4066,
+                "BottomMargin": 46.5934,
+                "Tag": 38,
+                "ActionTag": -1485525130,
+                "Size": {
+                  "X": 600.0,
+                  "Y": 170.0
+                },
+                "Name": "lbl_rule",
+                "ctype": "TextObjectData"
+              }
+            ],
+            "ActionTag": 378217916,
+            "Size": {
+              "X": 697.0,
+              "Y": 248.0
+            },
+            "Name": "spr_bgrule",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "IsCustomSize": true,
+            "FontSize": 40,
+            "LabelText": "THỂ LỆ VÒNG I",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "font/UVNVan_B.TTF",
+              "Plist": ""
+            },
+            "HorizontalAlignmentType": "HT_Center",
+            "VerticalAlignmentType": "VT_Center",
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 640.4398,
+              "Y": 588.1472
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5003,
+              "Y": 0.7352
+            },
+            "PreSize": {
+              "X": 0.3125,
+              "Y": 0.0625
+            },
+            "LeftMargin": 440.4398,
+            "RightMargin": 439.5602,
+            "TopMargin": 186.8528,
+            "BottomMargin": 563.1472,
+            "Tag": 39,
+            "ActionTag": -1116212268,
+            "Size": {
+              "X": 400.0,
+              "Y": 50.0
+            },
+            "Name": "lbl_textround",
+            "ctype": "TextObjectData"
+          },
+          {
+            "FontSize": 30,
+            "ButtonText": "BẮT ĐẦU",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "font/UVNVan_B.TTF",
+              "Plist": ""
+            },
+            "TextColor": {
+              "R": 127,
+              "G": 127,
+              "B": 127
+            },
+            "DisabledFileData": {
+              "Type": "Normal",
+              "Path": "art/btn_dis.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "art/btn32.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "art/btn31.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 188,
+            "Scale9Height": 58,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 640.4398,
+              "Y": 137.3591
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5003,
+              "Y": 0.1717
+            },
+            "PreSize": {
+              "X": 0.1703,
+              "Y": 0.1
+            },
+            "LeftMargin": 531.4398,
+            "RightMargin": 530.5602,
+            "TopMargin": 622.6409,
+            "BottomMargin": 97.3591,
+            "Tag": 40,
+            "ActionTag": -201839882,
+            "Size": {
+              "X": 218.0,
+              "Y": 80.0
+            },
+            "Name": "btn_start",
+            "ctype": "ButtonObjectData"
+          }
+        ],
+        "Size": {
+          "X": 1280.0,
+          "Y": 800.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "art/bg.jpg",
+        "art/bg_rule.png",
+        "art/btn_dis.png",
+        "art/btn31.png",
+        "art/btn32.png",
+        "art/logo.png",
+        "font/UVNVan_B.TTF"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

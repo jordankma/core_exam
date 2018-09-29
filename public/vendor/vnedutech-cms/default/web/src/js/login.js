@@ -92,8 +92,9 @@ $(document).ready(function() {
 	            if (!result.status) {
 	                alert('false');
 	            } else{
-	            	$('body').removeClass('active-registration');
-	            	$('body').addClass('active-login');
+	            	// $('body').removeClass('active-registration');
+	            	// $('body').addClass('active-login');
+                    window.location.assign("http://exam.local.vn/cap-nhat-thong-tin");
 	            }	    
             }, 'json');
         }

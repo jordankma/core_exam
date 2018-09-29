@@ -47,24 +47,25 @@ class MemberfrontendController extends Controller
         return view('VNE-MEMBERFRONTEND::modules.memberfrontend.list',$data);
     }
 
-    public function show(Request $request)
+    public function show()
     {
+        $city_id_default = config('site.city_id_default');
+        
         $member = Auth::guard('member')->user();
-        $class_old = DB::table('vne_classes')->where('class_id',$member->class_id)->first();
-        $list_object = DB::table('vne_object')->get();
         $list_table = DB::table('vne_table')->get();
-        $list_city = DB::table('vne_city')->get();
-        $list_district = DB::table('vne_district')->where('city_id',$member->city_id)->get();
+        $city = DB::table('vne_city')->where('city_id',$city_id_default)->first();
+        $list_district = DB::table('vne_district')->get();
         $list_school =  DB::table('vne_school')->where('district_id',$member->district_id)->get();
-
+        if($member->birthday==null){
+            $member->birthday ='10-10-1995';   
+        }
         $data = [
             'member' => $member,
-            'class_old' => $class_old,
-            'list_object' => $list_object,
+            'birthday' => explode("-",$member->birthday),
             'list_table' => $list_table,
-            'list_city' => $list_city,
             'list_district' => $list_district,
             'list_school' => $list_school,
+            'city' => $city
         ];
         return view('VNE-MEMBERFRONTEND::modules.memberfrontend.update',$data);
     }
@@ -73,11 +74,8 @@ class MemberfrontendController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:4|max:50',
-            'object_id' => 'required',
             'city_id' => 'required',
-            'district_id' => 'required',
-            'school_id' => 'required',
-            'class_id' => 'required'
+            'table_id' => 'required',
         ], $this->messages);
         if (!$validator->fails()) {
             $member_id = $request->input('member_id');
@@ -87,13 +85,16 @@ class MemberfrontendController extends Controller
             if($member->is_reg==0){
                 $member->email = $request->input('email');
             }
-            $member->birthday = $request->input('birthday');
+
+            $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
             $member->gender = $request->input('gender');
-            $member->object_id = $request->input('object_id');
+            $member->birthday = $birthday;
+            $member->table_id = $request->input('table_id');
             $member->city_id = $request->input('city_id');
             $member->district_id = $request->input('district_id');
             $member->school_id = $request->input('school_id');
             $member->class_id = $request->input('class_id');
+            $member->don_vi = $request->input('don_vi');
             $member->is_reg = 1;
 
             $member->updated_at = new DateTime();

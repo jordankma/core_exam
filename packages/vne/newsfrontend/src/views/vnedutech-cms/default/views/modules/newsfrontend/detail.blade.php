@@ -38,7 +38,7 @@
 
 			<div class="container container-main">
 				<div class="row">
-					<div class="col-lg-12 left-main">
+					<div class="col-lg-8 left-main">
 
 						<!-- news detail -->
 						<section class="section news-detail">
@@ -53,7 +53,7 @@
 						<!-- news detail end -->
 
 					</div>
-					<div class="col-lg-12 right-main">
+					<div class="col-lg-4 right-main">
 
 						@include('includes.frontend.sidebar')
 

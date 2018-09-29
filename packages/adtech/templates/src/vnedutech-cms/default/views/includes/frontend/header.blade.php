@@ -45,15 +45,15 @@ function showCategories($categories, $parent_id = 0, $char = '')
 					<p class="email">{{ $SETTING['email'] }}</p>
 				</div> <!-- /top bar -->
 				<ul class="nav">
+					@if($USER_LOGGED)
 					<li class="nav-item dropdown">
 						<i class="ii ii-bachelor"></i>Vào thi
 						<ul class="sub-menu">
-							<li class="nav-item"><i class="fa fa-edit"></i><a href="" class="nav-link">Thi Thử</a></li>
+							<li class="nav-item"><i class="fa fa-edit"></i><a href="{{route('vne.index.try.exam')}}" class="nav-link">Thi Thử</a></li>
 							<li class="nav-item"><i class="ii ii-bachelor"></i><a href="" class="nav-link">Thi Thật</a></li>
 							<li class="nav-item"><i class="fa fa-file-text"></i><a href="" class="nav-link">Tự Luận</a></li>
 						</ul>
 					</li>
-					@if($USER_LOGGED)
 						<li class="nav-item"><i class="fa fa-user"></i><a href="{{ route('vne.memberfrontend.show') }}"> {{ $USER_LOGGED->u_name }}</a></li>
 						<li class="nav-item"><i class="fa fa-user"></i> <a href="{{ route('vne.member.auth.logout') }}">Đăng xuất</a></li>
 					@else

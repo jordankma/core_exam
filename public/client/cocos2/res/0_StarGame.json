@@ -1,0 +1,490 @@
+{
+  "ID": "11db9d03-8d09-47c9-98f3-a4e92d62b545",
+  "Version": "3.10.0.0",
+  "Name": "0_StarGame",
+  "Content": {
+    "Content": {
+      "Animation": {
+        "Duration": 0,
+        "Speed": 1.0,
+        "Timelines": [],
+        "ctype": "TimelineActionData"
+      },
+      "AnimationList": [],
+      "ObjectData": {
+        "Tag": 14,
+        "Children": [
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/background.jpg",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 641.9702,
+              "Y": 399.1971
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5015,
+              "Y": 0.499
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "LeftMargin": 1.9702,
+            "RightMargin": -1.9702,
+            "TopMargin": 0.8029,
+            "BottomMargin": -0.8029,
+            "Tag": 2,
+            "ActionTag": -1981505857,
+            "Size": {
+              "X": 1280.0,
+              "Y": 800.0
+            },
+            "Name": "spr_bg",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/logo.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 204.7282,
+              "Y": 758.5496
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.1599,
+              "Y": 0.9482
+            },
+            "PreSize": {
+              "X": 0.3,
+              "Y": 0.0812
+            },
+            "LeftMargin": 12.7282,
+            "RightMargin": 883.2718,
+            "TopMargin": 8.9504,
+            "BottomMargin": 726.0496,
+            "Tag": 3,
+            "ActionTag": 645752583,
+            "Size": {
+              "X": 384.0,
+              "Y": 65.0
+            },
+            "Name": "spr_logo",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 26,
+            "ButtonText": "BẮT ĐẦU",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "font/UVNVan_B.TTF",
+              "Plist": ""
+            },
+            "TextColor": {},
+            "DisabledFileData": {
+              "Type": "Normal",
+              "Path": "art/btn_dis.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "art/btn_12.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "art/btn_11.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 188,
+            "Scale9Height": 58,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 640.4395,
+              "Y": 97.435
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5003,
+              "Y": 0.1218
+            },
+            "PreSize": {
+              "X": 0.1703,
+              "Y": 0.1
+            },
+            "LeftMargin": 531.4395,
+            "RightMargin": 530.5605,
+            "TopMargin": 662.565,
+            "BottomMargin": 57.435,
+            "Tag": 13,
+            "ActionTag": 1002380161,
+            "Size": {
+              "X": 218.0,
+              "Y": 80.0
+            },
+            "Name": "btn_Start",
+            "ctype": "ButtonObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/text.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 641.9704,
+              "Y": 500.1063
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5015,
+              "Y": 0.6251
+            },
+            "PreSize": {
+              "X": 0.707,
+              "Y": 0.3075
+            },
+            "LeftMargin": 189.4704,
+            "RightMargin": 185.5295,
+            "TopMargin": 176.8937,
+            "BottomMargin": 377.1063,
+            "Tag": 33,
+            "ActionTag": 1037970864,
+            "Size": {
+              "X": 905.0,
+              "Y": 246.0
+            },
+            "Name": "spr_name",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/background.jpg",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 770,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 641.5395,
+              "Y": 399.6226
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {
+              "R": 0,
+              "G": 0,
+              "B": 0
+            },
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5012,
+              "Y": 0.4995
+            },
+            "PreSize": {
+              "X": 1.0,
+              "Y": 1.0
+            },
+            "LeftMargin": 1.5395,
+            "RightMargin": -1.5396,
+            "TopMargin": 0.3774,
+            "BottomMargin": -0.3774,
+            "Tag": 37,
+            "ActionTag": -1551343385,
+            "Size": {
+              "X": 1280.0,
+              "Y": 800.0
+            },
+            "Alpha": 236,
+            "Name": "spr_layout",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FileData": {
+              "Type": "Normal",
+              "Path": "art/bg_rule.png",
+              "Plist": ""
+            },
+            "BlendFunc": {
+              "Src": 1,
+              "Dst": 771
+            },
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 641.5393,
+              "Y": 456.5659
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5012,
+              "Y": 0.5707
+            },
+            "PreSize": {
+              "X": 0.5445,
+              "Y": 0.31
+            },
+            "LeftMargin": 293.0393,
+            "RightMargin": 289.9607,
+            "TopMargin": 219.4341,
+            "BottomMargin": 332.5659,
+            "Tag": 38,
+            "Children": [
+              {
+                "IsCustomSize": true,
+                "FontSize": 30,
+                "LabelText": "Bạn đã hết lượt thi!",
+                "FontResource": {
+                  "Type": "Normal",
+                  "Path": "font/UVNVan_B.TTF",
+                  "Plist": ""
+                },
+                "HorizontalAlignmentType": "HT_Center",
+                "VerticalAlignmentType": "VT_Center",
+                "OutlineColor": {
+                  "G": 0,
+                  "B": 0
+                },
+                "ShadowColor": {
+                  "R": 110,
+                  "G": 110,
+                  "B": 110
+                },
+                "ShadowOffsetX": 2.0,
+                "ShadowOffsetY": -2.0,
+                "AnchorPoint": {
+                  "ScaleX": 50.0,
+                  "ScaleY": 0.5
+                },
+                "Position": {
+                  "X": 25093.418,
+                  "Y": 123.4605
+                },
+                "Scale": {
+                  "ScaleX": 1.0,
+                  "ScaleY": 1.0
+                },
+                "CColor": {
+                  "R": 0,
+                  "G": 0,
+                  "B": 0
+                },
+                "IconVisible": false,
+                "PrePosition": {
+                  "X": 36.002,
+                  "Y": 0.4978
+                },
+                "PreSize": {
+                  "X": 0.7174,
+                  "Y": 0.8065
+                },
+                "LeftMargin": 93.418,
+                "RightMargin": 103.582,
+                "TopMargin": 24.5395,
+                "BottomMargin": 23.4605,
+                "Tag": 39,
+                "ActionTag": -877366688,
+                "Size": {
+                  "X": 500.0,
+                  "Y": 200.0
+                },
+                "Name": "lbl_info",
+                "ctype": "TextObjectData"
+              }
+            ],
+            "ActionTag": -650818717,
+            "Size": {
+              "X": 697.0,
+              "Y": 248.0
+            },
+            "Name": "spr_info",
+            "ctype": "SpriteObjectData"
+          },
+          {
+            "FontSize": 26,
+            "ButtonText": "THOÁT",
+            "FontResource": {
+              "Type": "Normal",
+              "Path": "font/UVNVan_B.TTF",
+              "Plist": ""
+            },
+            "TextColor": {
+              "R": 65,
+              "G": 65,
+              "B": 70
+            },
+            "DisabledFileData": {
+              "Type": "Normal",
+              "Path": "art/btn_dis.png",
+              "Plist": ""
+            },
+            "PressedFileData": {
+              "Type": "Normal",
+              "Path": "art/btn32.png",
+              "Plist": ""
+            },
+            "NormalFileData": {
+              "Type": "Normal",
+              "Path": "art/btn31.png",
+              "Plist": ""
+            },
+            "Scale9Enable": true,
+            "Scale9OriginX": 15,
+            "Scale9OriginY": 11,
+            "Scale9Width": 188,
+            "Scale9Height": 58,
+            "OutlineColor": {
+              "G": 0,
+              "B": 0
+            },
+            "ShadowColor": {
+              "R": 110,
+              "G": 110,
+              "B": 110
+            },
+            "ShadowOffsetX": 2.0,
+            "ShadowOffsetY": -2.0,
+            "TouchEnable": true,
+            "AnchorPoint": {
+              "ScaleX": 0.5,
+              "ScaleY": 0.5
+            },
+            "Position": {
+              "X": 641.5394,
+              "Y": 286.5558
+            },
+            "Scale": {
+              "ScaleX": 1.0,
+              "ScaleY": 1.0
+            },
+            "CColor": {},
+            "IconVisible": false,
+            "PrePosition": {
+              "X": 0.5012,
+              "Y": 0.3582
+            },
+            "PreSize": {
+              "X": 0.1703,
+              "Y": 0.1
+            },
+            "LeftMargin": 532.5394,
+            "RightMargin": 529.4606,
+            "TopMargin": 473.4442,
+            "BottomMargin": 246.5558,
+            "Tag": 40,
+            "ActionTag": -1397826099,
+            "Size": {
+              "X": 218.0,
+              "Y": 80.0
+            },
+            "Name": "btn_exit",
+            "ctype": "ButtonObjectData"
+          }
+        ],
+        "Size": {
+          "X": 1280.0,
+          "Y": 800.0
+        },
+        "Name": "Scene",
+        "ctype": "SingleNodeObjectData"
+      },
+      "UsedResources": [
+        "art/background.jpg",
+        "art/bg_rule.png",
+        "art/btn_11.png",
+        "art/btn_12.png",
+        "art/btn_dis.png",
+        "art/btn31.png",
+        "art/btn32.png",
+        "art/logo.png",
+        "art/text.png",
+        "font/UVNVan_B.TTF"
+      ],
+      "ctype": "GameFileData"
+    }
+  },
+  "Type": "Scene"
+}

@@ -24,7 +24,7 @@
     <div class="row">
         <div class="box animation flipInX">
             <div class="box1">
-                <img src="{{ (!empty($SETTING['logo'])) ? config('site.url_storage') . ($SETTING['logo']) : '' }}" alt="logo" class="img-responsive mar">
+                <img src="{{ (!empty($SETTING['logo'])) ? config('site.url_storage') . ($SETTING['logo']) : '' }}" id="test" alt="logo" class="img-responsive mar">
                 <br>
                 <div id="notific">
                     @include('includes.notifications')

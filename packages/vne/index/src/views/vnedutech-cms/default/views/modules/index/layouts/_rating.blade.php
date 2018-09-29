@@ -4,7 +4,7 @@
 			<h2 class="headline">Top thí sinh đăng ký</h2>
 			<div class="tab js-tab">
 				<div class="tab-item active">
-					<div class="title">Sở GD & ĐT Tỉnh/TP</div>
+					<div class="title">Bảng A</div>
 					<ul class="list">
 						<li class="list-item">
 							<div class="number">01</div>
@@ -30,7 +30,7 @@
 					</ul>
 				</div>
 				<div class="tab-item">
-					<div class="title">Trường</div>
+					<div class="title">Bảng B</div>
 					<ul class="list">
 						<li class="list-item">
 							<div class="number">01</div>
@@ -61,7 +61,7 @@
 	</div>
 	<div class="rating-item">
 		<div class="wrapper">
-			<h2 class="headline">Top thí sinh đăng ký</h2>
+			<h2 class="headline">Top thí sinh đã thi</h2>
 			<div class="tab js-tab">
 				<div class="tab-item active">
 					<div class="title">Sở GD & ĐT Tỉnh/TP</div>

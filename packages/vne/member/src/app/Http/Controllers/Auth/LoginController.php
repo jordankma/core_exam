@@ -37,24 +37,15 @@ class LoginController extends Controller
         $password = $request->input('password');
         $remember = $request->input('remember', false);
         if ($this->_guard()->attempt(['u_name' => $u_name, 'password' => $password], $remember)) {
+            
             $request->session()->regenerateToken();
             shell_exec('cd ../ && /egserver/php/bin/php artisan view:clear');
             $data['status'] = true;
             $data['messeger'] = "Đăng nhập thành công";
             return json_encode($data);
-            // \Session::flash('flash_messenger', trans('adtech-core::messages.login_success'));
-            // $routeName = 'frontend.homepage';
-            // return redirect()->intended(route($routeName));
         } else {
             $request->session()->regenerateToken();
             return json_encode($data);
-            // \Session::flash('flash_messenger', trans('adtech-core::messages.login_failed'));
-            // return redirect()->back()
-            //     ->withInput($request->only('u_name'))
-            //     ->withErrors([
-            //         'inputUname' => trans('adtech-core::messages.login_failed'),
-            //         'inputPassword' => trans('adtech-core::messages.login_failed')
-            //     ]);
         }
 
         return null;
@@ -101,7 +92,13 @@ class LoginController extends Controller
             $member->phone = $request->input('phone');
             $member->created_at = new DateTime();
             $member->updated_at = new DateTime();
+
+            
             if($member->save()){
+                $u_name = $member->u_name;
+                $password = $member->password;
+                $remember = '';
+                $this->_authenticate($request);
                 $data['status'] = true;
                 $data['messeger'] = "Đăng ký thành công mời bạn đăng nhập";
             }
