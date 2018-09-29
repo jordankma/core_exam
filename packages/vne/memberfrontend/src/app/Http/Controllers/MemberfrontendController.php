@@ -9,6 +9,10 @@ use Spatie\Activitylog\Models\Activity;
 use Vne\Member\App\Models\Member;
 use Vne\Member\App\Repositories\MemberRepository;
 
+use Vne\Member\App\Models\Table;
+use Vne\Member\App\Models\School;
+use Vne\Member\App\Models\District;
+
 use Yajra\Datatables\Datatables;
 use Validator,Auth,DB,Datetime,Cache;
 
@@ -79,6 +83,8 @@ class MemberfrontendController extends Controller
         ], $this->messages);
         if (!$validator->fails()) {
             $member_id = $request->input('member_id');
+            $table_id = $request->input('table_id');
+
             $member = $this->member->find($member_id); 
 
             $member->name = $request->input('name');
@@ -89,18 +95,49 @@ class MemberfrontendController extends Controller
             $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
             $member->gender = $request->input('gender');
             $member->birthday = $birthday;
-            $member->table_id = $request->input('table_id');
+            $member->table_id = $table_id;
             $member->city_id = $request->input('city_id');
             $member->district_id = $request->input('district_id');
             $member->school_id = $request->input('school_id');
             $member->class_id = $request->input('class_id');
             $member->don_vi = $request->input('don_vi');
-            $member->is_reg = 1;
-
             $member->updated_at = new DateTime();
             if ($member->save()) {
+                if($member->is_reg==0){
+                    $table = Table::find($table_id);  
+                    $district = District::find($request->input('district_id'));  
+                    $school = School::find($request->input('school_id'));
+                    if($table_id==config('site.table_a_id')){
+
+                        $user_reg_exam_a = $table->user_reg_exam_a;
+                        $table->user_reg_exam_a = $user_reg_exam_a + 1;   
+                        $table->save();
+
+                        $user_reg_exam_a = $district->user_reg_exam_a;
+                        $district->user_reg_exam_a = $user_reg_exam_a + 1;   
+                        $district->save();  
+
+                        $user_reg_exam_a = $school->user_reg_exam_a;
+                        $school->user_reg_exam_a = $user_reg_exam_a + 1;   
+                        $school->save(); 
+                    }   
+                    elseif($table_id==config('site.table_b_id')){
+                        $user_reg_exam_b = $table->user_reg_exam_b;
+                        $table->user_reg_exam_b = $user_reg_exam_b + 1;   
+                        $table->save();
+
+                        $user_reg_exam_b = $district->user_reg_exam_b;
+                        $district->user_reg_exam_b = $user_reg_exam_b + 1;   
+                        $district->save();
+                        $user_reg_exam_b = $school->user_reg_exam_b;
+                        $school->user_reg_exam_b = $user_reg_exam_b + 1;   
+                        $school->save(); 
+                    }     
+                }
+                $member->is_reg = 1;
+                $member->save();
                 Cache::forget('member');
-                return redirect()->route('vne.memberfrontend.show');
+                return redirect()->route('index');
             } else {
                 return redirect()->route('vne.member.member.manage');
             }
@@ -110,4 +147,14 @@ class MemberfrontendController extends Controller
         }    
     }
 
+    public function listTopMember(){
+        $list_member_top_a = District::query()->orderBy('user_reg_exam_a','desc')->get();
+        $list_member_top_b = District::query()->orderBy('user_reg_exam_b','desc')->get();
+        $data = [
+            'list_member_top_a' => $list_member_top_a,
+            'list_member_top_b' => $list_member_top_b
+        ];
+        return view('VNE-MEMBERFRONTEND::modules.memberfrontend.list_reg',$data);
+            
+    }
 }

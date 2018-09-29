@@ -13,6 +13,10 @@ use Adtech\Core\App\Models\Menu;
 use Vne\Banner\App\Models\Banner;
 use Vne\News\App\Models\News;
 use Vne\Member\App\Models\Member;
+use Vne\Member\App\Models\Table;
+use Vne\Member\App\Models\School;
+use Vne\Member\App\Models\District;
+
 use Vne\News\App\Repositories\NewsRepository;
 
 class IndexController extends Controller
@@ -42,6 +46,9 @@ class IndexController extends Controller
 
         $banners = Banner::all();
 
+        $list_member_top_a = District::query()->orderBy('user_reg_exam_a','desc')->limit(3)->get();
+        $list_member_top_b = District::query()->orderBy('user_reg_exam_b','desc')->limit(3)->get();
+
         $list_news_member = Member::orderBy('member_id', 'desc')->where('is_reg',1)->with('city','school','classes')->limit(8)->get();
         $data = [
             'banners' => $banners,
@@ -50,7 +57,9 @@ class IndexController extends Controller
             'tin_tuc_chung' => $tin_tuc_chung,
             'video_noi_bat' => $video_noi_bat,
             'last_page_tin_tuc_chung' => $tin_tuc_chung->lastPage(),
-            'list_news_member' => $list_news_member
+            'list_news_member' => $list_news_member,
+            'list_member_top_a' => $list_member_top_a,
+            'list_member_top_b' => $list_member_top_b
 
         ];
         return view('VNE-INDEX::modules.index.index',$data);

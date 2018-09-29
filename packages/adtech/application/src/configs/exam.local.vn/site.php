@@ -126,5 +126,7 @@ return [
         'videonoibat' => 'videonoibat',
         'tintucchung' => 'tintucchung'
     ],
-    'city_id_default' => 62
+    'city_id_default' => 62,
+    'table_a_id' => 1,
+    'table_b_id' => 2
 ];

@@ -207,13 +207,13 @@
                     //         }
                     //     }
                     // },
-                    // district_id: {
-                    //     validators: {
-                    //         notEmpty: {
-                    //             message: 'Trường này không được bỏ trống'
-                    //         }
-                    //     }
-                    // },
+                    district_id: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Trường này không được bỏ trống'
+                            }
+                        }
+                    },
                     table_id: {
                         validators: {
                             notEmpty: {
