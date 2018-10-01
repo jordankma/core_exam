@@ -38,7 +38,16 @@ class MemberfrontendController extends Controller
         $list_district = DB::table('vne_district')->get();
         $list_school =  DB::table('vne_school')->get();
         $list_class =  DB::table('vne_classes')->get();
-        $list_member = Member::orderBy('member_id','desc')->paginate(5);
+        $list_member = Member::orderBy('member_id','desc')->where('is_reg',1)->paginate(20);
+        $params = [
+            'table_id' => '',
+            'u_name' => '',
+            'name' => '',
+            'city_id' => '',
+            'district_id' => '',
+            'school_id' => '',
+            'class_id' => ''
+        ];
         $data = [
             'list_member' => $list_member,
             'list_object' => $list_object,
@@ -46,7 +55,39 @@ class MemberfrontendController extends Controller
             'list_city' => $list_city,
             'list_district' => $list_district,
             'list_school' => $list_school,
-            'list_class' => $list_class
+            'list_class' => $list_class,
+            'params' => $params,
+        ];
+        return view('VNE-MEMBERFRONTEND::modules.memberfrontend.list',$data);
+    }
+
+    public function search(Request $request){
+        $params = [
+            'table_id' => $request->input('table_id'),
+            'u_name' => $request->input('u_name'),
+            'name' => $request->input('name'),
+            'city_id' => $request->input('city_id'),
+            'district_id' => $request->input('district_id'),
+            'school_id' => $request->input('school_id'),
+            'class_id' => $request->input('class_id')
+        ];
+
+        $list_object = DB::table('vne_object')->get();
+        $list_table = DB::table('vne_table')->get();
+        $list_city = DB::table('vne_city')->get();
+        $list_district = DB::table('vne_district')->get();
+        $list_school =  DB::table('vne_school')->get();
+        $list_class =  DB::table('vne_classes')->get();
+        $list_member = $this->member->search($params);
+        $data = [
+            'list_member' => $list_member,
+            'list_object' => $list_object,
+            'list_table' => $list_table,
+            'list_city' => $list_city,
+            'list_district' => $list_district,
+            'list_school' => $list_school,
+            'list_class' => $list_class,
+            'params' => $params
         ];
         return view('VNE-MEMBERFRONTEND::modules.memberfrontend.list',$data);
     }
@@ -129,9 +170,9 @@ class MemberfrontendController extends Controller
                         $user_reg_exam_b = $district->user_reg_exam_b;
                         $district->user_reg_exam_b = $user_reg_exam_b + 1;   
                         $district->save();
-                        $user_reg_exam_b = $school->user_reg_exam_b;
-                        $school->user_reg_exam_b = $user_reg_exam_b + 1;   
-                        $school->save(); 
+                        // $user_reg_exam_b = $school->user_reg_exam_b;
+                        // $school->user_reg_exam_b = $user_reg_exam_b + 1;   
+                        // $school->save(); 
                     }     
                 }
                 $member->is_reg = 1;

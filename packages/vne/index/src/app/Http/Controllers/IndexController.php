@@ -87,7 +87,7 @@ class IndexController extends Controller
     public function getTryExam(Request $request){
         $uid = Auth::guard('member')->user()->member_id;
         $game_token = 'minhnt' . $uid;
-        $ip_port = 'http://123.30.174.148:4555';
+        $ip_port = 'http://123.30.174.148:4555/';
         $src = 'thi-thu';
         $src = $src.'?game_token='.$game_token.'&uid='.$uid.'&ip_port='.$ip_port;
         $data = [

@@ -7,6 +7,10 @@
 		.pagination{
 			display: inline !important;
 		}
+		.pagination .active .page-link{
+			background: #0690d1;
+			color: white;
+		}
 		.pagination .page-item{
 			float: left !important;
 		}
@@ -39,26 +43,26 @@
 				<div class="container">
 					<div class="search-wrapper">
 						<div class="headline"><i class="fa fa-search"></i> Tra cứu danh sách thí sinh</div>
-						<form action="" class="search-form" method="post">
+						<form action="{{route('vne.memberfrontend.list.search')}}" class="search-form" method="get">
 							<div class="wrapper">
 								<div class="form-group col-12">
 									<label for="bangThi">Chọn bảng</label>
-									<select class="form-control" name="object_id">
+									<select class="form-control" name="table_id">
 										<option value="0">Chọn bảng</option>
 										@if(!empty($list_table))
 											@foreach ($list_table as $element)
-												<option value="{{ $element->table_id }}">{{ $element->name }}</option>
+												<option value="{{ $element->table_id }}" @if($element->table_id==$params['table_id']) selected="" @endif>{{ $element->name }}</option>
 											@endforeach
 										@endif
 									</select>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="id">Tên đăng nhập</label>
-									<input type="id" class="form-control" placeholder="Tên đăng nhập" name="u_name">
+									<input type="id" class="form-control" value="{{$params['u_name']}}" placeholder="Tên đăng nhập" name="u_name">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="name">Họ tên</label>
-									<input type="name" class="form-control" placeholder="Họ tên" name="name">
+									<input type="name" class="form-control" value="{{$params['name']}}" placeholder="Họ tên" name="name">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="provinceCity">Chọn tỉnh/thành phố</label>
@@ -66,7 +70,7 @@
 										<option value="0">Chọn tỉnh/thành phố</option>
 										@if(!empty($list_city))
 											@foreach ($list_city as $element)
-												<option value="{{ $element->city_id }}">{{ $element->name }}</option>
+												<option value="{{ $element->city_id }}" @if($element->city_id==$params['city_id']) selected="" @endif>{{ $element->name }}</option>
 											@endforeach
 										@endif
 									</select>
@@ -77,7 +81,7 @@
 										<option value="0">Chọn quận/huyện</option>
 										@if(!empty($list_district))
 											@foreach ($list_district as $element)
-												<option value="{{ $element->district_id }}">{{ $element->name }}</option>
+												<option value="{{ $element->district_id }}" @if($element->district_id==$params['district_id']) selected="" @endif>{{ $element->name }}</option>
 											@endforeach
 										@endif
 									</select>
@@ -88,21 +92,14 @@
 										<option value="0">Chọn trường</option>
 										@if(!empty($list_school))
 											@foreach ($list_school as $element)
-												<option value="{{ $element->school_id }}">{{ $element->name }}</option>
+												<option value="{{ $element->school_id }}" @if($element->school_id==$params['school_id']) selected="" @endif>{{ $element->name }}</option>
 											@endforeach
 										@endif
 									</select>
 								</div>
 								<div class="form-group col-md-4">
 									<label for="class">Lớp</label>
-									<select class="form-control" name="class_id">
-										<option value="0">Chọn lớp</option>
-										@if(!empty($list_class))
-											@foreach ($list_class as $element)
-												<option value="{{ $element->class_id }}">{{ $element->name }}</option>
-											@endforeach
-										@endif
-									</select>
+									<input type="text" class="form-control" value="{{$params['class_id']}}" placeholder="Lớp" name="class_id">
 								</div>
 							</div>
 							<button class="btn btn-primary" type="submit">Tìm kiếm</button>
@@ -115,19 +112,19 @@
 			<!-- search results -->
 			<section class="section search-results">
 				<div class="container">
-					<div class="results">Tổng só: <span>1.965.697</span> lượt thi</div>
+					<div class="results">Tổng số: <span>0</span> lượt thi</div>
 					<!-- pagination -->
-					{{$list_member->links()}}
+					{{$list_member->appends($params)->links()}}
 					<!-- pagination end -->
 					<div class="detail">
 						<ul class="detail-row title">
 							<li class="detail-col-1">STT</li>
 							<li class="detail-col-2">Họ tên</li>
-							<li class="detail-col-3">Tên đăng nhập</li>
+							<li class="detail-col-3">Ngày sinh</li>
 							<li class="detail-col-4">Lớp</li>
 							<li class="detail-col-5">Trường</li>
-							<li class="detail-col-6">Quận/Huyện</li>
-							<li class="detail-col-7">Thành phố</li>
+							<li class="detail-col-6">Thành phố</li>
+							<li class="detail-col-7">Quận/Huyện</li>
 							<li class="detail-col-8">Thời gian</li>
 							<li class="detail-col-9">Điểm</li>
 						</ul>
@@ -135,15 +132,15 @@
 							@if(!empty($list_member))
 							@foreach($list_member as $element )
 							<ul class="detail-row item">
-								<li class="detail-col-1">1</li>
-								<li class="detail-col-2">Nguyễn Trí Đức Nghĩa</li>
-								<li class="detail-col-3">banhbeovodung0102</li>
-								<li class="detail-col-4">Lớp A10</li>
-								<li class="detail-col-5">Trường Đại học Khoa học Tự nhiên - Đại học QG Tp Hồ Chí Minh</li>
-								<li class="detail-col-6">Quận 5</li>
-								<li class="detail-col-7">TP. Hồ Chí Minh</li>
-								<li class="detail-col-8">00:15:018</li>
-								<li class="detail-col-9">200</li>
+								<li class="detail-col-1">{{$loop->index + 1}}</li>
+								<li class="detail-col-2">{{ $element->name }}</li>
+								<li class="detail-col-3">{{ $element->birthday }}</li>
+								<li class="detail-col-4">{{ $element->class_id }}</li>
+								<li class="detail-col-5">{{ $element->school != null ? $element->school->name : '' }}</li>
+								<li class="detail-col-6">{{ $element->city != null ? $element->city->name : '' }}</li>
+								<li class="detail-col-7">{{ $element->district != null ? $element->district->name : '' }}</li>
+								<li class="detail-col-8"></li>
+								<li class="detail-col-9">0</li>
 							</ul>
 							@endforeach
 							@endif

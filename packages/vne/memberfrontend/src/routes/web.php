@@ -8,5 +8,7 @@ Route::group(array('prefix' => $adminPrefix), function() {
 
     Route::get('danh-sach-thi-sinh', 'MemberfrontendController@list')->name('vne.memberfrontend.list')->where('as','tra cứu - danh sách thí sinh frontend');
 
+    Route::get('search-danh-sach-thi-sinh', 'MemberfrontendController@search')->name('vne.memberfrontend.list.search');
+
     Route::get('top-thi-sinh-dangky', 'MemberfrontendController@listTopMember')->name('vne.memberfrontend.list.top.member')->where('as','tra cứu - top thí sinh đăng ký');
 });

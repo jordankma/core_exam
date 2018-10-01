@@ -13,10 +13,6 @@ $(document).ready(function() {
                         max: 30,
                         message: 'Tên đăng nhập phải ít nhất 3 đến 30 kí tự'
                     },
-                    regexp: {
-                        regexp: '^[a-zA-Z0-9_]+$',
-                        message: 'Username chỉ gồm số hoặc chữ'
-                    },
                     remote: {
                         // headers: {
                         //     'X-CSRF-TOKEN': $('input[name=_token]').val()//$('meta[name="csrf-token"]').attr('content')

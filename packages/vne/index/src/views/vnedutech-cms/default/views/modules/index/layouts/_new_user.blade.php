@@ -13,7 +13,7 @@
 					</div>
 					<div class="info">
 						<h3 class="name"> {{ $element->u_name }} </h3>
-						<p class="class-school"> {{ $element->classes != null ? $element->classes->name : '' }} -
+						<p class="class-school"> {{ $element->class_id }} -
 							<span> {{ $element->school != null ? $element->school->name : '' }} -</span></p>
 						<p class="district"> {{ $element->city != null ? $element->city->name : '' }} </p>
 					</div>

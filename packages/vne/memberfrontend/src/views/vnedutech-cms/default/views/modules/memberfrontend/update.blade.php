@@ -116,7 +116,7 @@
 								<label>Trường</label>
 								<div class="input">
 									<select id="school" class="form-control" name="school_id">
-                                        <option value="0">Chọn trường</option>
+                                        <option></option>
                                         @if(!empty($list_school))
                                             @foreach($list_school as $school)
                                                 <option value="{{$school->school_id}}" @if($school->school_id == $member->school_id) selected="" @endif>{{$school->name}}</option>     
@@ -200,13 +200,13 @@
                     //         }
                     //     }
                     // },
-                    // school_id: {
-                    //     validators: {
-                    //         notEmpty: {
-                    //             message: 'Trường này không được bỏ trống'
-                    //         }
-                    //     }
-                    // },
+                    school_id: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Trường này không được bỏ trống'
+                            }
+                        }
+                    },
                     district_id: {
                         validators: {
                             notEmpty: {
@@ -275,10 +275,12 @@
                 if(table_id==1){
                     $('.banga').show();
                     $('.bangb').hide();
+                    $('#school').removeAttr("disabled", "");
                 } 
                 else if(table_id==2) {
                     $('.bangb').show();
                     $('.banga').hide();
+                    $('#school').attr("disabled", "");
                 }
             });
 		});
