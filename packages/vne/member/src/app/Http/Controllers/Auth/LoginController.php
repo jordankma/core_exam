@@ -32,6 +32,7 @@ class LoginController extends Controller
     private function _authenticate(Request $request)
     {
         $data['status'] = false;
+        $data['messeger'] = "Tên tài khoản hoặc mật khẩu sai!!!";
         $routePrefix = $request->route()->getPrefix();
         $u_name = $request->input('u_name');
         $password = $request->input('password');

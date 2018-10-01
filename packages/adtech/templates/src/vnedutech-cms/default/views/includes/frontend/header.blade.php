@@ -42,7 +42,7 @@ function showCategories($categories, $parent_id = 0, $char = '')
 			<div class="inner">
 				<div class="contact">
 					<p class="phone">Hỗ trợ: {{ $SETTING['phone'] }}</p>
-					<p class="email">{{ $SETTING['email'] }}</p>
+					<p class="email">Email:{{ $SETTING['email'] }}</p>
 				</div> <!-- /top bar -->
 				<ul class="nav">
 					@if($USER_LOGGED)

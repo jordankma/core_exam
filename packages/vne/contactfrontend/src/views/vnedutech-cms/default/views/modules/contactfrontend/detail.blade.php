@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 {{-- Page title --}}
-@section('title'){{ $title = trans('vne-newsfrontend::language.titles.index') }}@stop
+@section('title'){{ $title = 'Liên hệ' }}@stop
 
 @section('content')
 	<!-- main -->
@@ -36,16 +36,16 @@
 						<div class="col-lg-7">
 							<div class="info">
 								<div class="info-item">
-									<h2 class="title">Ban tuyên giáo tỉnh ủy Đắk Nông</h2>
-									<p><i class="fa fa-address"> </i> Phòng tuyên truyền, báo chí - xuất bản</p>
-									<p><i class="fa fa-phone"> </i> 02613 545 662</p>
-									<p><i class="fa fa-email"> </i> timhieubiendao@gmail.com</p>
+									<h2 class="title">{{ $SETTING['company_name'] }}</h2>
+									<p><i class="fa fa-address"> </i> {{ $SETTING['address'] }}</p>
+									<p><i class="fa fa-phone"> </i> Hỗ trợ công tác tổ chức: {{ $SETTING['phone'] }} </p>
+									<p><i class="fa fa-email"> </i> {{ $SETTING['email'] }} </p>
 								</div>
 								<div class="info-item">
-									<h2 class="title"> {{ $SETTING['company_name'] }} </h2>
-									<p><i class="fa fa-address"> </i> {{ $SETTING['address'] }}</p>
-									<p><i class="fa fa-phone"> </i> Hỗ trợ kỹ thuật: {{ $SETTING['hotline'] }} (8h - 22h hàng ngày)</p>
-									<p><i class="fa fa-email"> </i>{{ $SETTING['email'] }}</p>
+									<h2 class="title"> CÔNG TY CỔ PHẦN DỊCH VỤ CÔNG NGHỆ GIÁO DỤC VIỆT NAM (VNEDUTECH) </h2>
+									<p><i class="fa fa-address"> </i> Tầng 3, Tòa Nhà 25T1, Hoàng Đạo Thúy, Trung Hòa, Cầu Giấy, Hà Nội</p>
+									<p><i class="fa fa-phone"> </i>Hỗ trợ kỹ thuật: 1900636444 (8h - 22h hàng ngày)</p>
+									<p><i class="fa fa-email"> </i>contact@vnedutech.vn</p>
 								</div>
 							</div>
 							<form action="{{ route('vne.contactfrontend.contact.add') }}" class="form-contact" id="form-contact" method="post">

@@ -41,12 +41,13 @@
 					<input type="text" name="username" class="form-control" placeholder="Email/Username">
 				</div>
 				<div class="form-group">
-					<input type="password" name="password" class="form-control" placeholder="password">
+					<input type="password" name="password" class="form-control" placeholder="Password">
 				</div>
 				{{-- <div class="form-group form-check">
 					<input type="checkbox" name="remember" class="form-check-input" id="check_renember">
 					<label class="form-check-label" for="check_renember">Ghi nhớ đăng nhập</label>
 				</div> --}}
+				<small class="help-block"></small>
 				<button type="submit" class="btn btn-success">Đăng nhập</button>
 			</form>
 			<div class="bottom">

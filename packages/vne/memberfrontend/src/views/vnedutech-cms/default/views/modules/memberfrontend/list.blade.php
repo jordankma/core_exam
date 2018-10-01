@@ -120,10 +120,11 @@
 						<ul class="detail-row title">
 							<li class="detail-col-1">STT</li>
 							<li class="detail-col-2">Họ tên</li>
-							<li class="detail-col-3">Ngày sinh</li>
+							<li class="detail-col-2">Ngày sinh</li>
 							<li class="detail-col-4">Lớp</li>
-							<li class="detail-col-5">Trường</li>
-							<li class="detail-col-6">Thành phố</li>
+							<li class="detail-col-4">Trường</li>
+							<li class="detail-col-5">Đơn vị</li>
+							<li class="detail-col-4">Thành phố</li>
 							<li class="detail-col-7">Quận/Huyện</li>
 							<li class="detail-col-8">Thời gian</li>
 							<li class="detail-col-9">Điểm</li>
@@ -134,10 +135,11 @@
 							<ul class="detail-row item">
 								<li class="detail-col-1">{{$loop->index + 1}}</li>
 								<li class="detail-col-2">{{ $element->name }}</li>
-								<li class="detail-col-3">{{ $element->birthday }}</li>
+								<li class="detail-col-2">{{ $element->birthday }}</li>
 								<li class="detail-col-4">{{ $element->class_id }}</li>
-								<li class="detail-col-5">{{ $element->school != null ? $element->school->name : '' }}</li>
-								<li class="detail-col-6">{{ $element->city != null ? $element->city->name : '' }}</li>
+								<li class="detail-col-4">{{ $element->school != null ? $element->school->name : '' }}</li>
+								<li class="detail-col-5">{{ $element->don_vi }}</li>
+								<li class="detail-col-4">{{ $element->city != null ? $element->city->name : '' }}</li>
 								<li class="detail-col-7">{{ $element->district != null ? $element->district->name : '' }}</li>
 								<li class="detail-col-8"></li>
 								<li class="detail-col-9">0</li>

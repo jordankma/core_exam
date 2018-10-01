@@ -4,7 +4,7 @@
 			$alias = config('site.news_cat.thongbaobtc');
 		@endphp
 		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list',$alias)}}" style="text-decoration: none;
-    color: #0690d1;">Thông báo BTC</a></h2>
+    color: #ff1134;">Thông báo BTC</a></h2>
 		<div class="list">
 			@if(!empty($thong_bao_ban_to_chuc))
 			@foreach ($thong_bao_ban_to_chuc as $element)
@@ -24,7 +24,7 @@
 			$alias = config('site.news_cat.biendaovietnamtailieuthamkhaochocuocthi');
 		@endphp
 		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list',$alias)}}" style="text-decoration:      none;
-    color: #0690d1;">Biển đảo việt nam (Tài liệu tham khảo cho cuộc thi)</a></h2>
+    color: #ff1134;">Biển đảo việt nam (Tài liệu tham khảo cho cuộc thi)</a></h2>
 		<div class="list">
 			@if(!empty($bien_dao_viet_nam))
 			@foreach ($bien_dao_viet_nam as $element)
