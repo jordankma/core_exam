@@ -88,8 +88,6 @@ $(document).ready(function() {
 	            if (!result.status) {
 	                alert('false');
 	            } else{
-	            	// $('body').removeClass('active-registration');
-	            	// $('body').addClass('active-login');
                     window.location.assign("http://exam.local.vn/cap-nhat-thong-tin");
 	            }	    
             }, 'json');
@@ -99,8 +97,8 @@ $(document).ready(function() {
 	$('body').on('submit', "#form-login", function (event) {
         event.preventDefault();
         var _crsfToken = $('meta[name=csrf-token]').prop('content');
-        var u_name = $('input[name=username]').val();;
-        var password = $('input[name=password]').val();; 
+        var u_name = $('input[name=username]').val();
+        var password = $('input[name=password]').val(); 
         var url = '/login';
         $.post(url, {_token: _crsfToken, u_name: u_name, password: password}, function (result) {
             if (!result.status) {

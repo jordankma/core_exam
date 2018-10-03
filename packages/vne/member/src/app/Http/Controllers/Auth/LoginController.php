@@ -38,7 +38,10 @@ class LoginController extends Controller
         $password = $request->input('password');
         $remember = $request->input('remember', false);
         if ($this->_guard()->attempt(['u_name' => $u_name, 'password' => $password], $remember)) {
-            
+            $member = Member::where('u_name',$u_name)->first();
+            $time = time();
+            $member->token = bcrypt($u_name.$password.$time); 
+            $member->save();
             $request->session()->regenerateToken();
             shell_exec('cd ../ && /egserver/php/bin/php artisan view:clear');
             $data['status'] = true;
