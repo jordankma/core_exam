@@ -109,8 +109,19 @@
                         <!-- /.col-sm-4 -->
                         <div class="col-md-4 col-sm-4">
                             <div class="form-group">
-                                <label>{{trans('vne-news::language.form.text.cat')}} <span style="color: red">(*)</span></label><br>
-                                <select id="cate" class="form-control" name="news_cat[]" required="" multiple="multiple">
+                                <label>{{trans('vne-news::language.form.text.box')}} <span style="color: red">(*)</span></label>
+                                <select id="box" class="form-control" name="news_box[]" required="" multiple="multiple">
+                                    @if(!empty($list_news_box))
+                                    @foreach($list_news_box as $box)
+                                        <option value="{{$box->news_box_id}}">{{$box->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>{{trans('vne-news::language.form.text.cat')}} </label> <br>
+                                <span style="color: red">Chỉ chọn danh mục khi chọn vị trí : BIỂN ĐẢO VIỆT NAM (TÀI LIỆU THAM KHẢO CHO CUỘC THI)</span>
+                                <select id="cate" class="form-control" name="news_cat[]" multiple="multiple">
                                     @if(!empty($list_news_cat))
                                     @foreach($list_news_cat as $news_cat)
                                         <option value="{{$news_cat->news_cat_id}}">{{str_repeat('+', $news_cat->level) .$news_cat->name}}</option>
@@ -118,14 +129,6 @@
                                     @endif
                                 </select>
                             </div>
-                            <label>{{trans('vne-news::language.form.text.box')}}</label>
-                            <select id="box" class="form-control" name="news_box[]" multiple="multiple">
-                                @if(!empty($list_news_box))
-                                @foreach($list_news_box as $box)
-                                    <option value="{{$box->news_box_id}}">{{$box->name}}</option>
-                                @endforeach
-                                @endif
-                            </select>
                             <div class="form-group area-tag">
                                 <label>{{trans('Thêm tag')}}</label><br>
                                 <div class="input-group">

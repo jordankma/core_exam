@@ -47,6 +47,7 @@
         </div>
         <![endif]>
     </noscript>
+    <div id="app" style="background-image: url(../images/bg-body.png);">
     @include('includes.frontend.header')
     <div id="notific">
         @include('includes.notifications')
@@ -54,6 +55,7 @@
     @yield('content')
     @include('includes.frontend.footer')
     @include('includes.frontend.modal')
+    </div>
 </body>
 <!-- global js -->
 <script src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/js/vendor/jquery-3.3.1.min.js?t=').time() }}"></script>

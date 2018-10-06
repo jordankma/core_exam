@@ -24,6 +24,9 @@ class MemberfrontendController extends Controller
         'numeric'  => "Phải là số"
     );
 
+    protected $secret_key = '8bgCi@gsLbtGhO)1';
+    protected $secret_iv = ')FQKRL57zFYdtn^!';
+
     public function __construct(MemberRepository $memberRepository)
     {
         parent::__construct();
@@ -123,9 +126,25 @@ class MemberfrontendController extends Controller
             'table_id' => 'required',
         ], $this->messages);
         if (!$validator->fails()) {
+
             $member_id = $request->input('member_id');
             $table_id = $request->input('table_id');
+            $table_name = $request->input('table_name');
+            $city_id = $request->input('city_id');
+            $city_name = $request->input('city_name');
+            $district_id = $request->input('district_id');
+            $district_name = $request->input('district_name');
+            $school_id = $request->input('school_id');
+            $school_name = $request->input('school_name');
+            $don_vi = $request->input('don_vi');
+            $gender = $request->input('gender');
+            $class_id = $request->input('class_id');
+            $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
 
+            $data = "member_id=" . $member_id . "&table_id=" . $table_id . "&table_name=" . $table_name . "&city_id=" . $city_id . "&city_name=" . $city_name . "&district_id=" . $district_id. "&district_name=" . $district_name. "&school_id=" . $school_id. "&school_name=" . $school_name. "&don_vi=" . $don_vi. "&gender=" . $gender. "&birthday=" . $birthday;
+            $data_encrypt = $this->my_simple_crypt($data);
+            
+            dd($data_encrypt);
             $member = $this->member->find($member_id); 
 
             $member->name = $request->input('name');
@@ -133,15 +152,15 @@ class MemberfrontendController extends Controller
                 $member->email = $request->input('email');
             }
 
-            $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
-            $member->gender = $request->input('gender');
+            $member->gender = $gender;
             $member->birthday = $birthday;
             $member->table_id = $table_id;
-            $member->city_id = $request->input('city_id');
-            $member->district_id = $request->input('district_id');
-            $member->school_id = $request->input('school_id');
-            $member->class_id = $request->input('class_id');
-            $member->don_vi = $request->input('don_vi');
+            $member->city_id = $city_id;
+            $member->district_id = $district_id;
+            $member->school_id = $school_id;
+            $member->class_id = $class_id;
+            $member->don_vi = $don_vi;
+
             $member->updated_at = new DateTime();
             if ($member->save()) {
                 if($member->is_reg==0){
@@ -197,5 +216,22 @@ class MemberfrontendController extends Controller
         ];
         return view('VNE-MEMBERFRONTEND::modules.memberfrontend.list_reg',$data);
             
+    }
+
+    function my_simple_crypt( $string, $action = 'e' ) {
+        // you may change these values to your own
+        $secret_key = $this->secret_key;
+        $secret_iv = $this->secret_iv;
+        $output = false;
+        $encrypt_method = "AES-256-CBC";
+        $key = substr( hash( 'sha256', $secret_key ), 0 ,32);
+        $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
+        if( $action == 'e' ) {
+            $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
+        }
+        else if( $action == 'd' ){
+            $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
+        }
+        return $output;
     }
 }

@@ -81,6 +81,7 @@
                                             @endforeach
                                         @endif
                                     </select>
+                                    <input type="hidden" name="table_name" value="">
                                     <small class="form-text">
                                         - Bảng A: Dành cho thí sinh là học sinh đang theo học tại các trường trung học phổ thông, học viên các trung tâm giáo dục thường xuyên và sinh viên đang theo học tại các trường trung cấp, cao đẳng trên địa bàn tỉnh Đắk Nông. <br>
                                         - Bảng B: Dành cho các đối tượng từ 16 tuổi trở lên đang sinh sống, lao động, làm việc trên địa bàn tỉnh Đắk Nông.
@@ -96,6 +97,7 @@
                                         <option value="{{$city->city_id}}">{{$city->name}}</option>
                                     </select>
 									<small class="text-muted">*</small>
+                                    <input type="hidden" name="city_name" value="">
 								</div>
 							</div>
 							<div class="form-group">
@@ -110,6 +112,7 @@
 	                                    @endif   
 	                                </select>
 	                                <small class="text-muted">*</small>
+                                    <input type="hidden" name="district_name" value="">
                             	</div>
 							</div>
 							<div class="form-group banga">
@@ -124,6 +127,7 @@
                                         @endif 
                                     </select>
 									<small class="text-muted">*</small>
+                                    <input type="hidden" name="school_name" value="">
 								</div>
 							</div>
 							<div class="form-group banga">
@@ -247,6 +251,8 @@
 
             $("body").on('change', '#district', function () {
                 var district_id = $(this).val();
+                var district_name = $("#district option:selected").text();
+                $('input[name=district_name]').val(district_name);
                 $.ajax({
                     url: "{{ route('vne.member.member.get.school') }}",
                     type: 'GET',
@@ -262,16 +268,13 @@
                         }   
                         $('#school').html('');
                         $('#school').append(str);
-                        $('#school').select2({
-                            width: '100%',
-                            dropdownAutoWidth: true,
-                            theme: "bootstrap"
-                        }); 
                     }
                 }, 'json');
             });
             $("body").on('change', '#table', function () {
                 var table_id = $(this).val();
+                var table_name = $("#table option:selected").text();
+                $('input[name=table_name]').val(table_name);
                 if(table_id==1){
                     $('.banga').show();
                     $('.bangb').hide();
@@ -282,6 +285,10 @@
                     $('.banga').hide();
                     $('#school').attr("disabled", "");
                 }
+            });
+            $("body").on('change', '#school', function () {
+                var school_name = $("#school option:selected").text();
+                $('input[name=school_name]').val(school_name);       
             });
 		});
 	</script>

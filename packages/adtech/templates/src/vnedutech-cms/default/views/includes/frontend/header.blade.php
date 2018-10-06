@@ -54,7 +54,7 @@ function showCategories($categories, $parent_id = 0, $char = '')
 							<li class="nav-item"><i class="fa fa-file-text"></i><a href="" class="nav-link">Tự Luận</a></li>
 						</ul>
 					</li>
-						<li class="nav-item"><i class="fa fa-user"></i><a href="{{ route('vne.memberfrontend.show') }}"> {{ $USER_LOGGED->u_name }}</a></li>
+						<li class="nav-item"><i class="fa fa-user"></i><a href="{{route('vne.memberfrontend.show')}}"> {{ $USER_LOGGED->u_name }}</a></li>
 						<li class="nav-item"><i class="fa fa-user"></i> <a href="{{ route('vne.member.auth.logout') }}">Đăng xuất</a></li>
 					@else
 						<li class="nav-item js-toggle-login"><i class="fa fa-user"></i> Đăng nhập</li>
