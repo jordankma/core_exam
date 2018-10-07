@@ -172,11 +172,14 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.class') }} </label><br>
-                                        <select id="class" class="form-control" name="class_id">
-                                            @if(!empty($class_old))
-                                            <option value="{{ $class_old->class_id }}" >{{ $class_old->name }}</option>    
-                                            @endif
-                                        </select>
+                                        <input type="text" name="class_id" value="{{ $member->class_id }}" class="form-control" id="classes" placeholder="Lớp">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Đơn vị</label>
+                                        <div class="input">
+                                            <input class="form-control" name="don_vi" id="don_vi" value="{{ $member->don_vi }}" type="name">
+                                            <small class="text-muted">*</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>    

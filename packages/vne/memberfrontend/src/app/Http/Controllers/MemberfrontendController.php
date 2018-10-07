@@ -15,7 +15,7 @@ use Vne\Member\App\Models\District;
 
 use Yajra\Datatables\Datatables;
 use Validator,Auth,DB,Datetime,Cache;
-
+use GuzzleHttp\Client;
 class MemberfrontendController extends Controller
 {
     private $messages = array(
@@ -100,6 +100,9 @@ class MemberfrontendController extends Controller
         $city_id_default = config('site.city_id_default');
         
         $member = Auth::guard('member')->user();
+        if($member->is_reg==1){
+            return redirect()->route('index');
+        }
         $list_table = DB::table('vne_table')->get();
         $city = DB::table('vne_city')->where('city_id',$city_id_default)->first();
         $list_district = DB::table('vne_district')->get();
@@ -141,10 +144,7 @@ class MemberfrontendController extends Controller
             $class_id = $request->input('class_id');
             $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
 
-            $data = "member_id=" . $member_id . "&table_id=" . $table_id . "&table_name=" . $table_name . "&city_id=" . $city_id . "&city_name=" . $city_name . "&district_id=" . $district_id. "&district_name=" . $district_name. "&school_id=" . $school_id. "&school_name=" . $school_name. "&don_vi=" . $don_vi. "&gender=" . $gender. "&birthday=" . $birthday;
-            $data_encrypt = $this->my_simple_crypt($data);
             
-            dd($data_encrypt);
             $member = $this->member->find($member_id); 
 
             $member->name = $request->input('name');
@@ -163,6 +163,20 @@ class MemberfrontendController extends Controller
 
             $member->updated_at = new DateTime();
             if ($member->save()) {
+                // $data = "member_id=" . $member_id . "&u_name=" . $member->u_name . "&table_id=" . $table_id . "&table_name=" . $table_name . "&city_id=" . $city_id . "&city_name=" . $city_name . "&district_id=" . $district_id. "&district_name=" . $district_name. "&school_id=" . $school_id. "&school_name=" . $school_name. "&don_vi=" . $don_vi. "&gender=" . $gender. "&birthday=" . $birthday;
+                $data = http_build_query($member->getAttributes());
+                $data['city_name'] = $city_name;
+                $data['district_name'] = $district_name;
+                $data['school_name'] = $school_name;
+                $data_encrypt = $this->my_simple_crypt($data);
+                $client = new Client();
+                // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register&data=' . $data_encrypt);
+                $result = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register?data='. $data_encrypt);
+                $result = json_decode($result);
+                if($result->status == true){
+                    $member->sync_mongo = '1';
+                    $member->update();
+                }
                 if($member->is_reg==0){
                     $table = Table::find($table_id);  
                     $district = District::find($request->input('district_id'));  

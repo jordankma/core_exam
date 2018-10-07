@@ -163,9 +163,14 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.class') }} </label><br>
-                                        <select id="class" class="form-control" name="class_id">
-                                            
-                                        </select>
+                                        <input type="text" name="class_id" value="" class="form-control" id="classes" placeholder="Lớp">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Đơn vị</label>
+                                        <div class="input">
+                                            <input class="form-control" name="don_vi" id="don_vi" value="" type="name">
+                                            <small class="text-muted">*</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>    
@@ -400,31 +405,31 @@
                 }, 'json');
             });
 
-            $("body").on('change', '#school', function () {
-                var school_id = $(this).val();
-                $.ajax({
-                    url: "{{ route('vne.member.member.get.class') }}",
-                    type: 'GET',
-                    cache: false,
-                    data: {
-                        'school_id': school_id
-                    },
-                    success: function (data, status) {
-                        var data = JSON.parse(data);
-                        var str = '<option value="0" >Chọn lớp</option>';
-                        for(i = 0; i<data.length; i++) {
-                            str += '<option value="' + data[i].class_id + '" >' + data[i].name + '</option>';
-                        }   
-                        $('#class').html('');
-                        $('#class').append(str);
-                        $('#class').select2({
-                            width: '100%',
-                            dropdownAutoWidth: true,
-                            theme: "bootstrap"
-                        }); 
-                    }
-                }, 'json');
-            });
+            // $("body").on('change', '#school', function () {
+            //     var school_id = $(this).val();
+            //     $.ajax({
+            //         url: "{{ route('vne.member.member.get.class') }}",
+            //         type: 'GET',
+            //         cache: false,
+            //         data: {
+            //             'school_id': school_id
+            //         },
+            //         success: function (data, status) {
+            //             var data = JSON.parse(data);
+            //             var str = '<option value="0" >Chọn lớp</option>';
+            //             for(i = 0; i<data.length; i++) {
+            //                 str += '<option value="' + data[i].class_id + '" >' + data[i].name + '</option>';
+            //             }   
+            //             $('#class').html('');
+            //             $('#class').append(str);
+            //             $('#class').select2({
+            //                 width: '100%',
+            //                 dropdownAutoWidth: true,
+            //                 theme: "bootstrap"
+            //             }); 
+            //         }
+            //     }, 'json');
+            // });
         })
     </script>
 @stop

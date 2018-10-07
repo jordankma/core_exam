@@ -24,7 +24,7 @@ Route::group(array('prefix' => $adminPrefix), function() {
     Route::get('vne/member/member/get/district', 'MemberController@getDistrict')->name('vne.member.member.get.district');
     Route::get('vne/member/member/get/school', 'MemberController@getSchool')->name('vne.member.member.get.school');
     Route::get('vne/member/member/get/class', 'MemberController@getClass')->name('vne.member.member.get.class');
-    
+     Route::get('vne/member/member/sync_mongo', 'MemberController@syncMongo')->name('vne.member.member.sync_mongo');
     Route::group(['middleware' => ['adtech.auth', 'adtech.acl']], function () {
         //member
         Route::get('vne/member/member/log', 'MemberController@log')->name('vne.member.member.log');

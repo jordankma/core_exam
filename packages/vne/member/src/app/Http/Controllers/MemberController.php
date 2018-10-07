@@ -4,6 +4,7 @@ namespace Vne\Member\App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Adtech\Application\Cms\Controllers\Controller as Controller;
+use Adtech\Core\App\HashSHA;
 use Vne\Member\App\Repositories\MemberRepository;
 use Vne\Member\App\Models\Member;
 use Vne\Member\App\Models\Group;
@@ -48,6 +49,40 @@ class MemberController extends Controller
         return view('VNE-MEMBER::modules.member.member.create',$data);
     }
 
+    public function encrypt( $string) {
+        $secret_key = '8bgCi@gsLbtGhO)1';
+        $secret_iv = ')FQKRL57zFYdtn^!';
+        $encrypt_method = "AES-256-CBC";
+        $key = substr( hash( 'sha256',  $secret_key ), 0 ,32);
+        $iv = substr( hash( 'sha256',  $secret_iv ), 0, 16 );
+        $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
+        return $output;
+    }
+
+    public function syncMongo(Request $request){
+        if(!empty($request->page)){
+            $limit = 100;
+            $offset = (((int)$request->page)-1)*100;
+            $member_list = Member::where(['is_reg' => 1,'sync_mongo' => '0'])->skip($offset)->take($limit)->get();
+            if(!empty($member_list)){
+                foreach ( $member_list as $key=>$value){
+                    $data = $value->getAttributes();
+                    $data['city_name'] = !empty($value->city->name)?$value->city->name:'';
+                    $data['district_name'] = !empty($value->district->name)?$value->district->name:'';
+                    $data['school_name'] = !empty($value->school->name)?$value->school->name:'';
+                    $param = http_build_query($data);
+                    $result = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register?data='.$this->encrypt($param));
+                    $result = json_decode($result);
+                    if($result->status == true){
+                        $value->sync_mongo = '1';
+                        $value->update();
+                        echo "<pre>";print_r($value->member_id . ' - done');echo "</pre>";
+                    }
+                }
+            }
+        }
+    }
+
     public function add(MemberRequest $request)
     {
         $validator = Validator::make($request->all(), [
@@ -76,6 +111,7 @@ class MemberController extends Controller
             $members->district_id = $request->input('district_id');
             $members->school_id = $request->input('school_id');
             $members->class_id = $request->input('class_id');
+            $members->don_vi = $request->input('don_vi');
 
             $members->created_at = new DateTime();
             $members->updated_at = new DateTime();
@@ -139,6 +175,7 @@ class MemberController extends Controller
             $member->district_id = $request->input('district_id');
             $member->school_id = $request->input('school_id');
             $member->class_id = $request->input('class_id');
+            $member->don_vi = $request->input('don_vi');
             $member->updated_at = new DateTime();
 
             if ($member->save()) {
