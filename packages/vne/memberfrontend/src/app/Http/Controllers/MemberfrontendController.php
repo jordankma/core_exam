@@ -143,7 +143,7 @@ class MemberfrontendController extends Controller
             $gender = $request->input('gender');
             $class_id = $request->input('class_id');
             $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
-
+            
             
             $member = $this->member->find($member_id); 
 
