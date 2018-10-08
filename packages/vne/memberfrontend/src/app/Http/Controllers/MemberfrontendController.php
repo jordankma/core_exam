@@ -127,7 +127,7 @@ class MemberfrontendController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|min:4|max:50',
             'city_id' => 'required',
-            'table_id' => 'required',
+            'table_id' => 'required'
         ], $this->messages);
         if (!$validator->fails()) {
 
