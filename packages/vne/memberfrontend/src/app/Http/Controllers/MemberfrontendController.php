@@ -81,7 +81,8 @@ class MemberfrontendController extends Controller
         $list_district = DB::table('vne_district')->get();
         $list_school =  DB::table('vne_school')->get();
         $list_class =  DB::table('vne_classes')->get();
-        $list_member = $this->member->search($params);
+        $member = new Member();
+        $list_member = $member->search($params);
         $data = [
             'list_member' => $list_member,
             'list_object' => $list_object,

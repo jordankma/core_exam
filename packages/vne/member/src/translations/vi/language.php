@@ -106,6 +106,7 @@ return [
             "update" => "Cập nhật thành công",
             "delete" => "Xóa thành công",
             "block" => "Khóa thành công",
+            "reset" => "Reset mật khẩu thành công",
             "add_member" => "Thêm người dùng thành công",
             "import" => "Thêm người dùng thành công"
         ],
@@ -115,6 +116,7 @@ return [
             "update" => "Cập nhật thất bại",
             "delete" => "Xóa thất bại",
             "block" => "Khóa thất bại",
+            "block" => "Reset mật khẩu thất bại",
             "add_member" => "Thêm người dùng thất bại",
             "import" => "Thêm người dùng thất bại"
         ]

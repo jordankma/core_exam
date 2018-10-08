@@ -204,13 +204,13 @@
                     //         }
                     //     }
                     // },
-                    school_id: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Trường này không được bỏ trống'
-                            }
-                        }
-                    },
+                    // school_id: {
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Trường này không được bỏ trống'
+                    //         }
+                    //     }
+                    // },
                     district_id: {
                         validators: {
                             notEmpty: {

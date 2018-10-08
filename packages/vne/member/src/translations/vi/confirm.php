@@ -8,9 +8,13 @@ return [
         	"title" => "Xóa người dùng",
         	"body" => "Bạn có chắc muốn xóa người dùng này?"
     	],
-    	"block"=>[
-        	"title" => "Khóa người dùng",
-        	"body" => "Bạn có chắc muốn xóa người dùng này?"
+        "block"=>[
+            "title" => "Khóa người dùng",
+            "body" => "Bạn có chắc muốn xóa người dùng này?"
+        ],
+    	"reset"=>[
+        	"title" => "Reset mật khẩu",
+        	"body" => "Bạn có chắc muốn xóa người dùng này? Sau khi reset mật khẩu người dùng sẽ mặc định về abc@123"
     	]
     ],
     "group" => [

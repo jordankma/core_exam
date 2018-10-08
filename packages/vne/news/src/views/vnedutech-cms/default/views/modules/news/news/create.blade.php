@@ -203,7 +203,7 @@
     <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vne/news/js/news/add.js') }}" type="text/javascript" ></script>
     <script src="{{ asset('/vendor/laravel-filemanager/js/lfm.js') }}" type="text/javascript" ></script>
     <script src="{{ asset('/vendor/laravel-filemanager/js/lfm2.js') }}" type="text/javascript" ></script>
-    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/vendor/' . $group_name . '/' . $skin .'/vendors/ckeditor_news/ckeditor.js') }}" type="text/javascript"></script>
     <!--end of page js-->
     <script>
     </script>

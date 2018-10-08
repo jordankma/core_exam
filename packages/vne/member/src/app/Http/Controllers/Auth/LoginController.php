@@ -40,7 +40,9 @@ class LoginController extends Controller
         if ($this->_guard()->attempt(['u_name' => $u_name, 'password' => $password], $remember)) {
             $member = Member::where('u_name',$u_name)->first();
             $time = time();
-            $member->token = bcrypt($u_name.$password.$time); 
+            $member->token = md5($u_name.$password.$time); 
+            $member->expire_token = $time; 
+            $member->is_login = 1; 
             $member->save();
             $request->session()->regenerateToken();
             shell_exec('cd ../ && /egserver/php/bin/php artisan view:clear');
@@ -71,6 +73,10 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $member = Member::where('u_name',$this->_guard()->user()->u_name)->first();
+        $member->is_login  = 0;
+        $member->save();
+
         $this->_guard()->logout();
 
         $request->session()->flush();
@@ -109,6 +115,37 @@ class LoginController extends Controller
             return json_encode($data);
         } else {
             return $validator->messages();
+        }
+    }
+
+    public function verify(Request $request){
+        $validator = Validator::make($request->all(), [
+            'token' => 'required'
+        ], $this->messages);
+        if (!$validator->fails()) {
+            $data['data'] = array();
+            $token = $request->input('token');
+            $member = Member::where('token',$token)->first();
+            if(empty($member)){  
+                $data['status'] = false; 
+                $data['messeger'] = 'invalid token';
+                return response(json_encode($data))->setStatusCode(200)->header('Content-Type', 'application/json; charset=utf-8');
+            } else{
+                if($member->is_login == 0){
+                    $data['data']['is_login'] = false;
+                    $data['status'] = false; 
+                    $data['messeger'] = '';     
+                }     
+                elseif($member->is_login == 1){
+                    $data['status'] = true; 
+                    $data['messeger'] = '';
+                    $data['data']['is_login'] = true;    
+                    $data['data']['user_id'] = $member->member_id;    
+                }
+            }
+            return response(json_encode($data))->setStatusCode(200)->header('Content-Type', 'application/json; charset=utf-8');
+        } else {
+            return $validator->messages();    
         }
     }
 }

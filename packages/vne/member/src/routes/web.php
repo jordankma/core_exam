@@ -8,7 +8,7 @@ Route::group(array('prefix' => null), function () {
     Route::match(['get', 'post'], 'login', 'Auth\LoginController@login')->name('vne.member.auth.login');
 
     Route::post('vne/member/member/register', 'Auth\LoginController@register')->name('vne.member.member.register');
-
+    Route::post('verify', 'Auth\LoginController@verify');
     Route::group(['middleware' => ['vne.auth']], function () {
         // Route::get('', '\Adtech\Core\App\Http\Controllers\FrontendController@index')->name('frontend.homepage');
 
@@ -34,8 +34,13 @@ Route::group(array('prefix' => $adminPrefix), function() {
         Route::post('vne/member/member/add', 'MemberController@add')->name('vne.member.member.add');
         Route::get('vne/member/member/show', 'MemberController@show')->name('vne.member.member.show');
         Route::post('vne/member/member/update', 'MemberController@update')->name('vne.member.member.update');
+
         Route::get('vne/member/member/delete', 'MemberController@delete')->name('vne.member.member.delete');
         Route::get('vne/member/member/confirm-delete', 'MemberController@getModalDelete')->name('vne.member.member.confirm-delete');
+
+        Route::get('vne/member/member/reset', 'MemberController@reset')->name('vne.member.member.reset');
+        Route::get('vne/member/member/confirm-reset', 'MemberController@getModalReset')->name('vne.member.member.confirm-reset');
+
         Route::get('vne/member/member/block', 'MemberController@block')->name('vne.member.member.block');
         Route::get('vne/member/member/confirm-block', 'MemberController@getModalBlock')->name('vne.member.member.confirm-block');
 
@@ -45,13 +50,14 @@ Route::group(array('prefix' => $adminPrefix), function() {
     });
 
 });
+    
 
-Route::group(array('prefix' => 'resource/dev'), function() {
-    Route::post('post/login', 'ApiMemberController@postLogin');
-    Route::get('get/register', 'ApiMemberController@getRegister');
-    Route::get('get/getuserinfo', 'ApiMemberController@getUserInfo');
-    Route::put('put/user/change-password', 'ApiMemberController@putChangePass');
+// Route::group(array('prefix' => 'resource/dev'), function() {
+//     Route::post('post/login', 'ApiMemberController@postLogin');
+//     Route::get('get/register', 'ApiMemberController@getRegister');
+//     Route::get('get/getuserinfo', 'ApiMemberController@getUserInfo');
+//     Route::put('put/user/change-password', 'ApiMemberController@putChangePass');
 
-    Route::get('get/list/group', 'ApiMemberController@getListGroup');
-    Route::get('get/list/member/group', 'ApiMemberController@getListMemberGroup');
-});
+//     Route::get('get/list/group', 'ApiMemberController@getListGroup');
+//     Route::get('get/list/member/group', 'ApiMemberController@getListMemberGroup');
+// });

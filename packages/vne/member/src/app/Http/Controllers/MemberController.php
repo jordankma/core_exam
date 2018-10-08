@@ -231,6 +231,45 @@ class MemberController extends Controller
         }
     }
 
+    public function reset(Request $request)
+    {
+        $member_id = $request->input('member_id');
+        $member = $this->member->find($member_id);
+        if (null != $member) {
+            $member->password = bcrypt('abc@123');
+            $member->save();
+            Cache::forget('member');
+            activity('member')
+                ->performedOn($member)
+                ->withProperties($request->all())
+                ->log('User: :causer.email - Delete member - member_id: :properties.member_id, name: ' . $member->name);
+
+            return redirect()->route('vne.member.member.manage')->with('success', trans('vne-member::language.messages.success.reset'));
+        } else {
+            return redirect()->route('vne.member.member.manage')->with('error', trans('vne-member::language.messages.error.reset'));
+        }
+    }
+
+    public function getModalReset(Request $request)
+    {
+        $model = 'member';
+        $type = 'reset';
+        $confirm_route = $error = null;
+        $validator = Validator::make($request->all(), [
+            'member_id' => 'required|numeric',
+        ], $this->messages);
+        if (!$validator->fails()) {
+            try {
+                $confirm_route = route('vne.member.member.reset', ['member_id' => $request->input('member_id')]);
+                return view('VNE-MEMBER::modules.member.modal.modal_reset', compact('error','type', 'model', 'confirm_route'));
+            } catch (GroupNotFoundException $e) {
+                return view('VNE-MEMBER::modules.member.modal.modal_reset', compact('error','type', 'model', 'confirm_route'));
+            }
+        } else {
+            return $validator->messages();
+        }
+    }
+
     public function block(Request $request)
     {
         $member_id = $request->input('member_id');
@@ -315,6 +354,10 @@ class MemberController extends Controller
                 }
                 if ($this->user->canAccess('vne.member.member.confirm-delete')) {
                     $actions .= '<a href=' . route('vne.member.member.confirm-delete', ['member_id' => $members->member_id]) . ' data-toggle="modal" data-target="#delete_confirm"><i class="livicon" data-name="trash" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete member"></i></a>
+                        ';
+                }
+                if ($this->user->canAccess('vne.member.member.confirm-reset')) {
+                    $actions .= '<a href=' . route('vne.member.member.confirm-reset', ['member_id' => $members->member_id]) . ' data-toggle="modal" data-target="#reset_confirm"><i class="livicon" data-name="reset" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="reset member"></i></a>
                         ';
                 }
                 return $actions;

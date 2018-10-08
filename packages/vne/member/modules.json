@@ -39,6 +39,13 @@
             "vne.member.member.delete",
             "vne.member.member.confirm-delete"
           ]
+        },
+        {
+          "name": "Reset",
+          "routes": [
+            "vne.member.member.reset",
+            "vne.member.member.confirm-reset"
+          ]
         }
       ]
     }
