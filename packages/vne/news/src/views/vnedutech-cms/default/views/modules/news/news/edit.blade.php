@@ -180,7 +180,7 @@
                                 <input type="radio" @if($news->is_hot==2) checked @endif id="normal" name="is_hot" value="2">
                                 <label for="normal">    {{trans('vne-news::language.form.text.news_normal')}}</label>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>{{trans('vne-news::language.form.text.priority')}}</label>
                                 <input class="form-control" type="number" name="priority" value="{{$news->priority}}" placeholder="{{trans('vne-news::language.form.priority_placeholder')}}">
                             </div>
@@ -191,7 +191,7 @@
                             <div class="form-group">
                                 <label>{{trans('vne-news::language.form.text.desc_seo')}}</label>
                                 <textarea rows="5" cols="101" name="desc_seo" class="form-control" placeholder="{{trans('vne-news::language.form.desc_seo_placeholder')}}">{{$news->desc_seo}}</textarea>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-success">{{trans('vne-news::language.buttons.update')}}</button>

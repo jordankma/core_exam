@@ -236,7 +236,7 @@ class MemberController extends Controller
         $member_id = $request->input('member_id');
         $member = $this->member->find($member_id);
         if (null != $member) {
-            $member->password = bcrypt('abc@123');
+            $member->password = bcrypt('12345678');
             $member->save();
             Cache::forget('member');
             activity('member')

@@ -77,6 +77,8 @@
                                 <th>{{ trans('vne-member::language.table.member.name') }}</th>
                                 <th>{{ trans('vne-member::language.table.member.u_name') }}</th>
                                 <th>{{ trans('vne-member::language.table.member.email') }}</th>
+                                <th>{{ trans('vne-member::language.table.member.phone') }}</th>
+                                <th>{{ trans('vne-member::language.table.member.birthday') }}</th>
                                 <th class="fit-content">{{ trans('vne-member::language.table.action') }}</th>
                             </tr>
                             </thead>
@@ -104,6 +106,8 @@
                     { data: 'name', name: 'name' },
                     { data: 'u_name', name: 'u_name' },
                     { data: 'email', name: 'email' },
+                    { data: 'phone', name: 'phone' },
+                    { data: 'birthday', name: 'birthday' },
                     { data: 'actions', name: 'actions', orderable: false, searchable: false, className: 'fit-content'}
                 ]
             });

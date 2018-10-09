@@ -466,13 +466,16 @@ class NewsController extends Controller
             	return $image;
             })
             ->addColumn('news_cat', function ($list_news) {
-            	$list_cat_json = json_decode($list_news->news_cat,true);
-            	$list_cat_array = array();
-                if(!empty($list_cat_json)){
-                    foreach ($list_cat_json as $key => $cat) {
-                        $list_cat_array[] = $cat['name'];   
+                $news_cat = array();
+                if($list_news->news_cat !=null){
+                $list_cat_json = json_decode($list_news->news_cat,true);
+                    $list_cat_array = array();
+                    if(!empty($list_cat_json)){
+                        foreach ($list_cat_json as $key => $cat) {
+                            $list_cat_array[] = $cat['name'];   
+                        }
+                        $news_cat = implode(",",$list_cat_array);
                     }
-                	$news_cat = implode(",",$list_cat_array);
                 }
             	return $news_cat;
             })
