@@ -165,10 +165,10 @@ class MemberfrontendController extends Controller
             $member->updated_at = new DateTime();
             if ($member->save()) {
                 // $data = "member_id=" . $member_id . "&u_name=" . $member->u_name . "&table_id=" . $table_id . "&table_name=" . $table_name . "&city_id=" . $city_id . "&city_name=" . $city_name . "&district_id=" . $district_id. "&district_name=" . $district_name. "&school_id=" . $school_id. "&school_name=" . $school_name. "&don_vi=" . $don_vi. "&gender=" . $gender. "&birthday=" . $birthday;
-                $data = http_build_query($member->getAttributes());
                 $data['city_name'] = $city_name;
                 $data['district_name'] = $district_name;
                 $data['school_name'] = $school_name;
+                $data = http_build_query($member->getAttributes());
                 $data_encrypt = $this->my_simple_crypt($data);
                 $client = new Client();
                 // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register&data=' . $data_encrypt);

@@ -8,7 +8,8 @@ Route::group(array('prefix' => null), function () {
     Route::match(['get', 'post'], 'login', 'Auth\LoginController@login')->name('vne.member.auth.login');
 
     Route::post('vne/member/member/register', 'Auth\LoginController@register')->name('vne.member.member.register');
-    Route::post('verify', 'Auth\LoginController@verify');
+    Route::get('verify', 'Auth\LoginController@verify');
+    Route::get('api/login', 'Auth\LoginController@loginApi');
     Route::group(['middleware' => ['vne.auth']], function () {
         // Route::get('', '\Adtech\Core\App\Http\Controllers\FrontendController@index')->name('frontend.homepage');
 

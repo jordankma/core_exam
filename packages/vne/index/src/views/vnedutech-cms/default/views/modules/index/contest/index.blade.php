@@ -22,7 +22,8 @@
 <input type="hidden" name="link" id="link" value="http://renluyendoivien.vn/"/>
 <input type="hidden" name="link1" id="link1" value="http://renluyendoivien.vn/"/>
 <input type="hidden" name="linkaudio" id="linkaudio" value="res/sound/"/> --}}
-<input type="hidden" name="game_token" id="token_key" value="minhnt"/>
+<input type="hidden" name="uid" id="uid" value="{{ $uid }}"/>
+<input type="hidden" name="game_token" id="token_key" value="{{ $game_token }}"/>
 <input type="hidden" name="link" id="link" value="http://renluyendoivien.vn/"/>
 <input type="hidden" name="linkaudio" id="linkaudio" value="res/sound/"/>
 <input type="hidden" name="link1" id="link1" value="http://renluyendoivien.vn/"/>

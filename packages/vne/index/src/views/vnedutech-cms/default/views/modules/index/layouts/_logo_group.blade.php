@@ -48,10 +48,9 @@
 						</div>
 						<div class="carousel-item">
 							<div class="logo">
-								<img src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/images/logo5.png?t=' . time()) }}" alt="">
+								<img src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/images/vnpost_taitro2.png?t=' . time()) }}" alt="">
 							</div>
-							<h3 class="name">Đơn vị<br>
-								Đồng hành 2</h3>
+							<h3 class="name">BƯU ĐIỆN VIỆT NAM - CHI NHÁNH ĐẮK NÔNG</h3>
 						</div>
 					</div>
 				</div>

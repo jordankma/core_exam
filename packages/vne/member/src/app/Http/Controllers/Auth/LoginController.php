@@ -148,4 +148,25 @@ class LoginController extends Controller
             return $validator->messages();    
         }
     }
+
+    public function loginApi(Request $request){
+        $u_name = $request->input('u_name');
+        $password = $request->input('password');
+        $data['status'] = false;
+        $data['messeger'] = 'Đăng nhập thất bại';
+        $ret = Auth::guard('member')->attempt(['u_name' => $u_name, 'password' => $password]);
+        if (!empty($ret)) {
+            $member = Member::where('u_name',$u_name)->first();
+            $time = time();
+            $token = md5($u_name.$password.$time);
+            $member->token = $token; 
+            $member->expire_token = $time; 
+            $member->is_login = 1; 
+            $member->save();
+            $data['status'] = true;
+            $data['messeger'] = 'Đăng nhập thành công';
+            $data['data']['token'] = $token;
+        }
+        return response(json_encode($data))->setStatusCode(200)->header('Content-Type', 'application/json; charset=utf-8');
+    }
 }
