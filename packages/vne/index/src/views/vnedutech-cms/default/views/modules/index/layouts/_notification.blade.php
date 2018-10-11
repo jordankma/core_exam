@@ -1,11 +1,18 @@
 <section class="section notification">
 	<div class="notification-item">
 		@php 
-			$alias = config('site.news_cat.thongbaobtc');
+			$alias = config('site.news_box.thongbaobtc');
 		@endphp
-		<h2 class="headline"><a href="{{route('vne.index.news.box',$alias)}}" style="text-decoration: none;
+		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list.box',$alias)}}" style="text-decoration: none;
     color: #ff1134;">Thông báo BTC</a></h2>
 		<div class="list">
+			@php 
+				$alias = 'the-le-cuoc-thi-tim-hieu-ve-bien-dao-viet-nam-nam-2018.html'
+			@endphp
+			<div class="list-item">
+				<h3 class="title"><a href="{{ URL::to('chi-tiet',$alias) }}">THỂ LỆ Cuộc thi “Tìm hiểu về biển, đảo Việt Nam” năm 2018</a></h3>
+				<p class="date">20-09-2018</p>
+			</div>
 			@if(!empty($thong_bao_ban_to_chuc))
 			@foreach ($thong_bao_ban_to_chuc as $element)
 				@php 
@@ -20,7 +27,10 @@
 		</div>
 	</div>
 	<div class="notification-item">
-		<h2 class="headline"><a href="#" style="text-decoration:none;
+		@php 
+			$alias = config('site.news_box.biendaovietnamtailieuthamkhaochocuocthi');
+		@endphp
+		<h2 class="headline"><a href="{{route('vne.newsfrontend.news.list.box',$alias)}}" style="text-decoration: none;
     color: #ff1134;">Biển đảo việt nam (Tài liệu tham khảo cho cuộc thi)</a></h2>
 		<div class="list">
 			<div class="list-item">

@@ -7,6 +7,8 @@ Route::group(array('prefix' => $adminPrefix), function() {
     ->where('type','news')
     ->where('view','list');
 
+    Route::get('vi-tri/{alias?}', 'NewsfrontendController@listBox')->name('vne.newsfrontend.news.list.box');
+
     Route::get('chi-tiet/{alias}.html', 'NewsfrontendController@detail')->name('vne.newsfrontend.news.detail')
     ->where('type','news')
     ->where('view','detail')

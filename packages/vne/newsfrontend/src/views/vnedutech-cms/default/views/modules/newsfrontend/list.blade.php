@@ -21,7 +21,7 @@
 				<div class="container">
 					<ul class="breadcrumb-list">
 						<li class="breadcrumb-item">
-							<a class="breadcrumb-link" href="#">Trang chủ</a>
+							<a class="breadcrumb-link" href="{{route('index')}}">Trang chủ</a>
 						</li>
 						<li class="breadcrumb-item">
 							<a class="breadcrumb-link" href="#">Tin tức</a>
