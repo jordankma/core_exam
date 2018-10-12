@@ -126,8 +126,8 @@
 							<li class="detail-col-5">Đơn vị</li>
 							<li class="detail-col-4">Thành phố</li>
 							<li class="detail-col-7">Quận/Huyện</li>
-							<li class="detail-col-8">Thời gian</li>
-							<li class="detail-col-9">Điểm</li>
+							{{-- <li class="detail-col-8">Thời gian</li> --}}
+							{{-- <li class="detail-col-9">Điểm</li> --}}
 						</ul>
 						<div class="detail-list">
 							@if(!empty($list_member))
@@ -141,8 +141,8 @@
 								<li class="detail-col-5">{{ $element->don_vi }}</li>
 								<li class="detail-col-4">{{ $element->city != null ? $element->city->name : '' }}</li>
 								<li class="detail-col-7">{{ $element->district != null ? $element->district->name : '' }}</li>
-								<li class="detail-col-8"></li>
-								<li class="detail-col-9">0</li>
+								{{-- <li class="detail-col-8"></li> --}}
+								{{-- <li class="detail-col-9">0</li> --}}
 							</ul>
 							@endforeach
 							@endif
