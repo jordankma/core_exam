@@ -7,6 +7,6 @@ Route::group(array('prefix' => $adminPrefix), function() {
     Route::get('tin-tuc-box/{alias?}', 'IndexController@getNewByBox')->name('vne.index.news.box');
     Route::group(['middleware' => ['register']], function () {
     	Route::get('thi-thu', 'IndexController@getTryExam')->name('vne.index.try.exam');
-    	Route::get('dXgkYdReMbkTlnXn', 'IndexController@getRealExam')->name('vne.index.real.exam');
+    	Route::get('thi-that', 'IndexController@getRealExam')->name('vne.index.real.exam');
     });
 });

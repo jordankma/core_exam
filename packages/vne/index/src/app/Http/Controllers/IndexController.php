@@ -102,17 +102,22 @@ class IndexController extends Controller
 
     public function getRealExam(Request $request){
         $uid = Auth::guard('member')->user()->member_id;
-        $game_token = Auth::guard('member')->user()->token;
-        // $game_token = 'minhnt'.$uid;
-        $ip_port = 'http://123.30.174.148:4555/';
-        $src = 'thi-thu';
-        $src = $src.'?game_token='.$game_token.'&uid='.$uid.'&ip_port='.$ip_port;
-        $data = [
-            'game_token' => $game_token,
-            'uid' => $uid,
-            'ip_port' => $ip_port,
-            'src' => $src
-        ];
-        return view('VNE-INDEX::modules.index.contest.index_real',$data);
+        if(in_array($uid, [4448,4450,4451,4452,4453])){
+            $game_token = Auth::guard('member')->user()->token;
+            // $game_token = 'minhnt'.$uid;
+            $ip_port = 'http://123.30.174.148:4555/';
+            $src = 'thi-thu';
+            $src = $src.'?game_token='.$game_token.'&uid='.$uid.'&ip_port='.$ip_port;
+            $data = [
+                'game_token' => $game_token,
+                'uid' => $uid,
+                'ip_port' => $ip_port,
+                'src' => $src
+            ];
+            return view('VNE-INDEX::modules.index.contest.index_real',$data);
+        }
+        else {
+            return redirect()->route('index');
+        }
     }
 }
