@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 {{-- Page title --}}
-@section('title'){{ $title = trans('vne-newsfrontend::language.titles.index') }}@stop
+@section('title'){{ $title = isset($title) ? $title : 'Tin tức' }}@stop
 @section('header_styles')
 	<style type="text/css">
 		.pagination{
@@ -24,7 +24,7 @@
 							<a class="breadcrumb-link" href="{{route('index')}}">Trang chủ</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a class="breadcrumb-link" href="#">Tin tức</a>
+							<a class="breadcrumb-link" href="#">{{ isset($title) ? $title : 'Tin tức' }}</a>
 						</li>
 					</ul>
 				</div>

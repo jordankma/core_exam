@@ -30,7 +30,7 @@
 <input type="hidden" name="link" id="link" value="http://timhieubiendao.daknong.vn/"/>
 <input type="hidden" name="link1" id="link1" value="http://timhieubiendao.daknong.vn/"/>
 <input type="hidden" name="linkaudio" id="linkaudio" value="res/sound/"/>
-
-<script cocos src="{{ asset('client/cocos/game.min.js?v=0.0.5') }}"></script>
+<input type="hidden" name="test" id="test" value="false"/>
+<script cocos src="{{ asset('client/cocos/game.min.js?v=0.0.8') }}"></script>
 </body>
 </html>

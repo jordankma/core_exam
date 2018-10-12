@@ -29,7 +29,7 @@
 							<a class="breadcrumb-link" href=" {{route('index')}} ">Trang chủ</a>
 						</li>
 						<li class="breadcrumb-item">
-							<a class="breadcrumb-link" href="#">Tin tức</a>
+							<a class="breadcrumb-link" href="#">{{ $news->title }}</a>
 						</li>
 					</ul>
 				</div>

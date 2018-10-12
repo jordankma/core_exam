@@ -8,6 +8,7 @@ use Adtech\Application\Cms\Controllers\MController as Controller;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\Datatables\Datatables;
 use Vne\News\App\Models\News;
+use Vne\News\App\Models\NewsBox;
 
 use Vne\News\App\Repositories\NewsRepository;
 
@@ -36,8 +37,10 @@ class NewsfrontendController extends Controller
 
     public function listBox(Request $request,$alias  = null){
         $list_news = $this->news->getNewsByBox($alias,10);
+        $news_box = NewsBox::where('alias',$alias)->first();
         $data = [
-            'list_news' => $list_news     
+            'list_news' => $list_news,
+            'title'=> $news_box->name     
         ];
         return view('VNE-NEWSFRONTEND::modules.newsfrontend.list',$data);                  
     }

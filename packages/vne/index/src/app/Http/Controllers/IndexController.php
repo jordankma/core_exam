@@ -86,8 +86,8 @@ class IndexController extends Controller
     }
     public function getTryExam(Request $request){
         $uid = Auth::guard('member')->user()->member_id;
-        // $game_token = Auth::guard('member')->user()->token;
-        $game_token = 'minhnt'.$uid;
+        $game_token = Auth::guard('member')->user()->token;
+        // $game_token = 'minhnt'.$uid;
         $ip_port = 'http://123.30.174.148:4555/';
         $src = 'thi-thu';
         $src = $src.'?game_token='.$game_token.'&uid='.$uid.'&ip_port='.$ip_port;
@@ -98,5 +98,21 @@ class IndexController extends Controller
             'src' => $src
         ];
         return view('VNE-INDEX::modules.index.contest.index',$data);
+    }
+
+    public function getRealExam(Request $request){
+        $uid = Auth::guard('member')->user()->member_id;
+        $game_token = Auth::guard('member')->user()->token;
+        // $game_token = 'minhnt'.$uid;
+        $ip_port = 'http://123.30.174.148:4555/';
+        $src = 'thi-thu';
+        $src = $src.'?game_token='.$game_token.'&uid='.$uid.'&ip_port='.$ip_port;
+        $data = [
+            'game_token' => $game_token,
+            'uid' => $uid,
+            'ip_port' => $ip_port,
+            'src' => $src
+        ];
+        return view('VNE-INDEX::modules.index.contest.index_real',$data);
     }
 }
