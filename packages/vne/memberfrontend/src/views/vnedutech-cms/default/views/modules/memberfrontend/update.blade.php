@@ -82,7 +82,7 @@
                                         @endif
                                     </select>
                                     <input type="hidden" name="table_name" value="">
-                                    <small class="form-text">
+                                    <small class="form-text" style="color: red;">
                                         - Bảng A: Dành cho thí sinh là học sinh đang theo học tại các trường trung học phổ thông, học viên các trung tâm giáo dục thường xuyên và sinh viên đang theo học tại các trường trung cấp, cao đẳng trên địa bàn tỉnh Đắk Nông. <br>
                                         - Bảng B: Dành cho các đối tượng từ 16 tuổi trở lên đang sinh sống, lao động, làm việc trên địa bàn tỉnh Đắk Nông.
                                     </small>

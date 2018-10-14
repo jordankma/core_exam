@@ -249,7 +249,7 @@ class MemberfrontendController extends Controller
         ];
         return view('VNE-MEMBERFRONTEND::modules.memberfrontend.result_member',$data);    
     }
-
+    
     public function result(){
         $list_object = DB::table('vne_object')->get();
         $list_table = DB::table('vne_table')->get();
@@ -260,6 +260,7 @@ class MemberfrontendController extends Controller
         $client = new Client();
         // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
         $list_member = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
+        $list_member = json_decode($list_member); 
         // dd($list_member);
         $params = [
             'table_id' => '',
@@ -284,7 +285,7 @@ class MemberfrontendController extends Controller
     }
 
     public function searchResult(){
-
+    	//test
     }
 
     function my_simple_crypt( $string, $action = 'e' ) {
