@@ -8,6 +8,10 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'Bạn chưa nhập tên tên tài khoản'
                     },
+                    regexp: {
+                        regexp: '^[A-Za-z][A-Za-z0-9@.]*$',
+                        message: 'Tên chỉ bao gồm a-z, 0-9'
+                    },
                     stringLength: {
                         min: 3,
                         max: 30,

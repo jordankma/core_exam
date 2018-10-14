@@ -47,7 +47,7 @@
         </div>
         <![endif]>
     </noscript>
-    <div id="app" style="background-image: url(../images/bg-body.png);">
+    <div id="app" style="background-image: url({{ asset('/vendor/' . $group_name . '/' . $skin . '/web/images/bg-body.png?t=').time() }};">
     @include('includes.frontend.header')
     <div id="notific">
         @include('includes.notifications')

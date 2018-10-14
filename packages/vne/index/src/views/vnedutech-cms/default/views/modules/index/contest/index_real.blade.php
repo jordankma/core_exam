@@ -18,17 +18,36 @@
             -ms-user-select: none;
             -khtml-user-select: none;
         }
+        #button_back {
+            position: absolute;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        #button_back a{
+            text-decoration: none;
+            color: white;
+        }
     </style>
 
 </head>
 <body>
 <script src="{{ asset('client/cocos/res/loading.js') }}"></script>
 <canvas id="gameCanvas" width="1140px" height="700px"></canvas>
+<button id="button_back"><a href="http://timhieubiendao.daknong.vn/">Trở về trang chủ</a></button>
 <input type="hidden" name="game_token" id="token_key" value="{{ $game_token }}"/>
 <input type="hidden" name="uid" id="uid" value="{{ $uid }}"/>
 <input type="hidden" name="ip_port" id="ip_port" value="{{ $ip_port }}"/>
-<input type="hidden" name="link" id="link" value="http://timhieubiendao.daknong.vn/"/>
-<input type="hidden" name="link1" id="link1" value="http://timhieubiendao.daknong.vn/"/>
+<input type="hidden" name="link" id="linkresult" value="http://timhieubiendao.daknong.vn/"/>
+<input type="hidden" name="link1" id="linkhome" value="http://timhieubiendao.daknong.vn/"/>
 <input type="hidden" name="linkaudio" id="linkaudio" value="res/sound/"/>
 <input type="hidden" name="test" id="test" value="false"/>
 <script cocos src="{{ asset('client/cocos/game.min.js?v=0.0.8') }}"></script>

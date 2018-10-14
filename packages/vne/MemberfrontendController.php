@@ -166,11 +166,10 @@ class MemberfrontendController extends Controller
             $member->updated_at = new DateTime();
             if ($member->save()) {
                 // $data = "member_id=" . $member_id . "&u_name=" . $member->u_name . "&table_id=" . $table_id . "&table_name=" . $table_name . "&city_id=" . $city_id . "&city_name=" . $city_name . "&district_id=" . $district_id. "&district_name=" . $district_name. "&school_id=" . $school_id. "&school_name=" . $school_name. "&don_vi=" . $don_vi. "&gender=" . $gender. "&birthday=" . $birthday;
-                $data = $member->getAttributes();
                 $data['city_name'] = $city_name;
                 $data['district_name'] = $district_name;
                 $data['school_name'] = $school_name;
-                $data = http_build_query($data);
+                $data = http_build_query($member->getAttributes());
                 $data_encrypt = $this->my_simple_crypt($data);
                 $client = new Client();
                 // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register&data=' . $data_encrypt);
@@ -214,8 +213,6 @@ class MemberfrontendController extends Controller
                 $member->is_reg = 1;
                 $member->save();
                 Cache::forget('member');
-                Cache::forget('list_member_top_a');
-                Cache::forget('list_member_top_b');
                 return redirect()->route('index');
             } else {
                 return redirect()->route('vne.member.member.manage');
@@ -239,9 +236,8 @@ class MemberfrontendController extends Controller
 
     public function resultMember($member_id){
         $client = new Client();
-        $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
-        $data_reponse = json_decode($res->getBody());
-        // dd($data_reponse);
+        $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id=220');
+        $data_reponse = json_decode($res->getBody(),true);
         $member = Member::where('member_id', $member_id)->with('city','school','classes')->first();
         $data = [
             'member' => $member,
@@ -251,39 +247,6 @@ class MemberfrontendController extends Controller
     }
 
     public function result(){
-        $list_object = DB::table('vne_object')->get();
-        $list_table = DB::table('vne_table')->get();
-        $list_city = DB::table('vne_city')->get();
-        $list_district = DB::table('vne_district')->get();
-        $list_school =  DB::table('vne_school')->get();
-        $list_class =  DB::table('vne_classes')->get();
-        $client = new Client();
-        // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
-        $list_member = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
-        // dd($list_member);
-        $params = [
-            'table_id' => '',
-            'u_name' => '',
-            'name' => '',
-            'city_id' => '',
-            'district_id' => '',
-            'school_id' => '',
-            'class_id' => ''
-        ];
-        $data = [
-            'list_member' => $list_member,
-            'list_object' => $list_object,
-            'list_table' => $list_table,
-            'list_city' => $list_city,
-            'list_district' => $list_district,
-            'list_school' => $list_school,
-            'list_class' => $list_class,
-            'params' => $params,
-        ];
-        return view('VNE-MEMBERFRONTEND::modules.memberfrontend.result',$data);     
-    }
-
-    public function searchResult(){
 
     }
 

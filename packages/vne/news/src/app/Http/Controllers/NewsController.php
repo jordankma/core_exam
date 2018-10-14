@@ -34,15 +34,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 
 class NewsController extends Controller
-{	
-	protected $_newsCatList;
-	private $messages = array(
+{   
+    protected $_newsCatList;
+    private $messages = array(
         'name.regex' => "Sai định dạng",
         'required' => "Bắt buộc",
         'numeric'  => "Phải là số"
     );
 
-	public function __construct(NewsRepository $newsRepository, NewsCatRepository $newsCatRepository,NewsTagRepository $newsTagRepository,NewsHasTagRepository $newsHasTagRepository,NewsHasCatRepository $newsHasCatRepository,NewsBoxRepository $newsBoxRepository)
+    public function __construct(NewsRepository $newsRepository, NewsCatRepository $newsCatRepository,NewsTagRepository $newsTagRepository,NewsHasTagRepository $newsHasTagRepository,NewsHasCatRepository $newsHasCatRepository,NewsBoxRepository $newsBoxRepository)
     {
         parent::__construct();
         $this->news = $newsRepository;
@@ -53,51 +53,51 @@ class NewsController extends Controller
         $this->news_box = $newsBoxRepository;
         $this->_user = Auth::user();
     }
-	/**
+    /**
      * @return view list news
      * @author: tuanlv
      * @params: 
      * Chức năng : get list news
      */
-	public function manager(Request $request){
+    public function manager(Request $request){
         $list_news_cat = $this->news_cat->all();
-		$list_news_box = $this->news_box->all();
-		$params =[
-    		'name'=> $request->name,
-    		'news_time'=> $request->news_time,
+        $list_news_box = $this->news_box->all();
+        $params =[
+            'name'=> $request->name,
+            'news_time'=> $request->news_time,
             'news_cat'=> $request->news_cat,
-    		'news_box'=> $request->news_box,
-    		'is_hot'=> $request->is_hot
-    	];
-		return view('VNE-NEWS::modules.news.news.manager',compact('list_news_cat','list_news_box','params'));
-	}
-	public function create(){
-		// $list_news_cat = $this->news_cat->all();
-		self::getCate();
+            'news_box'=> $request->news_box,
+            'is_hot'=> $request->is_hot
+        ];
+        return view('VNE-NEWS::modules.news.news.manager',compact('list_news_cat','list_news_box','params'));
+    }
+    public function create(){
+        // $list_news_cat = $this->news_cat->all();
+        self::getCate();
         $list_news_cat = $this->_newsCatList;
         $list_news_tag = $this->news_tag->all();
-		$list_news_box = $this->news_box->all();
-		$data = [
-			'list_news_cat' => $list_news_cat,
-			'list_news_tag' => $list_news_tag,
+        $list_news_box = $this->news_box->all();
+        $data = [
+            'list_news_cat' => $list_news_cat,
+            'list_news_tag' => $list_news_tag,
             'list_news_box' => $list_news_box
-		];
-		return view('VNE-NEWS::modules.news.news.create',$data);
-	}
-	public function add(NewsRequest $request){
-		$create_by = $this->user->contact_name;
-		$title = $request->input('title');
-		$news_cat = $request->input('news_cat');
+        ];
+        return view('VNE-NEWS::modules.news.news.create',$data);
+    }
+    public function add(NewsRequest $request){
+        $create_by = $this->user->contact_name;
+        $title = $request->input('title');
+        $news_cat = $request->input('news_cat');
         $news_tag = $request->input('news_tag');
-		$news_box = $request->input('news_box');
-		$desc = $request->input('desc');
-		$content = $request->input('content');
+        $news_box = $request->input('news_box');
+        $desc = $request->input('desc');
+        $content = $request->input('content');
         $is_hot = $request->input('is_hot');
-		$type = $request->input('type');
-		$priority = $request->input('priority');
-		$desc_seo = !empty($request->input('desc_seo')) ? $request->input('desc_seo') : '';
-		$image = $request->input('image') !='' ? $request->input('image') : asset('test.png');
-		$key_word_seo = explode(",",$request->input('key_word_seo')[0]);
+        $type = $request->input('type');
+        $priority = $request->input('priority');
+        $desc_seo = !empty($request->input('desc_seo')) ? $request->input('desc_seo') : '';
+        $image = $request->input('image') !='' ? $request->input('image') : asset('test.png');
+        $key_word_seo = explode(",",$request->input('key_word_seo')[0]);
         $gallery = [];
         if($type == 2){  
             $file_names = $request->input('file_names');
@@ -113,43 +113,43 @@ class NewsController extends Controller
                 }
             }
         }
-		$news = new News();
-		$news->create_by = $create_by;
+        $news = new News();
+        $news->create_by = $create_by;
         $news->title = $title;
-		$news->type_page = 'news';
-		$news->news_cat = json_encode($news_cat);
-		$news->news_tag = json_encode($news_tag);
-		$news->title_alias = self::to_slug($title);
-		$news->desc = $desc;
-		$news->image = $image;
-		$news->content = $content;
+        $news->type_page = 'news';
+        $news->news_cat = json_encode($news_cat);
+        $news->news_tag = json_encode($news_tag);
+        $news->title_alias = self::to_slug($title);
+        $news->desc = $desc;
+        $news->image = $image;
+        $news->content = $content;
         $news->is_hot = $is_hot;
 
-		$news->type = $type;
-		$news->gallery = json_encode($gallery);  
+        $news->type = $type;
+        $news->gallery = json_encode($gallery);  
 
         $news->priority = $priority;
-		$news->key_word_seo = json_encode($key_word_seo);
-		$news->desc_seo = $desc_seo;
-		$news->created_at = new DateTime();
-		$news->updated_at = new DateTime();
-		$news->save();
+        $news->key_word_seo = json_encode($key_word_seo);
+        $news->desc_seo = $desc_seo;
+        $news->created_at = new DateTime();
+        $news->updated_at = new DateTime();
+        $news->save();
 
-		if(!empty($news_tag)){
-			foreach ($news_tag as $key => $tag) {
-				$data_insert_news_has_tag[] =[
-					'news_id'=> $news->news_id,
-					'news_tag_id'=> $tag
-				];
-				$list_tag_id[] = $tag;
-			}
-			if(!empty($data_insert_news_has_tag)){
-				DB::table('vne_news_has_tag')->insert($data_insert_news_has_tag);
-				$news_tag_list = NewsTag::whereIn('news_tag_id', $list_tag_id)->select('news_tag_id', 'name')->get()->toJson();
-	            $news->news_tag = $news_tag_list;
-	            $news->save();
-			}
-		}
+        if(!empty($news_tag)){
+            foreach ($news_tag as $key => $tag) {
+                $data_insert_news_has_tag[] =[
+                    'news_id'=> $news->news_id,
+                    'news_tag_id'=> $tag
+                ];
+                $list_tag_id[] = $tag;
+            }
+            if(!empty($data_insert_news_has_tag)){
+                DB::table('vne_news_has_tag')->insert($data_insert_news_has_tag);
+                $news_tag_list = NewsTag::whereIn('news_tag_id', $list_tag_id)->select('news_tag_id', 'name')->get()->toJson();
+                $news->news_tag = $news_tag_list;
+                $news->save();
+            }
+        }
         if(!empty($news_box)){
             foreach ($news_box as $key => $box) {
 
@@ -166,7 +166,7 @@ class NewsController extends Controller
                 $news->save();
             }
         }
-		if (!empty($news_cat)) {
+        if (!empty($news_cat)) {
             $news_has_tag = [];
             foreach ($news_cat as $cat) {
                 $news_has_tag[] = [
@@ -181,9 +181,12 @@ class NewsController extends Controller
             $news->news_cat = $news_cat_list;
             $news->save();
         }
-		if ($news->news_id) {
+        if ($news->news_id) {
             Cache::forget('cache_api_news');
             Cache::forget('cache_news');
+            Cache::forget('thong_bao_ban_to_chuc');
+            Cache::forget('video_noi_bat');
+            Cache::forget('tintucchung');
             activity('news')
                 ->performedOn($news)
                 ->withProperties($request->all())
@@ -192,35 +195,35 @@ class NewsController extends Controller
         } else {
             return redirect()->route('vne.news.news.manager')->with('error', trans('VNE-NEWS::language.messages.error.create'));
         }
-	}
+    }
 
-	public function show($news_id){
+    public function show($news_id){
 
-		self::getCate();
+        self::getCate();
         $list_news_cat = $this->_newsCatList;
         $list_news_tag = $this->news_tag->all();
-		$list_news_box = $this->news_box->all();
-		$news = $this->news->find($news_id);
-		$list_id_cat = array();
+        $list_news_box = $this->news_box->all();
+        $news = $this->news->find($news_id);
+        $list_id_cat = array();
         $list_id_tag = array();
         $list_id_box= array();
-		$list_tag = array();
-		if(!empty($news->news_cat)){
-			$news_cat = json_decode($news->news_cat,true);
+        $list_tag = array();
+        if(!empty($news->news_cat)){
+            $news_cat = json_decode($news->news_cat,true);
             if(!empty($news_cat)){
                 foreach ($news_cat as $key => $value) {
                     $list_id_cat[] = $value['news_cat_id'];
                 } 
             }
-		}
-		if(!empty($news->news_tag)){
-			$news_tag = json_decode($news->news_tag,true);
+        }
+        if(!empty($news->news_tag)){
+            $news_tag = json_decode($news->news_tag,true);
             if(!empty($news_tag)){
-    			foreach ($news_tag as $key => $value) {
-    				$list_id_tag[] = $value['news_tag_id'];
-    			}
-            }	
-		}
+                foreach ($news_tag as $key => $value) {
+                    $list_id_tag[] = $value['news_tag_id'];
+                }
+            }   
+        }
         if(!empty($news->news_box)){
             $news_box = json_decode($news->news_box,true);
             if(!empty($news_box)){
@@ -229,39 +232,39 @@ class NewsController extends Controller
                 }
             }   
         }
-		$list_key_word_seo_string = implode(',', json_decode($news->key_word_seo,true));
+        $list_key_word_seo_string = implode(',', json_decode($news->key_word_seo,true));
         $list_gallery = json_decode($news->gallery,true);
-		$data = [
-			'news' => $news,
-			'list_news_cat' => $list_news_cat,
+        $data = [
+            'news' => $news,
+            'list_news_cat' => $list_news_cat,
             'list_news_tag' => $list_news_tag,
-			'list_news_box' => $list_news_box,
-			'list_id_cat' => $list_id_cat,
+            'list_news_box' => $list_news_box,
+            'list_id_cat' => $list_id_cat,
             'list_id_tag' => $list_id_tag,
-			'list_id_box' => $list_id_box,
-			'list_key_word_seo_string' => $list_key_word_seo_string,
-		    'list_gallery' => $list_gallery        
+            'list_id_box' => $list_id_box,
+            'list_key_word_seo_string' => $list_key_word_seo_string,
+            'list_gallery' => $list_gallery        
         ];
-		return view('VNE-NEWS::modules.news.news.edit',$data);
-	}	
-	public function update($news_id,NewsRequest $request){
+        return view('VNE-NEWS::modules.news.news.edit',$data);
+    }   
+    public function update($news_id,NewsRequest $request){
         
         DB::table('vne_news_has_tag')->where('news_id',$news_id)->delete();
-		DB::table('vne_news_has_box')->where('news_id',$news_id)->delete();
-		DB::table('vne_news_has_cat')->where('news_id',$news_id)->delete();
+        DB::table('vne_news_has_box')->where('news_id',$news_id)->delete();
+        DB::table('vne_news_has_cat')->where('news_id',$news_id)->delete();
 
-		$title = $request->input('title');
-		$news_cat = $request->input('news_cat');
-		$news_tag = $request->input('news_tag');
+        $title = $request->input('title');
+        $news_cat = $request->input('news_cat');
+        $news_tag = $request->input('news_tag');
         $news_box = $request->input('news_box');
-		$desc = $request->input('desc');
-		$content = $request->input('content');
-		$image = $request->input('image') !='' ? $request->input('image') : asset('test.png');
-		$is_hot = $request->input('is_hot');
+        $desc = $request->input('desc');
+        $content = $request->input('content');
+        $image = $request->input('image') !='' ? $request->input('image') : asset('test.png');
+        $is_hot = $request->input('is_hot');
         $type = $request->input('type');
-		$priority = $request->input('priority');
-		$desc_seo = !empty($request->input('desc_seo')) ? $request->input('desc_seo') : '';
-		$key_word_seo = explode(",",$request->input('key_word_seo')[0]);
+        $priority = $request->input('priority');
+        $desc_seo = !empty($request->input('desc_seo')) ? $request->input('desc_seo') : '';
+        $key_word_seo = explode(",",$request->input('key_word_seo')[0]);
         
         $gallery = [];
         if($type == 2){ 
@@ -279,42 +282,42 @@ class NewsController extends Controller
             }
         }
         
-		$news = $this->news->find($news_id);
-		$news->title = $title;
+        $news = $this->news->find($news_id);
+        $news->title = $title;
         $news->type_page = 'news';
-		$news->news_cat = json_encode($news_cat);
-		$news->news_tag = json_encode($news_tag);
-		$news->title_alias = self::to_slug($title);
-		$news->desc = $desc;
-		$news->content = $content;
-		$news->image = $image;
-		$news->is_hot = $is_hot;
+        $news->news_cat = json_encode($news_cat);
+        $news->news_tag = json_encode($news_tag);
+        $news->title_alias = self::to_slug($title);
+        $news->desc = $desc;
+        $news->content = $content;
+        $news->image = $image;
+        $news->is_hot = $is_hot;
 
         $news->type = $type;
         $news->gallery = json_encode($gallery);
 
-		$news->priority = $priority;
-		$news->is_hot = $is_hot;
-		$news->key_word_seo = json_encode($key_word_seo);
-		$news->desc_seo = $desc_seo;
-		$news->updated_at = new DateTime();
-		$news->save();
+        $news->priority = $priority;
+        $news->is_hot = $is_hot;
+        $news->key_word_seo = json_encode($key_word_seo);
+        $news->desc_seo = $desc_seo;
+        $news->updated_at = new DateTime();
+        $news->save();
 
-		if(!empty($news_tag)){
-			foreach ($news_tag as $key => $tag) {
-				$data_insert_news_has_tag[] =[
-					'news_id'=> $news->news_id,
-					'news_tag_id'=> $tag
-				];
-				$list_tag_id[] = $tag;
-			}
-			if(!empty($data_insert_news_has_tag)){
-				DB::table('vne_news_has_tag')->insert($data_insert_news_has_tag);
-				$news_tag_list = NewsTag::whereIn('news_tag_id', $list_tag_id)->select('news_tag_id', 'name')->get()->toJson();
-	            $news->news_tag = $news_tag_list;
-	            $news->save();
-			}
-		}
+        if(!empty($news_tag)){
+            foreach ($news_tag as $key => $tag) {
+                $data_insert_news_has_tag[] =[
+                    'news_id'=> $news->news_id,
+                    'news_tag_id'=> $tag
+                ];
+                $list_tag_id[] = $tag;
+            }
+            if(!empty($data_insert_news_has_tag)){
+                DB::table('vne_news_has_tag')->insert($data_insert_news_has_tag);
+                $news_tag_list = NewsTag::whereIn('news_tag_id', $list_tag_id)->select('news_tag_id', 'name')->get()->toJson();
+                $news->news_tag = $news_tag_list;
+                $news->save();
+            }
+        }
         if(!empty($news_box)){
             foreach ($news_box as $key => $box) {
                 $data_insert_news_has_box[] =[
@@ -330,7 +333,7 @@ class NewsController extends Controller
                 $news->save();
             }
         }
-		if (!empty($news_cat)) {
+        if (!empty($news_cat)) {
             $news_has_tag = [];
             foreach ($news_cat as $cat) {
                 $news_has_tag[] = [
@@ -345,9 +348,12 @@ class NewsController extends Controller
             $news->news_cat = $news_cat_list;
             $news->save();
         }
-		if ($news->news_id) {
+        if ($news->news_id) {
             Cache::forget('cache_api_news');
             Cache::forget('cache_news');
+            Cache::forget('thong_bao_ban_to_chuc');
+            Cache::forget('video_noi_bat');
+            Cache::forget('tintucchung');
             activity('news')
                 ->performedOn($news)
                 ->withProperties($request->all())
@@ -355,10 +361,10 @@ class NewsController extends Controller
             return redirect()->route('vne.news.news.manager')->with('success', trans('VNE-NEWS::language.messages.success.update'));
         } else {
             return redirect()->route('vne.news.news.manager')->with('error', trans('VNE-NEWS::language.messages.error.update'));
-        }		
-	}
+        }       
+    }
 
-	public function log(Request $request)
+    public function log(Request $request)
     {
         $model = 'news';
         $confirm_route = $error = null;
@@ -388,7 +394,9 @@ class NewsController extends Controller
             $this->news->delete($news_id);
             Cache::forget('cache_api_news');
             Cache::forget('cache_news');
-
+            Cache::forget('thong_bao_ban_to_chuc');
+            Cache::forget('video_noi_bat');
+            Cache::forget('tintucchung');
             NewsHasTag::where('news_id', $news_id)->delete();
             NewsHasCat::where('news_id', $news_id)->delete();
             NewsHasBox::where('news_id', $news_id)->delete();
@@ -421,22 +429,22 @@ class NewsController extends Controller
             return $validator->messages();
         }
     }
-	//Table Data to index page
+    //Table Data to index page
     public function data(Request $request)
     {
-    	$params =[
-    		'name'=>$request->name,
-    		'news_time'=>$request->news_time,
+        $params =[
+            'name'=>$request->name,
+            'news_time'=>$request->news_time,
             'news_cat'=>$request->news_cat,
-    		'news_box'=>$request->news_box,
-    		'is_hot'=> $request->is_hot
-    	];
-    	if($request->name!=null || $request->news_time!=null || $request->news_cat!=null || $request->is_hot!=null || $request->news_box!=null){
-    		$list_news = $this->news->getListNews($params);
-    	}
-    	else{
-    		$list_news = News::where('type_page','news')->get();	
-    	}
+            'news_box'=>$request->news_box,
+            'is_hot'=> $request->is_hot
+        ];
+        if($request->name!=null || $request->news_time!=null || $request->news_cat!=null || $request->is_hot!=null || $request->news_box!=null){
+            $list_news = $this->news->getListNews($params);
+        }
+        else{
+            $list_news = News::where('type_page','news')->get();    
+        }
         return Datatables::of($list_news)
             ->addIndexColumn()
             ->addColumn('actions', function ($list_news) {
@@ -453,22 +461,22 @@ class NewsController extends Controller
                 return $actions;
             })
             ->addColumn('title', function ($list_news) {
-            	if($list_news->is_hot==1){
-            		$title = $list_news->title . '  (Tin hot)';
-            	}
-            	else{
-            		$title = $list_news->title;	
-            	}
-            	return $title;
+                if($list_news->is_hot==1){
+                    $title = $list_news->title . '  (Tin hot)';
+                }
+                else{
+                    $title = $list_news->title; 
+                }
+                return $title;
             })
             ->addColumn('image', function ($list_news) {
-            	$image = '<img src="'.$list_news->image.'"  height="80" width="100">';
-            	return $image;
+                $image = '<img src="'.$list_news->image.'"  height="80" width="100">';
+                return $image;
             })
             ->addColumn('news_cat', function ($list_news) {
                 $news_cat = array();
                 if($list_news->news_cat !=null){
-                $list_cat_json = json_decode($list_news->news_cat,true);
+                    $list_cat_json = json_decode($list_news->news_cat,true);
                     $list_cat_array = array();
                     if(!empty($list_cat_json)){
                         foreach ($list_cat_json as $key => $cat) {
@@ -477,14 +485,14 @@ class NewsController extends Controller
                         $news_cat = implode(",",$list_cat_array);
                     }
                 }
-            	return $news_cat;
+                return $news_cat;
             })
             ->rawColumns(['actions','is_hot','image'])
             ->make();
     }
     public function searchNews(){
-    	$list_news_cat = $this->news_cat->all();
-		return view('VNE-NEWS::modules.news.news.manager_search',compact('list_news_cat'));
+        $list_news_cat = $this->news_cat->all();
+        return view('VNE-NEWS::modules.news.news.manager_search',compact('list_news_cat'));
     }
 
     function getCate() {

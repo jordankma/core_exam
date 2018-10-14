@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Adtech\Application\Cms\Controllers\MController as Controller;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\Datatables\Datatables;
-use Validator,Auth,Config;
+use Validator,Auth,Config,Cache;
 
 use Adtech\Core\App\Models\Menu;
 use Vne\Banner\App\Models\Banner;
@@ -39,17 +39,61 @@ class IndexController extends Controller
         $videonoibat = config('site.news_box.videonoibat');    
         $tintucchung = config('site.news_box.tintucchung');    
         $biendaovietnamtailieuthamkhaochocuocthi = config('site.news_box.biendaovietnamtailieuthamkhaochocuocthi');
-        $thong_bao_ban_to_chuc = $this->news->getNewsByBox($thongbaobtc,10);
-        $bien_dao_viet_nam = $this->news->getNewsByBox($biendaovietnamtailieuthamkhaochocuocthi,10);
-        $tin_tuc_chung = $this->news->getNewsByBox($tintucchung,4);
-        $video_noi_bat = $this->news->getNewsByBox($videonoibat,5);
 
-        $banners = Banner::all();
+        // $thong_bao_ban_to_chuc = $this->news->getNewsByBox($thongbaobtc,10);
+        // $bien_dao_viet_nam = $this->news->getNewsByBox($biendaovietnamtailieuthamkhaochocuocthi,10);.
+        $bien_dao_viet_nam = array();
+        $tin_tuc_chung = $this->news->getNewsByBox($tintucchung,15);
+        // $video_noi_bat = $this->news->getNewsByBox($videonoibat,5);
 
-        $list_member_top_a = District::query()->orderBy('user_reg_exam_a','desc')->limit(3)->get();
-        $list_member_top_b = District::query()->orderBy('user_reg_exam_b','desc')->limit(3)->get();
+        if (Cache::has('tintucchung')) {
+            $tintucchung = Cache::get('tintucchung');
+        } else {
+            $tintucchung = $this->news->getNewsByBox($tintucchung,15);
+            Cache::put('tintucchung',$tintucchung);
+        }
 
-        $list_news_member = Member::orderBy('member_id', 'desc')->where('is_reg',1)->with('city','school','classes')->limit(8)->get();
+        if (Cache::has('thong_bao_ban_to_chuc')) {
+            $thong_bao_ban_to_chuc = Cache::get('thong_bao_ban_to_chuc');
+        } else {
+            $thong_bao_ban_to_chuc = $this->news->getNewsByBox($thongbaobtc,10);
+            Cache::put('thong_bao_ban_to_chuc',$thong_bao_ban_to_chuc);
+        }
+
+        if (Cache::has('video_noi_bat')) {
+            $video_noi_bat = Cache::get('video_noi_bat');
+        } else {
+            $video_noi_bat = $this->news->getNewsByBox($videonoibat,10);
+            Cache::put('video_noi_bat',$video_noi_bat);
+        }
+
+        if (Cache::has('banner')) {
+            $banners = Cache::get('banner');
+        } else {
+            $banners = Banner::all();
+            Cache::put('banner',$banners);
+        }
+
+        if (Cache::has('list_member_top_a')) {
+            $list_member_top_a = Cache::get('list_member_top_a');
+        } else {
+            $list_member_top_a = District::query()->orderBy('user_reg_exam_a','desc')->limit(3)->get();
+            Cache::put('list_member_top_a',$list_member_top_a);
+        }
+        if (Cache::has('list_member_top_b')) {
+            $list_member_top_b = Cache::get('list_member_top_b');
+        } else {
+            $list_member_top_b = District::query()->orderBy('user_reg_exam_b','desc')->limit(3)->get();
+            Cache::put('list_member_top_b',$list_member_top_b);
+        }
+        if (Cache::has('list_news_member')) {
+            $list_news_member = Cache::get('list_news_member');
+        } else {
+            $list_news_member = Member::orderBy('member_id', 'desc')->where('is_reg',1)->with('city','school','classes')->limit(8)->get();
+            Cache::put('list_news_member',$list_news_member);
+        }
+        
+
         $data = [
             'banners' => $banners,
             'thong_bao_ban_to_chuc' => $thong_bao_ban_to_chuc,
@@ -66,7 +110,7 @@ class IndexController extends Controller
     } 
 
     public function getNewByBox(Request $request,$alias){
-        $list_news = $this->news->getNewsByBox($alias,4);
+        $list_news = $this->news->getNewsByBox($alias,15);
         $list_news_json = array();
         if(!empty($list_news)){
             foreach ($list_news as $key => $news) {
@@ -85,6 +129,7 @@ class IndexController extends Controller
              
     }
     public function getTryExam(Request $request){
+        return '<p style="color:red;margin:22%;font-size:30px;">Thời gian thi thử kết thúc để chuẩn bị cho thi thật!!! Mời bạn quay lại sau.</p>';
         $uid = Auth::guard('member')->user()->member_id;
         $game_token = Auth::guard('member')->user()->token;
         // $game_token = 'minhnt'.$uid;
@@ -102,9 +147,11 @@ class IndexController extends Controller
 
     public function getRealExam(Request $request){
         $uid = Auth::guard('member')->user()->member_id;
-        if(in_array($uid, [4448,4450,4451,4452,4453])){
+        // if(in_array($uid, [4448,4450,4451,4452,4453,4628,4629,4630,4631,4632,4633])){
+        // if(Auth::guard('member')->user()->is_reg==2){
             $game_token = Auth::guard('member')->user()->token;
             // $game_token = 'minhnt'.$uid;
+            $url_result = route('vne.memberfrontend.result.member',$uid);
             $ip_port = 'http://123.30.174.148:4555/';
             $src = 'thi-thu';
             $src = $src.'?game_token='.$game_token.'&uid='.$uid.'&ip_port='.$ip_port;
@@ -112,12 +159,13 @@ class IndexController extends Controller
                 'game_token' => $game_token,
                 'uid' => $uid,
                 'ip_port' => $ip_port,
-                'src' => $src
+                'src' => $src,
+                'url_result' => $url_result
             ];
             return view('VNE-INDEX::modules.index.contest.index_real',$data);
-        }
-        else {
-            return redirect()->route('index');
-        }
+        // }
+        // else {
+        //     return redirect()->route('index');
+        // }
     }
 }

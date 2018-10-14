@@ -131,7 +131,7 @@ class LoginController extends Controller
                 $data['messeger'] = 'invalid token';
                 return response(json_encode($data))->setStatusCode(200)->header('Content-Type', 'application/json; charset=utf-8');
             } else{
-                if($member->is_login == 0){
+                if($member->is_login == 0 || $member->is_reg == 0 || $member->is_reg == 1){
                     $data['data']['is_login'] = false;
                     $data['status'] = false; 
                     $data['messeger'] = '';     

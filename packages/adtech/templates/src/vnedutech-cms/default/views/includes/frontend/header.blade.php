@@ -1,5 +1,4 @@
 @php
-
 function showCategories($categories, $parent_id = 0, $char = '')
 {
     // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
@@ -49,13 +48,13 @@ function showCategories($categories, $parent_id = 0, $char = '')
 					<li class="nav-item dropdown">
 						<i class="ii ii-bachelor"></i>Vào thi
 						<ul class="sub-menu">
-							<li class="nav-item"><i class="fa fa-edit"></i><a href="{{route('vne.index.try.exam')}}" class="nav-link">Thi Thử</a></li>
-							<li class="nav-item"><i class="ii ii-bachelor"></i><a href="" class="nav-link">Thi Thật</a></li>
+							<li class="nav-item"><i class="fa fa-edit"></i><a href="{{ route('vne.index.try.exam') }}" class="nav-link">Thi Thử</a></li>
+							<li class="nav-item"><i class="ii ii-bachelor"></i><a href="{{ route('vne.index.real.exam') }}" class="nav-link">Thi Thật</a></li>
 							<li class="nav-item"><i class="fa fa-file-text"></i><a href="" class="nav-link">Tự Luận</a></li>
 						</ul>
 					</li>
 						<li class="nav-item"><i class="fa fa-user"></i><a href="{{route('vne.memberfrontend.show')}}"> {{ $USER_LOGGED->u_name }}</a></li>
-						<li class="nav-item"><i class="fa fa-user"></i> <a href="{{ route('vne.member.auth.logout') }}">Đăng xuất</a></li>
+						<a href="{{ route('vne.member.auth.logout') }}" style="color: #fff;text-decoration: none;"><li class="nav-item"><i class="fa fa-user"></i> Đăng xuất</li></a>
 					@else
 						<li class="nav-item js-toggle-login"><i class="fa fa-user"></i> Đăng nhập</li>
 						<li class="nav-item js-toggle-registration"><i class="fa fa-user"></i> Đăng ký</li>

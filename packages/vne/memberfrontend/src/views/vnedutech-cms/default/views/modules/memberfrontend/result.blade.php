@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 
 {{-- Page title --}}
-@section('title'){{ $title = 'Cập nhật thông tin' }}@stop
+@section('title'){{ $title = 'Tra cứu kết quả' }}@stop
 @section('header_styles')
 	<style type="text/css">
 		.pagination{
@@ -31,13 +31,12 @@
 						<a class="breadcrumb-link" href="#">Tra cứu</a>
 					</li>
 					<li class="breadcrumb-item">
-						<a class="breadcrumb-link" href="#">Danh sách thí sinh</a>
+						<a class="breadcrumb-link" href="#">Tra cứu kết quả</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
 		<!-- breadcrumb end -->
-
 			<!-- search -->
 			<section class="section search">
 				<div class="container">
@@ -45,7 +44,7 @@
 						<div class="headline"><i class="fa fa-search"></i> Tra cứu danh sách thí sinh</div>
 						<form action="{{route('vne.memberfrontend.list.search')}}" class="search-form" method="get">
 							<div class="wrapper">
-								<div class="form-group col-12">
+								<div class="form-group col-4">
 									<label for="bangThi">Chọn bảng</label>
 									<select class="form-control" name="table_id">
 										<option value="0">Chọn bảng</option>
@@ -55,10 +54,6 @@
 											@endforeach
 										@endif
 									</select>
-								</div>
-								<div class="form-group col-md-4">
-									<label for="id">Tên đăng nhập</label>
-									<input type="id" class="form-control" value="{{$params['u_name']}}" placeholder="Tên đăng nhập" name="u_name">
 								</div>
 								<div class="form-group col-md-4">
 									<label for="name">Họ tên</label>
@@ -112,9 +107,9 @@
 			<!-- search results -->
 			<section class="section search-results">
 				<div class="container">
-					<div class="results">Tổng số: <span>{{ $list_member->total() }}</span> thí sinh</div>
+					<div class="results">Tổng số: <span>0</span> lượt thi</div>
 					<!-- pagination -->
-					{{$list_member->appends($params)->links()}}
+					{{$list_member->render()}}
 					<!-- pagination end -->
 					<div class="detail" style="background: #f1f1f1;">
 						<ul class="detail-row title">
@@ -126,23 +121,23 @@
 							<li class="detail-col-5">Đơn vị</li>
 							<li class="detail-col-4">Thành phố</li>
 							<li class="detail-col-7">Quận/Huyện</li>
-							{{-- <li class="detail-col-8">Thời gian</li> --}}
-							{{-- <li class="detail-col-9">Điểm</li> --}}
+							<li class="detail-col-8">Thời gian</li>
+							<li class="detail-col-9">Điểm</li>
 						</ul>
 						<div class="detail-list">
 							@if(!empty($list_member))
 							@foreach($list_member as $element )
 							<ul class="detail-row item">
 								<li class="detail-col-1">{{$loop->index + 1}}</li>
-								<li class="detail-col-2"><a href="{{ route('vne.memberfrontend.result.member',$element->member_id) }}" style="text-decoration: none;color: black"> {{ $element->name }} </a></li>
+								<li class="detail-col-2">{{ $element->name }}</li>
 								<li class="detail-col-2">{{ $element->birthday }}</li>
 								<li class="detail-col-4">{{ $element->class_id }}</li>
 								<li class="detail-col-4">{{ $element->school != null ? $element->school->name : '' }}</li>
 								<li class="detail-col-5">{{ $element->don_vi }}</li>
 								<li class="detail-col-4">{{ $element->city != null ? $element->city->name : '' }}</li>
 								<li class="detail-col-7">{{ $element->district != null ? $element->district->name : '' }}</li>
-								{{-- <li class="detail-col-8"></li> --}}
-								{{-- <li class="detail-col-9">0</li> --}}
+								<li class="detail-col-8"></li>
+								<li class="detail-col-9">0</li>
 							</ul>
 							@endforeach
 							@endif
