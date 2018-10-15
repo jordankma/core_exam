@@ -94,6 +94,9 @@ class MemberController extends Controller
             'phone' => 'required|unique:vne_member,phone'
         ], $this->messages);
         if (!$validator->fails()) {
+
+            $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
+
             $members = new Member();
 
             $members->token = $request->input('token');   
@@ -101,7 +104,7 @@ class MemberController extends Controller
             $members->u_name = $request->input('u_name');
             $members->password = bcrypt($request->input('password'));
             $members->email = $request->input('email');
-            $members->birthday = $request->input('birthday');
+            $members->birthday = $birthday;
             $members->avatar = $request->input('avatar');
             $members->phone = $request->input('phone');
             $members->gender = $request->input('gender');
@@ -143,9 +146,13 @@ class MemberController extends Controller
         $list_city = DB::table('vne_city')->get();
         $list_district = DB::table('vne_district')->where('city_id',$member->city_id)->get();
         $list_school =  DB::table('vne_school')->where('district_id',$member->district_id)->get();
-
+        if($member->birthday==null){
+            $member->birthday ='10-10-1995';   
+        }
         $data = [
             'member' => $member,
+            'table_id' => $member->table_id != 'null' ? $member->table_id : 1,
+            'birthday' => explode("-",$member->birthday),
             'class_old' => $class_old,
             'list_object' => $list_object,
             'list_table' => $list_table,
@@ -162,20 +169,29 @@ class MemberController extends Controller
             'name' => 'required|min:4|max:50',
         ], $this->messages);
         if (!$validator->fails()) { 
+            $birthday = $request->input('day') . '-' . $request->input('month') . '-' . $request->input('year');
+
             $member_id = $request->input('member_id');
+            $table_id = $request->input('table_id');
             $member = $this->member->find($member_id);
+            $member->school_id = null;
+            $member->class_id = null;
+            $member->don_vi = null;
             $member->token = $request->input('token');   
             $member->name = $request->input('name');
-            $member->birthday = $request->input('birthday');
+            $member->birthday = $birthday;
             $member->avatar = $request->input('avatar');
             $member->gender = $request->input('gender');
             $member->object_id = $request->input('object_id');
-            $member->table_id = $request->input('table_id');
+            $member->table_id = $table_id;
             $member->city_id = $request->input('city_id');
             $member->district_id = $request->input('district_id');
-            $member->school_id = $request->input('school_id');
-            $member->class_id = $request->input('class_id');
-            $member->don_vi = $request->input('don_vi');
+            if($table_id==1){
+                $member->school_id = $request->input('school_id');
+                $member->class_id = $request->input('class_id');
+            } elseif($table_id==2){
+                $member->don_vi = $request->input('don_vi');
+            }
             $member->updated_at = new DateTime();
 
             if ($member->save()) {

@@ -75,6 +75,7 @@ class LoginController extends Controller
     {
         $member = Member::where('u_name',$this->_guard()->user()->u_name)->first();
         $member->is_login  = 0;
+        $member->token  = '';
         $member->save();
 
         $this->_guard()->logout();

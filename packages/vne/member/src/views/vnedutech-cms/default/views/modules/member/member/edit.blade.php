@@ -81,7 +81,26 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.birthday') }}</label>
-                                        <input type="text" name="birthday" class="form-control" id="birthday" value="{{ $member->birthday }}" >
+                                        <select class="date" name="day">
+                                            <option value="0"></option>
+                                            @for($i = 1; $i < 32; $i++)
+                                                <option value="{{$i}}" @if($birthday[0]==$i) selected="" @endif>{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                        <span>/</span>
+                                        <select class="date" name="month">
+                                            <option value="0"></option>
+                                            @for($i = 1; $i < 13; $i++)
+                                                <option value="{{$i}}" @if($birthday[1]==$i) selected="" @endif>{{$i}}</option>
+                                            @endfor
+                                        </select>
+                                        <span>/</span>
+                                        <select class="date year" name="year">
+                                            <option value="0"></option>
+                                            @for($i = 1950; $i < 2018; $i++)
+                                                <option value="{{$i}}" @if($birthday[2]==$i) selected="" @endif>{{$i}}</option>
+                                            @endfor
+                                        </select>
                                     </div>
                                     <label>{{trans('vne-member::language.form.title.avatar') }} <span style="color: red">(*)</span> </label>
                                     <div class="form-group input-group">
@@ -107,7 +126,7 @@
                         <!-- /.tab-pane -->
                         <div class="tab-pane" id="info">
                             <div class="row">
-                                <div class="col-sm-6">
+                                {{-- <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.object') }} </label><br>
                                         <select id="object" class="form-control" name="object_id" placeholder="{{trans('vne-member::language.placeholder.member.object')}}">
@@ -118,8 +137,8 @@
                                             @endif
                                         </select>
                                     </div> 
-                                </div>
-                                <div class="col-sm-6">
+                                </div> --}}
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.table') }} </label><br>
                                         <select id="table" class="form-control" name="table_id">
@@ -149,6 +168,7 @@
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.district') }} </label><br>
                                         <select id="district" class="form-control" name="district_id">
+                                            <option value="0" >Chọn quận huyện</option>
                                             @if(!empty($list_district))
                                                 @foreach($list_district as $district)
                                                     <option value="{{$district->district_id}}" @if($district->district_id == $member->district_id) selected="" @endif>{{$district->name}}</option>     
@@ -157,10 +177,11 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 banga">
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.school') }} </label><br>
                                         <select id="school" class="form-control" name="school_id">
+                                            <option value="0" >Chọn trường</option>
                                             @if(!empty($list_school))
                                                 @foreach($list_school as $school)
                                                     <option value="{{$school->school_id}}" @if($school->school_id == $member->school_id) selected="" @endif>{{$school->name}}</option>     
@@ -169,16 +190,17 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-3 banga">
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.class') }} </label><br>
                                         <input type="text" name="class_id" value="{{ $member->class_id }}" class="form-control" id="classes" placeholder="Lớp">
                                     </div>
+                                </div>
+                                <div class="col-sm-3 bangb">
                                     <div class="form-group">
                                         <label>Đơn vị</label>
                                         <div class="input">
                                             <input class="form-control" name="don_vi" id="don_vi" value="{{ $member->don_vi }}" type="name">
-                                            <small class="text-muted">*</small>
                                         </div>
                                     </div>
                                 </div>
@@ -438,6 +460,33 @@
                         }); 
                     }
                 }, 'json');
+            });
+            var table_id = {{$table_id}};
+            if(table_id==1){
+                $('.banga').show();
+                $('.bangb').hide();
+                $('#school').removeAttr("disabled", "");
+            } 
+            else if(table_id==2) {
+                $('.bangb').show();
+                $('.banga').hide();
+                $('#school').attr("disabled", "");
+            }
+
+            $("body").on('change', '#table', function () {
+                var table_id = $(this).val();
+                var table_name = $("#table option:selected").text();
+                $('input[name=table_name]').val(table_name);
+                if(table_id==1){
+                    $('.banga').show();
+                    $('.bangb').hide();
+                    $('#school').removeAttr("disabled", "");
+                } 
+                else if(table_id==2) {
+                    $('.bangb').show();
+                    $('.banga').hide();
+                    $('#school').attr("disabled", "");
+                }
             });
         })
     </script>
