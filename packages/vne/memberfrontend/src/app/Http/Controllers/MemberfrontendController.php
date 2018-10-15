@@ -250,7 +250,7 @@ class MemberfrontendController extends Controller
         return view('VNE-MEMBERFRONTEND::modules.memberfrontend.result_member',$data);    
     }
     
-    public function result(){
+    public function result(Request $request){
         $list_object = DB::table('vne_object')->get();
         $list_table = DB::table('vne_table')->get();
         $list_city = DB::table('vne_city')->get();

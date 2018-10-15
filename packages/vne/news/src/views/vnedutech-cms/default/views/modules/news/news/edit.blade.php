@@ -133,7 +133,7 @@
                             </div>
                             <div class="form-group">
                                 <label>{{trans('vne-news::language.form.text.cat')}} </label> <br>
-                                <span style="color: red">Chỉ chọn danh mục khi chọn vị trí : BIỂN ĐẢO VIỆT NAM (TÀI LIỆU THAM KHẢO CHO CUỘC THI)</span><br>
+                                {{-- <span style="color: red">Chỉ chọn danh mục khi chọn vị trí : BIỂN ĐẢO VIỆT NAM (TÀI LIỆU THAM KHẢO CHO CUỘC THI)</span><br> --}}
                                 <select id="cate" class="form-control" name="news_cat[]" multiple="multiple">
                                     @if(!empty($list_news_cat))
                                     @foreach($list_news_cat as $news_cat)
@@ -273,14 +273,14 @@
                             }
                         }
                     },
-                    image: {
-                        trigger: 'change keyup',
-                        validators: {
-                            notEmpty: {
-                                message: 'Trường này không được bỏ trống'
-                            }
-                        }
-                    }
+                    // image: {
+                    //     trigger: 'change keyup',
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Trường này không được bỏ trống'
+                    //         }
+                    //     }
+                    // }
                 }
             });  
             

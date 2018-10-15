@@ -54,6 +54,9 @@
 			<div class="list-item">
 				<h3 class="title"><a href="{{ URL::to('tin-tuc','cac-hoat-dong-phoi-hop-giua-dak-nong-va-quan-chung-hai-quan') }}">Các hoạt động phối hợp giữa Đắk Nông và Quân chủng Hải quân</a></h3>
 			</div>
+			<div class="list-item">
+				<h3 class="title"><a href="{{ URL::to('tin-tuc','hai-quan-nhan-dan-viet-nam-anh-hung') }}">Hải quân nhân dân Việt Nam Anh hùng</a></h3>
+			</div>
 		</div>
 	</div>
 </section>

@@ -136,7 +136,13 @@
 								<li class="detail-col-5">{{ isset($member_data->don_vi)?$member_data->don_vi:'' }}</li>
 								<li class="detail-col-4">{{ isset($member_data->city_name) ? $member_data->city_name : '' }}</li>
 								<li class="detail-col-7">{{ isset($member_data->district_name) != null ? $member_data->district_name : '' }}</li>
-								<li class="detail-col-8">{{ isset($member_data->used_time)?$member_data->used_time/1000:'' }}</li>
+								<li class="detail-col-8">
+									@php 
+									$point = isset($member_data->used_time) ? (float)($member_data->used_time/1000) : '';
+									$point_real =  $point > 720 ? '720' : $point ; 
+									@endphp
+									{{$point_real}}
+								</li>
 								<li class="detail-col-9">{{ isset($member_data->total_point)?$member_data->total_point:'' }}</li>
 							</ul>
 							@endforeach

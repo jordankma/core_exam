@@ -14,7 +14,7 @@
 						<a class="breadcrumb-link" href="{{ route('index') }}">Trang chủ</a>
 					</li>
 					<li class="breadcrumb-item">
-						<a class="breadcrumb-link" href="#">Kết quả thí sinh</a>
+						<a class="breadcrumb-link" href="#">Thông tin thí sinh</a>
 					</li>
 				</ul>
 			</div>
@@ -50,7 +50,14 @@
 							<li class="detail-col-5">{{ isset($element->round_name) ? $element->round_name : ''  }}</li>
 							<li class="detail-col-3">{{ isset($element->topic_name) ? $element->topic_name : ''}}</li>
 							<li class="detail-col-3">{{ isset($element->repeat_time) ? $element->repeat_time : ''}}</li>
-							<li class="detail-col-3">{{ isset($element->used_time) ? (float)($element->used_time/1000) : ''}} s</li>
+							<li class="detail-col-3">
+								@php 
+									$point = isset($element->used_time) ? (float)($element->used_time/1000) : '';
+									$point_real =  $point > 720 ? '720' : $point ; 
+								@endphp
+								{{$point_real}}
+								s
+							</li>
 							<li class="detail-col-3">{{ isset($element->total_point) ? $element->total_point : ''}}</li>
 						</ul>
 						@endforeach

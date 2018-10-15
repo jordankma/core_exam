@@ -10,7 +10,7 @@ class CheckRegister
 {
     public function handle($request, Closure $next)
     {
-        if(Auth::guard('member')->check()){
+    	if(Auth::guard('member')->check()){
 	        if (Auth::guard('member')->user()->is_reg == 0) {
 	            return redirect()->route('vne.memberfrontend.show');
 	        }

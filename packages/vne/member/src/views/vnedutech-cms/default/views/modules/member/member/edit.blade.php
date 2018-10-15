@@ -306,14 +306,14 @@
                             }
                         }
                     },
-                    avatar: {
-                        trigger: 'change keyup',
-                        validators: {
-                            notEmpty: {
-                                message: 'Trường này không được bỏ trống'
-                            }
-                        }
-                    },
+                    // avatar: {
+                    //     trigger: 'change keyup',
+                    //     validators: {
+                    //         notEmpty: {
+                    //             message: 'Trường này không được bỏ trống'
+                    //         }
+                    //     }
+                    // },
                     password: {
                         validators: {
                             notEmpty: {

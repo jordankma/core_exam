@@ -14,7 +14,7 @@ return [
         ],
     	"reset"=>[
         	"title" => "Reset mật khẩu",
-        	"body" => "Bạn có chắc muốn xóa người dùng này? Sau khi reset mật khẩu người dùng sẽ mặc định về abc@123"
+        	"body" => "Bạn có chắc muốn xóa người dùng này? Sau khi reset mật khẩu người dùng sẽ mặc định về 12345678"
     	]
     ],
     "group" => [

@@ -27,9 +27,9 @@ return [
             "email"=> "Email",
             "group"=> "Nhóm",
             "object"=> "Đối tượng",
+            "address"=> "Địa chỉ",
             "phone"=> "Số điện thoại",
             "birthday"=> "Ngày sinh",
-            "address"=> "Địa chỉ",
             "trinh_do_chuyen_mon"=> "Học hàm học vị chuyên môn cao nhất",
             "trinh_do_ly_luan"=> "Lý luận Chính trị"
         ],
