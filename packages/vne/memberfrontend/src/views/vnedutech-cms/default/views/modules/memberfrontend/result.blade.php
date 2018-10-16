@@ -107,9 +107,9 @@
 			<!-- search results -->
 			<section class="section search-results">
 				<div class="container">
-					<div class="results">Tổng số: <span>0</span> lượt thi</div>
+					<div class="results">Tổng số: <span> {{$list_member->total()}}</span> lượt thi</div>
 					<!-- pagination -->
-					{{-- {{$list_member->links()}} --}}
+					 {{$list_member->links()}}
 					<!-- pagination end -->
 					<div class="detail" style="background: #f1f1f1;">
 						<ul class="detail-row title">
@@ -126,30 +126,28 @@
 						</ul>
 						<div class="detail-list">
 							@if(!empty($list_member))
-							@foreach($list_member->data as $member_data )
+							@foreach($list_member as $member_data )
 							<ul class="detail-row item">
 								<li class="detail-col-1">{{$loop->index + 1}}</li>
-								<li class="detail-col-2">{{ isset($member_data->name)?$member_data->name:'' }}</li>
-								<li class="detail-col-2">{{ isset($member_data->birthday)?$member_data->birthday:'' }}</li>
-								{{-- <li class="detail-col-4">{{ $member_data->class_id }}</li> --}}
-								{{-- <li class="detail-col-4">{{ $member_data->school != null ? $member_data->school->name : '' }}</li> --}}
-								<li class="detail-col-5">{{ isset($member_data->don_vi)?$member_data->don_vi:'' }}</li>
-								<li class="detail-col-4">{{ isset($member_data->city_name) ? $member_data->city_name : '' }}</li>
-								<li class="detail-col-7">{{ isset($member_data->district_name) != null ? $member_data->district_name : '' }}</li>
+								<li class="detail-col-2">{{ isset($member_data['name'])?$member_data['name']:'' }}</li>
+								<li class="detail-col-2">{{ isset($member_data['birthday'])?$member_data['birthday']:'' }}</li>
+								{{-- <li class="detail-col-4">{{ $member['class_id }}</li> --}}
+								{{-- <li class="detail-col-4">{{ $member['school != null ? $member['school->name : '' }}</li> --}}
+								<li class="detail-col-5">{{ isset($member_data['don_vi'])?$member_data['don_vi']:'' }}</li>
+								<li class="detail-col-4">{{ isset($member_data['city_name']) ? $member_data['city_name'] : '' }}</li>
+								<li class="detail-col-7">{{ isset($member_data['district_name']) != null ? $member_data['district_name'] : '' }}</li>
 								<li class="detail-col-8">
 									@php 
-									$point = isset($member_data->used_time) ? (float)($member_data->used_time/1000) : '';
+									$point = isset($member_data['used_time']) ? (int)($member_data['used_time']/1000) : '';
 									$point_real =  $point > 720 ? '720' : $point ; 
 									@endphp
-									{{$point_real}}
+									{{(int)($point_real/60) }}p {{$point_real%60 }}s
 								</li>
-								<li class="detail-col-9">{{ isset($member_data->total_point)?$member_data->total_point:'' }}</li>
+								<li class="detail-col-9">{{ isset($member_data['total_point'])?$member_data['total_point']:'' }}</li>
 							</ul>
 							@endforeach
 							@endif
 						</div>
-
-					Tổng: {{$list_member->total}} kết quả
 					
 					</div>
 				</div>

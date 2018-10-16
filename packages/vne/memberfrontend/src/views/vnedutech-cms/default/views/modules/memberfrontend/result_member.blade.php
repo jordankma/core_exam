@@ -55,8 +55,7 @@
 									$point = isset($element->used_time) ? (float)($element->used_time/1000) : '';
 									$point_real =  $point > 720 ? '720' : $point ; 
 								@endphp
-								{{$point_real}}
-								s
+								{{(int)($point_real/60) }}p {{$point_real%60 }}s
 							</li>
 							<li class="detail-col-3">{{ isset($element->total_point) ? $element->total_point : ''}}</li>
 						</ul>

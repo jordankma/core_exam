@@ -12,6 +12,8 @@ use Vne\Member\App\Repositories\MemberRepository;
 use Vne\Member\App\Models\Table;
 use Vne\Member\App\Models\School;
 use Vne\Member\App\Models\District;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 use Yajra\Datatables\Datatables;
 use Validator,Auth,DB,Datetime,Cache;
@@ -162,6 +164,7 @@ class MemberfrontendController extends Controller
             $member->school_id = $school_id;
             $member->class_id = $class_id;
             $member->don_vi = $don_vi;
+            $member->sync_mongo = '1';
 
             $member->updated_at = new DateTime();
             if ($member->save()) {
@@ -257,22 +260,37 @@ class MemberfrontendController extends Controller
         $list_district = DB::table('vne_district')->get();
         $list_school =  DB::table('vne_school')->get();
         $list_class =  DB::table('vne_classes')->get();
-        $client = new Client();
-        // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
-        $list_member = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
-        $list_member = json_decode($list_member); 
-        // dd($list_member);
+
         $params = [
-            'table_id' => '',
-            'u_name' => '',
-            'name' => '',
-            'city_id' => '',
-            'district_id' => '',
-            'school_id' => '',
-            'class_id' => ''
+            'table_id' => !empty($request->table_id)?$request->table_id:0,
+            'u_name' => !empty($request->u_name)?$request->u_name:0,
+            'name' => !empty($request->name)?$request->name:0,
+            'city_id' => !empty($request->city_id)?$request->city_id:0,
+            'district_id' => !empty($request->district_id)?$request->district_id:0,
+            'school_id' => !empty($request->school_id)?$request->school_id:0,
+            'class_id' => !empty($request->class_id)?$request->class_id:0
         ];
+//        $client = new Client();
+        // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
+        $list_member = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result?'. http_build_query($params));
+        $list_member = json_decode($list_member, true);
+
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        //Create a new Laravel collection from the array data
+        $collection = new Collection($list_member['data']);
+
+        //Define how many items we want to be visible in each page
+        $perPage = 20;
+
+        //Slice the collection to get the items to display in current page
+//        $currentPageSearchResults = $collection->slice($currentPage * $perPage, $perPage)->all();
+
+        //Create our paginator and pass it to the view
+        $paginatedSearchResults= new LengthAwarePaginator($collection, $list_member['total'], $perPage, $currentPage,['url' => route('vne.memberfrontend.result'),'path' => 'ket-qua?'. http_build_query($params)]);
+        // dd($list_member);
+
         $data = [
-            'list_member' => $list_member,
+            'list_member' => $paginatedSearchResults,
             'list_object' => $list_object,
             'list_table' => $list_table,
             'list_city' => $list_city,

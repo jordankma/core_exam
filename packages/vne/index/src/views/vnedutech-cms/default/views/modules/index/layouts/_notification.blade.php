@@ -46,7 +46,7 @@
 				<h3 class="title"><a href="{{ URL::to('tin-tuc','chu-truong-quan-diem-cua-dang-nha-nuoc-ve-bien-dao-viet-nam') }}">Chủ trương, quan điểm của Đảng, Nhà nước về biển đảo Việt Nam</a></h3>
 			</div>
 			<div class="list-item">
-				<h3 class="title"><a href="{{ URL::to('tin-tuc','nhung-thanh-tuu-xay-dung-va-phat-trien-cua-linh-vuc-lien-quan-den-bien-dao-viet-nam') }}">Những thành tựu xây dựng và phát triển của lĩnh vực liên quan đến biển, đảo Việt Nam</a></h3>
+				<h3 class="title"><a href="{{ URL::to('tin-tuc','thanh-tuu-xay-dung-va-phat-trien') }}">Thành tựu xây dựng và phát triển</a></h3>
 			</div>
 			{{-- <div class="list-item">
 				<h3 class="title"><a href="{{ URL::to('tin-tuc','100-cau-hoi-dap') }}">100 câu hỏi đáp</a></h3>
