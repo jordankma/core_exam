@@ -42,7 +42,7 @@
 				<div class="container">
 					<div class="search-wrapper">
 						<div class="headline"><i class="fa fa-search"></i> Tra cứu danh sách thí sinh</div>
-						<form action="{{route('vne.memberfrontend.search.result.member')}}" class="search-form" method="get">
+						<form action="{{route('vne.memberfrontend.result')}}" class="search-form" method="get">
 							<div class="wrapper">
 								<div class="form-group col-4">
 									<label for="bangThi">Chọn bảng</label>
@@ -138,12 +138,12 @@
 								<li class="detail-col-7">{{ isset($member_data['district_name']) != null ? $member_data['district_name'] : '' }}</li>
 								<li class="detail-col-8">
 									@php 
-									$point = isset($member_data['used_time']) ? (int)($member_data['used_time']/1000) : '';
+									$point = isset($member_data['used_time']) ? (float)($member_data['used_time']/1000) : 0;
 									$point_real =  $point > 720 ? '720' : $point ; 
 									@endphp
 									{{(int)($point_real/60) }}p {{$point_real%60 }}s
 								</li>
-								<li class="detail-col-9">{{ isset($member_data['total_point'])?$member_data['total_point']:'' }}</li>
+								<li class="detail-col-9">{{ isset($member_data['total_point'])?$member_data['total_point']: 0 }}</li>
 							</ul>
 							@endforeach
 							@endif

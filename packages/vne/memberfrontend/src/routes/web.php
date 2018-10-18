@@ -16,4 +16,5 @@ Route::group(array('prefix' => $adminPrefix), function() {
     Route::get('search-ket-qua', 'MemberfrontendController@searchResult')->name('vne.memberfrontend.search.result.member');
 
     Route::get('top-thi-sinh-dangky', 'MemberfrontendController@listTopMember')->name('vne.memberfrontend.list.top.member')->where('as','tra cứu - top thí sinh đăng ký');
+    
 });

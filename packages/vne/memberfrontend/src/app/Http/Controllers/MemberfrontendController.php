@@ -268,26 +268,36 @@ class MemberfrontendController extends Controller
             'city_id' => !empty($request->city_id)?$request->city_id:0,
             'district_id' => !empty($request->district_id)?$request->district_id:0,
             'school_id' => !empty($request->school_id)?$request->school_id:0,
-            'class_id' => !empty($request->class_id)?$request->class_id:0
+            'class_id' => !empty($request->class_id)?$request->class_id:0,
+            'page'=> !empty($request->page)?$request->page:1
         ];
 //        $client = new Client();
         // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
         $list_member = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result?'. http_build_query($params));
         $list_member = json_decode($list_member, true);
-
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        //Create a new Laravel collection from the array data
-        $collection = new Collection($list_member['data']);
-
-        //Define how many items we want to be visible in each page
-        $perPage = 20;
-
-        //Slice the collection to get the items to display in current page
-//        $currentPageSearchResults = $collection->slice($currentPage * $perPage, $perPage)->all();
-
-        //Create our paginator and pass it to the view
-        $paginatedSearchResults= new LengthAwarePaginator($collection, $list_member['total'], $perPage, $currentPage,['url' => route('vne.memberfrontend.result'),'path' => 'ket-qua?'. http_build_query($params)]);
         // dd($list_member);
+        foreach ($list_member['data'] as $key => $value) {
+            $point = 0;
+            if(isset($value['answers']) && !empty($value['answers'])){
+                foreach ($value['answers'] as $key2 => $value2) {
+                    if($key2 >= 0 &&  $key2 <= 19){
+                        if($value2['correct']==true){
+                            $point+=5;
+                        }
+                    }
+                    elseif( $key2 >= 20 &&  $key2 <= 29){
+                        if($value2['correct']==true){
+                            $point+=10;
+                        }    
+                    }
+                }
+            }
+            $list_member['data'][$key]['total_point'] = $point;
+        }
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $collection = new Collection($list_member['data']);
+        $perPage = 20;
+        $paginatedSearchResults= new LengthAwarePaginator($collection, $list_member['total'], $perPage, $currentPage,['url' => route('vne.memberfrontend.result'),'path' => 'ket-qua?'. http_build_query($params)]);
 
         $data = [
             'list_member' => $paginatedSearchResults,
@@ -304,6 +314,13 @@ class MemberfrontendController extends Controller
 
     public function searchResult(){
     	//test
+    }
+
+    public function syncMongo(Request $request){
+        $limit = !empty($request->limit)?$request->limit:100;
+        $offset = !empty($request->page)?($request->page - 1)*100:0;
+        $members = Member::query()->select('member_id')->where(['sync_mongo' => '0','is_reg' => 1])->skip($offset)->take($limit)->get();
+        echo "<pre>";print_r($members);echo "</pre>";die;
     }
 
     function my_simple_crypt( $string, $action = 'e' ) {

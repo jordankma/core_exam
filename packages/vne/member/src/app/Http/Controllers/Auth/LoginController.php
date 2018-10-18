@@ -124,7 +124,6 @@ class LoginController extends Controller
             'token' => 'required'
         ], $this->messages);
         if (!$validator->fails()) {
-            $data['data'] = array();
             $token = $request->input('token');
             $member = Member::where('token',$token)->first();
             if(empty($member)){  
