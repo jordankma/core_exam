@@ -244,7 +244,24 @@ class MemberfrontendController extends Controller
         $client = new Client();
         $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
         $data_reponse = json_decode($res->getBody());
-        // dd($data_reponse);
+        foreach ($data_reponse as $key => $value) {
+            $point = 0;
+            if(isset($value->answers) && !empty($value->answers)){
+                foreach ($value->answers as $key2 => $value2) {
+                    if($key2 >= 0 &&  $key2 <= 19){
+                        if($value2->correct==true){
+                            $point+=5;
+                        }
+                    }
+                    elseif( $key2 >= 20 &&  $key2 <= 29){
+                        if($value2->correct==true){
+                            $point+=10;
+                        }    
+                    }
+                }
+            }
+            $data_reponse[$key]->total_point = $point;
+        }
         $member = Member::where('member_id', $member_id)->with('city','school','classes')->first();
         $data = [
             'member' => $member,
