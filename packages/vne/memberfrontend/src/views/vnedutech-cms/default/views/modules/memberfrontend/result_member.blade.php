@@ -52,12 +52,12 @@
 							<li class="detail-col-3">{{ isset($element->repeat_time) ? $element->repeat_time : ''}}</li>
 							<li class="detail-col-3">
 								@php 
-									$point = isset($element->used_time) ? (float)($element->used_time/1000) : '';
-									$point_real =  $point > 720 ? '720' : $point ; 
+									$time = isset($element->used_time) ? (float)($element->used_time/1000) : '';
+									$time_real =  $time > 720 ? '720' : $time ; 
 								@endphp
-								{{(int)($point_real/60) }}p {{$point_real%60 }}s
+								{{(int)($time_real/60) }}p {{$time_real%60 }}s
 							</li>
-							<li class="detail-col-3">{{ isset($element->total_point) ? $element->total_point : ''}}</li>
+							<li class="detail-col-3">{{ isset($element->point_real) ? $element->point_real : ''}}</li>
 						</ul>
 						@endforeach
 						@endif

@@ -240,6 +240,18 @@ class MemberfrontendController extends Controller
             
     }
 
+    // public function resultMember($member_id){
+    //     $client = new Client();
+    //     $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
+    //     $data_reponse = json_decode($res->getBody());
+    //     // dd($data_reponse);
+    //     $member = Member::where('member_id', $member_id)->with('city','school','classes')->first();
+    //     $data = [
+    //         'member' => $member,
+    //         'result' => $data_reponse
+    //     ];
+    //     return view('VNE-MEMBERFRONTEND::modules.memberfrontend.result_member',$data);    
+    // }
     public function resultMember($member_id){
         $client = new Client();
         $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
@@ -279,13 +291,13 @@ class MemberfrontendController extends Controller
         $list_class =  DB::table('vne_classes')->get();
 
         $params = [
-            'table_id' => !empty($request->table_id)?$request->table_id:0,
-            'u_name' => !empty($request->u_name)?$request->u_name:0,
-            'name' => !empty($request->name)?$request->name:0,
-            'city_id' => !empty($request->city_id)?$request->city_id:0,
-            'district_id' => !empty($request->district_id)?$request->district_id:0,
-            'school_id' => !empty($request->school_id)?$request->school_id:0,
-            'class_id' => !empty($request->class_id)?$request->class_id:0,
+            'table_id' => !empty($request->table_id)?$request->table_id: '',
+            'u_name' => !empty($request->u_name)?$request->u_name: '',
+            'name' => !empty($request->name)?$request->name: '',
+            'city_id' => !empty($request->city_id)?$request->city_id: '',
+            'district_id' => !empty($request->district_id)?$request->district_id: '',
+            'school_id' => !empty($request->school_id)?$request->school_id: '',
+            'class_id' => !empty($request->class_id)?$request->class_id: '',
             'page'=> !empty($request->page)?$request->page:1
         ];
 //        $client = new Client();

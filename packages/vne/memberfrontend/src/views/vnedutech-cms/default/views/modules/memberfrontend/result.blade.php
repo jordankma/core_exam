@@ -118,7 +118,7 @@
 							<li class="detail-col-2">Ngày sinh</li>
 							{{-- <li class="detail-col-4">Lớp</li> --}}
 							{{-- <li class="detail-col-4">Trường</li> --}}
-							<li class="detail-col-5">Đơn vị</li>
+							<li class="detail-col-5">Đơn vị/Trường</li>
 							<li class="detail-col-4">Thành phố</li>
 							<li class="detail-col-7">Quận/Huyện</li>
 							<li class="detail-col-8">Thời gian</li>
@@ -127,23 +127,31 @@
 						<div class="detail-list">
 							@if(!empty($list_member))
 							@foreach($list_member as $member_data )
+							{{ $member_data['used_time']}}
+							<input type="hidden" name="" value="{{ $member_data['is_reg'] }}">
 							<ul class="detail-row item">
 								<li class="detail-col-1">{{$loop->index + 1}}</li>
-								<li class="detail-col-2">{{ isset($member_data['name'])?$member_data['name']:'' }}</li>
+								<li class="detail-col-2"><a href="{{ route('vne.memberfrontend.result.member',$member_data['user_id']) }}" style="text-decoration: none;color: black"> {{ isset($member_data['name'])?$member_data['name']:'' }} </a></li>
 								<li class="detail-col-2">{{ isset($member_data['birthday'])?$member_data['birthday']:'' }}</li>
 								{{-- <li class="detail-col-4">{{ $member['class_id }}</li> --}}
 								{{-- <li class="detail-col-4">{{ $member['school != null ? $member['school->name : '' }}</li> --}}
-								<li class="detail-col-5">{{ isset($member_data['don_vi'])?$member_data['don_vi']:'' }}</li>
+								<li class="detail-col-5">
+									@if($member_data['table_id'] == 2 )
+									{{ isset($member_data['don_vi'])?$member_data['don_vi']:'' }}
+									@else 
+									{{ isset($member_data['school_name'])?$member_data['school_name']:'' }}
+									@endif
+								</li>
 								<li class="detail-col-4">{{ isset($member_data['city_name']) ? $member_data['city_name'] : '' }}</li>
 								<li class="detail-col-7">{{ isset($member_data['district_name']) != null ? $member_data['district_name'] : '' }}</li>
 								<li class="detail-col-8">
 									@php 
-									$point = isset($member_data['used_time']) ? (float)($member_data['used_time']/1000) : 0;
-									$point_real =  $point > 720 ? '720' : $point ; 
+									$time = isset($member_data['used_time']) ? (float)($member_data['used_time']/1000) : 0;
+									$time_real =  $time > 720 ? '720' : $time ; 
 									@endphp
-									{{(int)($point_real/60) }}p {{$point_real%60 }}s
+									{{(int)($time_real/60) }}p {{$time_real%60 }}s
 								</li>
-								<li class="detail-col-9">{{ isset($member_data['total_point'])?$member_data['total_point']: 0 }}</li>
+								<li class="detail-col-9">{{ isset($member_data['point_real'])?$member_data['point_real']: 0 }}</li>
 							</ul>
 							@endforeach
 							@endif

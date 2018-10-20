@@ -56,6 +56,15 @@
 			</div>
 		</div>
 
+		<div class="form-user message js-message">
+            <div class="logo">
+                <img src="src/images/egroup-logo.png" alt="">
+            </div>
+            <div class="inner-message">
+                <h4>Cuộc thi đã kết thúc.</h4>
+            </div>
+        </div>
+
 		<div class="form-user from-registration js-registration">
 			<div class="logo">
 				<img src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/images/egroup-logo.png?t=').time() }}" alt="">

@@ -57,6 +57,7 @@ function showCategories($categories, $parent_id = 0, $char = '')
 						<a href="{{ route('vne.member.auth.logout') }}" style="color: #fff;text-decoration: none;"><li class="nav-item"><i class="fa fa-user"></i> Đăng xuất</li></a>
 					@else
 						<li class="nav-item js-toggle-login"><i class="fa fa-user"></i> Đăng nhập</li>
+						<li class="nav-item js-toggle-message"><i class="fa fa-bullhorn"></i>Thông báo</li>
 						<li class="nav-item js-toggle-registration"><i class="fa fa-user"></i> Đăng ký</li>
 					@endif
 				</ul> <!-- nav -->

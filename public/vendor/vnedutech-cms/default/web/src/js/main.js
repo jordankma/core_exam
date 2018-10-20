@@ -75,11 +75,17 @@ var login = $('.js-login');
 var registration = $('.js-registration');
 var ACTIVE_LOGIN_CLASS = 'active-login';
 var ACTIVE_REGISTRAtion_CLASS = 'active-registration';
+var ACTIVE_MESSAGE_CLASS = 'active-message';
 var toggleLoginButton = $('.js-toggle-login');
 var toggleRegistrationButton = $('.js-toggle-registration');
+var toggleMessageButton = $('.js-toggle-message');
 var openRegistrationButton = $('.js-open-registration');
 
 if (login) {
+  toggleMessageButton.on('click', function () {
+    body.toggleClass(ACTIVE_MESSAGE_CLASS);
+    body.removeClass(ACTIVE_LOGIN_CLASS);
+  });
   toggleLoginButton.on('click', function () {
     body.toggleClass(ACTIVE_LOGIN_CLASS);
     body.removeClass(ACTIVE_SLIDEOUT_CLASS);
@@ -91,6 +97,7 @@ if (login) {
   bodyOvarlay.on('click', function () {
     body.removeClass(ACTIVE_LOGIN_CLASS);
     body.removeClass(ACTIVE_REGISTRAtion_CLASS);
+    body.removeClass(ACTIVE_MESSAGE_CLASS);
   });
   openRegistrationButton.on('click', function () {
     body.removeClass(ACTIVE_LOGIN_CLASS);
