@@ -46,57 +46,43 @@
 				<div class="tab-item active">
 					<div class="title">Bảng A</div>
 					<ul class="list">
-						{{-- <li class="list-item">
-							<div class="number">01</div>
+						@if(!empty($list_member_exam_top_a))
+						@foreach($list_member_exam_top_a as $value)
+						<li class="list-item">
+							<div class="number">{{$loop->index +1 }}</div>
 							<div class="info">
-								<div class="number-user">180356 <span>thí sinh</span></div>
-								<div class="address">Phú Thọ</div>
+								<div class="number-user">{{ $value['total'] }} <span>thí sinh</span></div>
+								<div class="address">{{ $value['district_name'] }}</div>
 							</div>
 						</li>
-						<li class="list-item">
-							<div class="number">02</div>
-							<div class="info">
-								<div class="number-user">92297 <span>thí sinh</span></div>
-								<div class="address">Hà Nội</div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="number">03</div>
-							<div class="info">
-								<div class="number-user">92297 <span>thí sinh</span></div>
-								<div class="address">Thái Nguyên</div>
-							</div>
-						</li> --}}
+						@if($loop->index==2)
+							 @break
+						@endif
+						@endforeach
+						@endif
 					</ul>
 				</div>
 				<div class="tab-item">
 					<div class="title">Bảng B</div>
 					<ul class="list">
-						{{-- <li class="list-item">
-							<div class="number">01</div>
+						@if(!empty($list_member_exam_top_b))
+						@foreach($list_member_exam_top_b as $value)
+						<li class="list-item">
+							<div class="number">{{$loop->index +1 }}</div>
 							<div class="info">
-								<div class="number-user">180356 <span>thí sinh</span></div>
-								<div class="address">THPT Lưu Nhân Chú, Đại Từ</div>
+								<div class="number-user">{{ $value['total'] }} <span>thí sinh</span></div>
+								<div class="address">{{ $value['district_name'] }}</div>
 							</div>
 						</li>
-						<li class="list-item">
-							<div class="number">02</div>
-							<div class="info">
-								<div class="number-user">92297 <span>thí sinh</span></div>
-								<div class="address">Trường Đại Học Nguyễn Tất Thành</div>
-							</div>
-						</li>
-						<li class="list-item">
-							<div class="number">03</div>
-							<div class="info">
-								<div class="number-user">92297 <span>thí sinh</span></div>
-								<div class="address">THPT Lý Thái Tổ</div>
-							</div>
-						</li> --}}
+						@if($loop->index==2)
+							 @break
+						@endif
+						@endforeach
+						@endif
 					</ul>
 				</div>
 			</div>
-			<a href="" class="btn btn-light">Xem thêm</a>
+			<a href="{{ route('vne.memberfrontend.list.top.member.exam') }}" class="btn btn-light">Xem thêm</a>
 		</div>
 	</div>
 </section>

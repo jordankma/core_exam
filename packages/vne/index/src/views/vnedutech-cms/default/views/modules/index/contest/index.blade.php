@@ -46,10 +46,11 @@
 <input type="hidden" name="game_token" id="token_key" value="{{ $game_token }}"/>
 <input type="hidden" name="uid" id="uid" value="{{ $uid }}"/>
 <input type="hidden" name="ip_port" id="ip_port" value="{{ $ip_port }}"/>
-<input type="hidden" name="link" id="linkresult" value="http://timhieubiendao.daknong.vn/"/>
-<input type="hidden" name="link1" id="linkhome" value="http://timhieubiendao.daknong.vn/"/>
+<input type="hidden" name="linkresult" id="link" value="http://timhieubiendao.daknong.vn/"/>
+<input type="hidden" name="linkhome" id="link1" value="http://timhieubiendao.daknong.vn/"/>
 <input type="hidden" name="linkaudio" id="linkaudio" value="res/sound/"/>
+<input type="hidden" name="test" id="test" value="true"/>
 
-<script cocos src="{{ asset('client/cocos/game.min.js?v=0.0.5') }}"></script>
+<script cocos src="{{ asset('client/cocos/game.min.js?v=0.0.9') }}"></script>
 </body>
 </html>

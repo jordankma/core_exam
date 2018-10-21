@@ -35,7 +35,9 @@ class MemberfrontendController extends Controller
         parent::__construct();
         $this->member = $memberRepository;
     }
-
+    public function cmp($a, $b){
+        return  strnatcmp($a['total'], $b['total']);
+    }
     public function list(Request $request)
     {
         $list_object = DB::table('vne_object')->get();
@@ -240,6 +242,47 @@ class MemberfrontendController extends Controller
             
     }
 
+    public function listTopMemberExam(){
+        if (Cache::has('list_district')) {
+            $list_district = Cache::get('list_district');
+        } else {
+            $list_district = DB::table('vne_district')->get();
+            Cache::put('list_district',$list_district);
+        }
+        
+        $list_member_exam_top_a = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=1');
+        $list_member_exam_top_a = json_decode($list_member_exam_top_a, true);
+        usort($list_member_exam_top_a, array($this, "cmp"));
+        if(!empty($list_member_exam_top_a) && !empty($list_district)){
+            foreach ($list_member_exam_top_a as $key => $value) {
+                foreach ($list_district as $key2 => $value2) {
+                    if($value['_id']['district_id'] == $value2->district_id){
+                        $list_member_exam_top_a[$key]['district_name'] = $value2->name;   
+                    }        
+                }    
+            }
+        }
+        $list_member_exam_top_b = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=2');
+        $list_member_exam_top_b = json_decode($list_member_exam_top_b, true);
+
+        usort($list_member_exam_top_b, array($this, "cmp"));
+        if(!empty($list_member_exam_top_b) && !empty($list_district)){
+            foreach ($list_member_exam_top_b as $key => $value) {
+                foreach ($list_district as $key2 => $value2) {
+                    if($value['_id']['district_id'] == $value2->district_id){
+                        $list_member_exam_top_b[$key]['district_name'] = $value2->name;   
+                    }        
+                }    
+            }
+        }
+        $data = [
+            'list_member_exam_top_a' => array_reverse($list_member_exam_top_a),
+            'list_member_exam_top_b' => array_reverse($list_member_exam_top_b)
+        ];
+        return view('VNE-MEMBERFRONTEND::modules.memberfrontend.list_exam',$data);
+            
+    }
+
     // public function resultMember($member_id){
     //     $client = new Client();
     //     $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
@@ -256,24 +299,24 @@ class MemberfrontendController extends Controller
         $client = new Client();
         $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
         $data_reponse = json_decode($res->getBody());
-        foreach ($data_reponse as $key => $value) {
-            $point = 0;
-            if(isset($value->answers) && !empty($value->answers)){
-                foreach ($value->answers as $key2 => $value2) {
-                    if($key2 >= 0 &&  $key2 <= 19){
-                        if($value2->correct==true){
-                            $point+=5;
-                        }
-                    }
-                    elseif( $key2 >= 20 &&  $key2 <= 29){
-                        if($value2->correct==true){
-                            $point+=10;
-                        }    
-                    }
-                }
-            }
-            $data_reponse[$key]->total_point = $point;
-        }
+        // foreach ($data_reponse as $key => $value) {
+        //     $point = 0;
+        //     if(isset($value->answers) && !empty($value->answers)){
+        //         foreach ($value->answers as $key2 => $value2) {
+        //             if($key2 >= 0 &&  $key2 <= 19){
+        //                 if($value2->correct==true){
+        //                     $point+=5;
+        //                 }
+        //             }
+        //             elseif( $key2 >= 20 &&  $key2 <= 29){
+        //                 if($value2->correct==true){
+        //                     $point+=10;
+        //                 }    
+        //             }
+        //         }
+        //     }
+        //     $data_reponse[$key]->total_point = $point;
+        // }
         $member = Member::where('member_id', $member_id)->with('city','school','classes')->first();
         $data = [
             'member' => $member,
@@ -305,24 +348,24 @@ class MemberfrontendController extends Controller
         $list_member = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result?'. http_build_query($params));
         $list_member = json_decode($list_member, true);
         // dd($list_member);
-        foreach ($list_member['data'] as $key => $value) {
-            $point = 0;
-            if(isset($value['answers']) && !empty($value['answers'])){
-                foreach ($value['answers'] as $key2 => $value2) {
-                    if($key2 >= 0 &&  $key2 <= 19){
-                        if($value2['correct']==true){
-                            $point+=5;
-                        }
-                    }
-                    elseif( $key2 >= 20 &&  $key2 <= 29){
-                        if($value2['correct']==true){
-                            $point+=10;
-                        }    
-                    }
-                }
-            }
-            $list_member['data'][$key]['total_point'] = $point;
-        }
+        // foreach ($list_member['data'] as $key => $value) {
+        //     $point = 0;
+        //     if(isset($value['answers']) && !empty($value['answers'])){
+        //         foreach ($value['answers'] as $key2 => $value2) {
+        //             if($key2 >= 0 &&  $key2 <= 19){
+        //                 if($value2['correct']==true){
+        //                     $point+=5;
+        //                 }
+        //             }
+        //             elseif( $key2 >= 20 &&  $key2 <= 29){
+        //                 if($value2['correct']==true){
+        //                     $point+=10;
+        //                 }    
+        //             }
+        //         }
+        //     }
+        //     $list_member['data'][$key]['total_point'] = $point;
+        // }
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $collection = new Collection($list_member['data']);
         $perPage = 20;

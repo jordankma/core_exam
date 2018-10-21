@@ -85,8 +85,8 @@ class LoginController extends Controller
         //$request->session()->regenerate();
 
         \Session::flash('flash_messenger', trans('adtech-core::messages.logout_success'));
-
-        return redirect(route('vne.member.auth.login'));
+        return redirect()->route('index');
+        // return redirect(route('vne.member.auth.login'));
     }
 
     public function register(Request $request){
@@ -124,6 +124,7 @@ class LoginController extends Controller
             'token' => 'required'
         ], $this->messages);
         if (!$validator->fails()) {
+            // $data['data'] = array();
             $token = $request->input('token');
             $member = Member::where('token',$token)->first();
             if(empty($member)){  

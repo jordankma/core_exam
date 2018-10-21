@@ -127,7 +127,6 @@
 						<div class="detail-list">
 							@if(!empty($list_member))
 							@foreach($list_member as $member_data )
-							{{ $member_data['used_time']}}
 							<input type="hidden" name="" value="{{ $member_data['is_reg'] }}">
 							<ul class="detail-row item">
 								<li class="detail-col-1">{{$loop->index + 1}}</li>

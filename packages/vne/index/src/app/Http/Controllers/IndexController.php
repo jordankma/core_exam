@@ -7,7 +7,7 @@ use Illuminate\Support\Collection;
 use Adtech\Application\Cms\Controllers\MController as Controller;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\Datatables\Datatables;
-use Validator,Auth,Config,Cache;
+use Validator,Auth,Config,Cache,DB;
 
 use Adtech\Core\App\Models\Menu;
 use Vne\Banner\App\Models\Banner;
@@ -32,6 +32,9 @@ class IndexController extends Controller
         parent::__construct();
         $this->news = $newsRepository;
         $this->_user = Auth::guard('member')->user();
+    }
+    public function cmp($a, $b){
+        return  strnatcmp($a['total'], $b['total']);
     }
     public function index()
     {
@@ -77,26 +80,54 @@ class IndexController extends Controller
         if (Cache::has('list_member_top_a')) {
             $list_member_top_a = Cache::get('list_member_top_a');
         } else {
-            $list_member_top_a = District::query()->orderBy('user_reg_exam_a','desc')->limit(3)->get();
+        	$list_member_top_a = District::query()->orderBy('user_reg_exam_a','desc')->limit(3)->get();
             Cache::put('list_member_top_a',$list_member_top_a);
         }
         if (Cache::has('list_member_top_b')) {
             $list_member_top_b = Cache::get('list_member_top_b');
         } else {
-            $list_member_top_b = District::query()->orderBy('user_reg_exam_b','desc')->limit(3)->get();
+        	$list_member_top_b = District::query()->orderBy('user_reg_exam_b','desc')->limit(3)->get();
             Cache::put('list_member_top_b',$list_member_top_b);
         }
         if (Cache::has('list_news_member')) {
             $list_news_member = Cache::get('list_news_member');
         } else {
-            $list_news_member = Member::orderBy('member_id', 'desc')->where('is_reg',1)->with('city','school','classes')->limit(8)->get();
+        	$list_news_member = Member::orderBy('member_id', 'desc')->where('is_reg',1)->with('city','school','classes')->limit(8)->get();
             Cache::put('list_news_member',$list_news_member);
         }
-
-        $list_member_exam_top_a = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result?'. http_build_query($params));
+        //get top exam
+        if (Cache::has('list_district')) {
+            $list_district = Cache::get('list_district');
+        } else {
+            $list_district = DB::table('vne_district')->get();
+            Cache::put('list_district',$list_district);
+        }
+        
+        $list_member_exam_top_a = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=1');
         $list_member_exam_top_a = json_decode($list_member_exam_top_a, true);
-        dd($list_member_exam_top_a);
+        usort($list_member_exam_top_a, array($this, "cmp"));
+        if(!empty($list_member_exam_top_a) && !empty($list_district)){
+            foreach ($list_member_exam_top_a as $key => $value) {
+                foreach ($list_district as $key2 => $value2) {
+                    if($value['_id']['district_id'] == $value2->district_id){
+                        $list_member_exam_top_a[$key]['district_name'] = $value2->name;   
+                    }        
+                }    
+            }
+        }
+        $list_member_exam_top_b = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=2');
+        $list_member_exam_top_b = json_decode($list_member_exam_top_b, true);
 
+        usort($list_member_exam_top_b, array($this, "cmp"));
+        if(!empty($list_member_exam_top_b) && !empty($list_district)){
+            foreach ($list_member_exam_top_b as $key => $value) {
+                foreach ($list_district as $key2 => $value2) {
+                    if($value['_id']['district_id'] == $value2->district_id){
+                        $list_member_exam_top_b[$key]['district_name'] = $value2->name;   
+                    }        
+                }    
+            }
+        }
         $data = [
             'banners' => $banners,
             'thong_bao_ban_to_chuc' => $thong_bao_ban_to_chuc,
@@ -106,7 +137,9 @@ class IndexController extends Controller
             'last_page_tin_tuc_chung' => $tin_tuc_chung->lastPage(),
             'list_news_member' => $list_news_member,
             'list_member_top_a' => $list_member_top_a,
-            'list_member_top_b' => $list_member_top_b
+            'list_member_top_b' => $list_member_top_b,
+            'list_member_exam_top_a' => array_reverse($list_member_exam_top_a),
+            'list_member_exam_top_b' => array_reverse($list_member_exam_top_b)
 
         ];
         return view('VNE-INDEX::modules.index.index',$data);
@@ -151,7 +184,7 @@ class IndexController extends Controller
     public function getRealExam(Request $request){
         $uid = Auth::guard('member')->user()->member_id;
         // if(in_array($uid, [4448,4450,4451,4452,4453,4628,4629,4630,4631,4632,4633])){
-        // if(Auth::guard('member')->user()->is_reg==2){
+        if(Auth::guard('member')->user()->is_reg==2){
             $game_token = Auth::guard('member')->user()->token;
             // $game_token = 'minhnt'.$uid;
             $url_result = route('vne.memberfrontend.result.member',$uid);
@@ -166,9 +199,9 @@ class IndexController extends Controller
                 'url_result' => $url_result
             ];
             return view('VNE-INDEX::modules.index.contest.index_real',$data);
-        // }
-        // else {
-        //     return redirect()->route('index');
-        // }
+        }
+        else {
+            return redirect()->route('index');
+        }
     }
 }

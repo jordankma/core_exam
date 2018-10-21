@@ -5,6 +5,7 @@ $adminPrefix = config('site.admin_prefix');
  * Frontend Routes
  */
 Route::group(array('prefix' => null), function () {
+
     Route::match(['get', 'post'], 'login', 'Auth\LoginController@login')->name('vne.member.auth.login');
 
     Route::post('vne/member/member/register', 'Auth\LoginController@register')->name('vne.member.member.register');
@@ -18,6 +19,9 @@ Route::group(array('prefix' => null), function () {
 });
 
 Route::group(array('prefix' => $adminPrefix), function() {
+    Route::get('api/member/sync_mongo', 'ApiController@syncMongo');
+    Route::get('api/member/get_member_data', 'ApiController@getMemberData');
+    Route::get('api/member/update_sync', 'ApiController@updateSync');
     Route::post('vne/member/member/check-username-exist', 'MemberController@checkUserNameExist')->name('vne.member.member.check-username-exist');
     Route::post('vne/member/member/check-email-exist', 'MemberController@checkEmailExist')->name('vne.member.member.check-email-exist');
     Route::post('vne/member/member/check-phone-exist', 'MemberController@checkPhoneExist')->name('vne.member.member.check-phone-exist');
@@ -25,7 +29,7 @@ Route::group(array('prefix' => $adminPrefix), function() {
     Route::get('vne/member/member/get/district', 'MemberController@getDistrict')->name('vne.member.member.get.district');
     Route::get('vne/member/member/get/school', 'MemberController@getSchool')->name('vne.member.member.get.school');
     Route::get('vne/member/member/get/class', 'MemberController@getClass')->name('vne.member.member.get.class');
-     Route::get('vne/member/member/sync_mongo', 'MemberController@syncMongo')->name('vne.member.member.sync_mongo');
+//     Route::get('vne/member/member/sync_mongo', 'MemberController@syncMongo')->name('vne.member.member.sync_mongo');
     Route::group(['middleware' => ['adtech.auth', 'adtech.acl']], function () {
         //member
         Route::get('vne/member/member/log', 'MemberController@log')->name('vne.member.member.log');

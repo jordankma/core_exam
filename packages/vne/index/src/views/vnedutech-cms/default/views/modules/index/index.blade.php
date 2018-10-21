@@ -21,7 +21,9 @@
 <!-- main -->
 
 		<main class="main">
-		<marquee id="marquee" behavior="scroll" direction="left" style="font-size: 22px;margin:0 20%;">{{ $SETTING['slogan'] }} </marquee>
+			<div class="container">
+				<marquee id="marquee" behavior="scroll" direction="left" style="font-size: 22px">{{ $SETTING['slogan'] }} </marquee>
+			</div>
 			<!-- hero -->
 			@include('VNE-INDEX::modules.index.layouts._slide')
 			<!-- hero end -->

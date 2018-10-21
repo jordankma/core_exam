@@ -9,10 +9,10 @@
 			@php 
 				$alias = 'the-le-cuoc-thi-tim-hieu-ve-bien-dao-viet-nam-nam-2018.html'
 			@endphp
-			<div class="list-item">
+			{{-- <div class="list-item">
 				<h3 class="title"><a href="{{ URL::to('chi-tiet',$alias) }}">THỂ LỆ Cuộc thi “Tìm hiểu về biển, đảo Việt Nam” năm 2018</a></h3>
 				<p class="date">20-09-2018</p>
-			</div>
+			</div> --}}
 			@if(!empty($thong_bao_ban_to_chuc))
 			@foreach ($thong_bao_ban_to_chuc as $element)
 				@php 

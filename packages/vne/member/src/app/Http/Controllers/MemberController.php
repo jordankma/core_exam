@@ -60,26 +60,24 @@ class MemberController extends Controller
     }
 
     public function syncMongo(Request $request){
-        if(!empty($request->page)){
-            $limit = 100;
-            $offset = (((int)$request->page)-1)*100;
-            $member_list = Member::where(['is_reg' => 1,'sync_mongo' => '0'])->skip($offset)->take($limit)->get();
-            if(!empty($member_list)){
-                foreach ( $member_list as $key=>$value){
-                    $data = $value->getAttributes();
-                    $data['city_name'] = !empty($value->city->name)?$value->city->name:'';
-                    $data['district_name'] = !empty($value->district->name)?$value->district->name:'';
-                    $data['school_name'] = !empty($value->school->name)?$value->school->name:'';
-                    $param = http_build_query($data);
-                    $result = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register?data='.$this->encrypt($param));
-                    $result = json_decode($result);
-                    if($result->status == true){
-                        $value->sync_mongo = '1';
-                        $value->update();
-                        echo "<pre>";print_r($value->member_id . ' - done');echo "</pre>";
-                    }
-                }
+
+        $limit = !empty($request->limit)?$request->limit:100;
+        $offset = !empty($request->page)?($request->page - 1)*100:0;
+        $members = Member::query()->select('member_id')->where(['sync_mongo' => '0','is_reg' => 1])->skip($offset)->take($limit)->get();
+        echo "<pre>";print_r($members->toArray());echo "</pre>";die;
+        $id_list = [];
+        $data = [];
+        if(!empty($member_list)){
+            foreach ( $member_list as $key=>$value){
+                $data[] = $value->getAttributes();
+                $data[]['city_name'] = !empty($value->city->name)?$value->city->name:'';
+                $data[]['district_name'] = !empty($value->district->name)?$value->district->name:'';
+                $data[]['school_name'] = !empty($value->school->name)?$value->school->name:'';
+                $param = json_encode($data);
             }
+            echo "<pre>";print_r($this->encrypt($param));echo "</pre>";die;
+            Member::whereIn('member_id',$id_list)->update('sync_mongo','1');
+
         }
     }
 
