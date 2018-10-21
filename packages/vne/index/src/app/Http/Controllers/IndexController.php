@@ -92,7 +92,10 @@ class IndexController extends Controller
             $list_news_member = Member::orderBy('member_id', 'desc')->where('is_reg',1)->with('city','school','classes')->limit(8)->get();
             Cache::put('list_news_member',$list_news_member);
         }
-        
+
+        $list_member_exam_top_a = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result?'. http_build_query($params));
+        $list_member_exam_top_a = json_decode($list_member_exam_top_a, true);
+        dd($list_member_exam_top_a);
 
         $data = [
             'banners' => $banners,
