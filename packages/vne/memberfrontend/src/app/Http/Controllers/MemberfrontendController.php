@@ -283,40 +283,10 @@ class MemberfrontendController extends Controller
             
     }
 
-    // public function resultMember($member_id){
-    //     $client = new Client();
-    //     $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
-    //     $data_reponse = json_decode($res->getBody());
-    //     // dd($data_reponse);
-    //     $member = Member::where('member_id', $member_id)->with('city','school','classes')->first();
-    //     $data = [
-    //         'member' => $member,
-    //         'result' => $data_reponse
-    //     ];
-    //     return view('VNE-MEMBERFRONTEND::modules.memberfrontend.result_member',$data);    
-    // }
     public function resultMember($member_id){
         $client = new Client();
         $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
         $data_reponse = json_decode($res->getBody());
-        // foreach ($data_reponse as $key => $value) {
-        //     $point = 0;
-        //     if(isset($value->answers) && !empty($value->answers)){
-        //         foreach ($value->answers as $key2 => $value2) {
-        //             if($key2 >= 0 &&  $key2 <= 19){
-        //                 if($value2->correct==true){
-        //                     $point+=5;
-        //                 }
-        //             }
-        //             elseif( $key2 >= 20 &&  $key2 <= 29){
-        //                 if($value2->correct==true){
-        //                     $point+=10;
-        //                 }    
-        //             }
-        //         }
-        //     }
-        //     $data_reponse[$key]->total_point = $point;
-        // }
         $member = Member::where('member_id', $member_id)->with('city','school','classes')->first();
         $data = [
             'member' => $member,
@@ -332,7 +302,28 @@ class MemberfrontendController extends Controller
         $list_district = DB::table('vne_district')->get();
         $list_school =  DB::table('vne_school')->get();
         $list_class =  DB::table('vne_classes')->get();
+        $config = file_get_contents('http://cuocthi.vnedutech.vn/admin/api/get_contest_config?contest_id=1');
+        $config = json_decode($config, true);
+        $data_round = $config['data']['config']['real']['data']['exam_info']['round'];
 
+        $list_round = array();
+        $list_topic = array();
+        if(!empty($data_round)){
+            foreach ($data_round as $key => $value) {
+                $list_round[] = [
+                    'round_id' => $value['round_id'],
+                    'round_name' => $value['round_name']
+                ];    
+                if(!empty($value['topic'])){
+                    foreach ($value['topic'] as $key2 => $value2) {
+                        $list_topic[] = [
+                            'topic_id' => $value2['topic_id'],
+                            'topic_name' => $value2['display_name']
+                        ];   
+                    }
+                }
+            }
+        }
         $params = [
             'table_id' => !empty($request->table_id)?$request->table_id: '',
             'u_name' => !empty($request->u_name)?$request->u_name: '',
@@ -341,31 +332,11 @@ class MemberfrontendController extends Controller
             'district_id' => !empty($request->district_id)?$request->district_id: '',
             'school_id' => !empty($request->school_id)?$request->school_id: '',
             'class_id' => !empty($request->class_id)?$request->class_id: '',
+            'topic_id' => !empty($request->topic_id)?$request->topic_id: '',
             'page'=> !empty($request->page)?$request->page:1
         ];
-//        $client = new Client();
-        // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result');
         $list_member = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/search_contest_result?'. http_build_query($params));
         $list_member = json_decode($list_member, true);
-        // dd($list_member);
-        // foreach ($list_member['data'] as $key => $value) {
-        //     $point = 0;
-        //     if(isset($value['answers']) && !empty($value['answers'])){
-        //         foreach ($value['answers'] as $key2 => $value2) {
-        //             if($key2 >= 0 &&  $key2 <= 19){
-        //                 if($value2['correct']==true){
-        //                     $point+=5;
-        //                 }
-        //             }
-        //             elseif( $key2 >= 20 &&  $key2 <= 29){
-        //                 if($value2['correct']==true){
-        //                     $point+=10;
-        //                 }    
-        //             }
-        //         }
-        //     }
-        //     $list_member['data'][$key]['total_point'] = $point;
-        // }
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $collection = new Collection($list_member['data']);
         $perPage = 20;
@@ -379,13 +350,11 @@ class MemberfrontendController extends Controller
             'list_district' => $list_district,
             'list_school' => $list_school,
             'list_class' => $list_class,
+            'list_topic' => $list_topic,
+            'list_round' => $list_round,
             'params' => $params,
         ];
         return view('VNE-MEMBERFRONTEND::modules.memberfrontend.result',$data);     
-    }
-
-    public function searchResult(){
-    	//test
     }
 
     public function syncMongo(Request $request){

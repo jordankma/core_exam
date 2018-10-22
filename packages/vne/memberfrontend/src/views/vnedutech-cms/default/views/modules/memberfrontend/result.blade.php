@@ -55,6 +55,17 @@
 										@endif
 									</select>
 								</div>
+								<div class="form-group col-4">
+									<label for="bangThi">Chọn tuần</label>
+									<select class="form-control" name="topic_id">
+										<option value="0">Chọn tuần</option>
+										@if(!empty($list_topic))
+											@foreach ($list_topic as $element)
+												<option value="{{ $element['topic_id'] }}" @if($element['topic_id']==$params['topic_id']) selected="" @endif>{{ $element['topic_name'] }}</option>
+											@endforeach
+										@endif
+									</select>
+								</div>
 								<div class="form-group col-md-4">
 									<label for="name">Họ tên</label>
 									<input type="name" class="form-control" value="{{$params['name']}}" placeholder="Họ tên" name="name">
@@ -129,7 +140,7 @@
 							@foreach($list_member as $member_data )
 							<input type="hidden" name="" value="{{ $member_data['is_reg'] }}">
 							<ul class="detail-row item">
-								<li class="detail-col-1">{{$loop->index + 1}}</li>
+								<li class="detail-col-1">{{ (($params['page']-1)*20) + $loop->index + 1 }}</li>
 								<li class="detail-col-2"><a href="{{ route('vne.memberfrontend.result.member',$member_data['user_id']) }}" style="text-decoration: none;color: black"> {{ isset($member_data['name'])?$member_data['name']:'' }} </a></li>
 								<li class="detail-col-2">{{ isset($member_data['birthday'])?$member_data['birthday']:'' }}</li>
 								{{-- <li class="detail-col-4">{{ $member['class_id }}</li> --}}
