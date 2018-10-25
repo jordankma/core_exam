@@ -16,5 +16,6 @@ Route::group(array('prefix' => $adminPrefix), function() {
     Route::group(['middleware' => ['register']], function () {
     	Route::get('thi-thu', 'IndexController@getTryExam')->name('vne.index.try.exam');
         Route::get('thi-that', 'IndexController@getRealExam')->name('vne.index.real.exam');
+        Route::get('test-thi', 'IndexController@getTestExam');
     });
 });

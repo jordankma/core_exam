@@ -64,7 +64,6 @@ class MemberController extends Controller
         $limit = !empty($request->limit)?$request->limit:100;
         $offset = !empty($request->page)?($request->page - 1)*100:0;
         $members = Member::query()->select('member_id')->where(['sync_mongo' => '0','is_reg' => 1])->skip($offset)->take($limit)->get();
-        echo "<pre>";print_r($members->toArray());echo "</pre>";die;
         $id_list = [];
         $data = [];
         if(!empty($member_list)){

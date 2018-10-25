@@ -5,6 +5,7 @@ namespace Vne\Member\App\Http\Controllers;
 use Illuminate\Http\Request;
 use Adtech\Application\Cms\Controllers\Controller as Controller;
 use Adtech\Core\App\HashSHA;
+use MongoDB\Client;
 use Vne\Member\App\Repositories\MemberRepository;
 use Vne\Member\App\Models\Member;
 use Vne\Member\App\Models\Group;
@@ -18,6 +19,12 @@ class ApiController extends Controller
         parent::__construct();
         $this->member = $memberRepository;
     }
+//    public function __construct(MemberRepository $memberRepository, ContestSeasonRepository $seasonRepository)
+//    {
+//        parent::__construct();
+//        $this->member = $memberRepository;
+//        $this->contestSeason = $seasonRepository;
+//    }
     public function encrypt( $string) {
         $secret_key = '8bgCi@gsLbtGhO)1';
         $secret_iv = ')FQKRL57zFYdtn^!';
@@ -38,10 +45,49 @@ class ApiController extends Controller
         return $output;
     }
 
-    public function syncMongo(Request $request){
+    public function syncMongo(Request $request)
+    {
+
+        $limit = 500;
+//        $offset = !empty($request->page) ? ($request->page - 1) * $limit : 0;
+        $query = Member::query()->where(['sync_mongo' => '0', 'is_reg' => 1])->skip(0)->take($limit);
+        $members = $query->get();
+        if (!empty($members)) {
+            $season = $this->contestSeason->getCurrentSeason();
+            $arr = [];
+            $count = Counters::find('candidate_id');
+            $last_id = $count->seq;
+            foreach ($members as $key => $value) {
+                $last_id += 1;
+                $arr[$key] = [];
+                $arr[$key]['_id'] = (int)$last_id;
+                $arr[$key]['season'] = !empty($season) ? $season->season_id : 1;
+                $arr[$key]['city_name'] = !empty($value->city->name)?$value->city->name:'';
+                $arr[$key]['district_name'] = !empty($value->district->name)?$value->district->name:'';
+                $arr[$key]['school_name'] = !empty($value->school->name)?$value->school->name:'';
+                foreach ($value->getAttributes() as $key1 => $value1) {
+                    $arr[$key][$key1] = $value1;
+                }
+
+            }
+            $collection = (new Client('mongodb://123.30.174.148'))->selectDatabase('daknong')->selectCollection('users_exam_info');
+            $mongo_result = $collection->insertMany($arr);
+            if (!empty($mongo_result)) {
+                $count->seq = (double)($last_id);
+                $count->update();
+                $query->update(['sync_mongo' => '1']);
+                echo "<pre>";
+                print_r($mongo_result->getInsertedIds());
+                echo "</pre>";
+            }
+        }
+    }
+
+
+    public function syncMongo_1(Request $request){
 
         $limit = !empty($request->limit)?$request->limit:100;
-        $offset = !empty($request->page)?($request->page - 1)*100:0;
+        $offset = !empty($request->page)?($request->page - 1)*$limit:0;
         $members = Member::query()->select('member_id')->where(['sync_mongo' => '0','is_reg' => 1])->skip($offset)->take($limit)->get();
         $id_list = [];
         if(!empty($members)){

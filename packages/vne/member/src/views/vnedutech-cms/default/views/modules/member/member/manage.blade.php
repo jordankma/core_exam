@@ -74,6 +74,7 @@
                             <thead>
                             <tr class="filters">
                                 <th class="fit-content">#</th>
+                                <th>{{ 'ID' }}</th>
                                 <th>{{ trans('vne-member::language.table.member.name') }}</th>
                                 <th>{{ trans('vne-member::language.table.member.u_name') }}</th>
                                 <th>{{ trans('vne-member::language.table.member.email') }}</th>
@@ -103,6 +104,7 @@
                 ajax: '{{ route('vne.member.member.data') }}',
                 columns: [
                     { data: 'DT_Row_Index', name: 'member_id' },
+                    { data: 'member_id', name: 'member_id' },
                     { data: 'name', name: 'name' },
                     { data: 'u_name', name: 'u_name' },
                     { data: 'email', name: 'email' },
