@@ -134,12 +134,12 @@ class LoginController extends Controller
             // $data['data'] = array();
             if(!$request->has('test')){
                 $token = $request->input('token');
-                if(Cache::has($token)){
-                    $member = Cache::get($token);    
-                } else {
+                // if(Cache::has($token)){
+                //     $member = Cache::get($token);    
+                // } else {
                     $member = Member::where('token',$token)->first();   
-                    Cache::put($token,$member);
-                }
+                //     Cache::put($token,$member);
+                // }
                 if(empty($member)){  
                     $data['status'] = false; 
                     $data['messeger'] = 'invalid token';
@@ -161,13 +161,13 @@ class LoginController extends Controller
             } else {
                 $token = $request->input('token');
                 echo time() . '-';
-                $member = Member::where('token',$token)->first(); 
-                // if(Cache::has($token)){
-                //     $member = Cache::get($token);    
-                // } else {
-                //     $member = Member::where('token',$token)->first();   
-                //     Cache::put($token,$member);
-                // }
+                // $member = Member::where('token',$token)->first(); 
+                if(Cache::has($token)){
+                    $member = Cache::get($token);    
+                } else {
+                    $member = Member::where('token',$token)->first();   
+                    Cache::put($token,$member);
+                }
                 echo time() . '-';
                 if(empty($member)){  
                     $data['status'] = false; 

@@ -44,16 +44,16 @@
 						<li class="detail-col-3">Điểm</li>
 					</ul>
 					<div class="detail-list">
-						@if(!empty($result))
-						@foreach($result as $element)
+						@if(!empty($result->data))
+						@foreach($result->data as $element)
 						<ul class="detail-row item">
 							<li class="detail-col-5">{{ isset($element->round_name) ? $element->round_name : ''  }}</li>
 							<li class="detail-col-3">{{ isset($element->topic_name) ? $element->topic_name : ''}}</li>
 							<li class="detail-col-3">{{ isset($element->repeat_time) ? $element->repeat_time : ''}}</li>
 							<li class="detail-col-3">
-								@php 
+								@php
 									$time = isset($element->used_time) ? (float)($element->used_time/1000) : '';
-									$time_real =  $time > 720 ? '720' : $time ; 
+									$time_real =  $time > 720 ? 720 : $time ; 
 								@endphp
 								{{(int)($time_real/60) }}p {{$time_real%60 }}s
 							</li>

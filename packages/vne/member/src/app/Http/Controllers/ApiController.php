@@ -2,6 +2,8 @@
 
 namespace Vne\Member\App\Http\Controllers;
 
+use Contest\Contestmanage\App\Models\Counters;
+use Contest\Contestmanage\App\Repositories\ContestSeasonRepository;
 use Illuminate\Http\Request;
 use Adtech\Application\Cms\Controllers\Controller as Controller;
 use Adtech\Core\App\HashSHA;
@@ -14,17 +16,17 @@ use Validator,Auth,DateTime,DB,Cache,Config;
 
 class ApiController extends Controller
 {
-    public function __construct(MemberRepository $memberRepository)
-    {
-        parent::__construct();
-        $this->member = $memberRepository;
-    }
-//    public function __construct(MemberRepository $memberRepository, ContestSeasonRepository $seasonRepository)
+//    public function __construct(MemberRepository $memberRepository)
 //    {
 //        parent::__construct();
 //        $this->member = $memberRepository;
-//        $this->contestSeason = $seasonRepository;
 //    }
+    public function __construct(MemberRepository $memberRepository, ContestSeasonRepository $seasonRepository)
+    {
+        parent::__construct();
+        $this->member = $memberRepository;
+        $this->contestSeason = $seasonRepository;
+    }
     public function encrypt( $string) {
         $secret_key = '8bgCi@gsLbtGhO)1';
         $secret_iv = ')FQKRL57zFYdtn^!';
@@ -70,7 +72,12 @@ class ApiController extends Controller
                 }
 
             }
-            $collection = (new Client('mongodb://123.30.174.148'))->selectDatabase('daknong')->selectCollection('users_exam_info');
+            $host = config('database.connections.mongodb.host');
+            $port = config('database.connections.mongodb.port');
+            $user = config('database.connections.mongodb.username');
+            $pass = config('database.connections.mongodb.password');
+            $db = config('database.connections.mongodb.database');
+            $collection = (new Client('mongodb://'.$user.':'.$pass.'@'.$host.':'.$port.'/'.$db))->selectDatabase($db)->selectCollection('users_exam_info');
             $mongo_result = $collection->insertMany($arr);
             if (!empty($mongo_result)) {
                 $count->seq = (double)($last_id);

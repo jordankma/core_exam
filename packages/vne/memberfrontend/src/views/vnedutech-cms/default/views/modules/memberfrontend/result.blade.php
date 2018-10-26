@@ -41,7 +41,7 @@
 			<section class="section search">
 				<div class="container">
 					<div class="search-wrapper">
-						<div class="headline"><i class="fa fa-search"></i> Tra cứu danh sách thí sinh</div>
+						<div class="headline"><i class="fa fa-search"></i> Tra cứu kết quả thí sinh</div>
 						<form action="{{route('vne.memberfrontend.result')}}" class="search-form" method="get">
 							<div class="wrapper">
 								<div class="form-group col-4">

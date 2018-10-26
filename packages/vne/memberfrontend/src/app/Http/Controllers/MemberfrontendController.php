@@ -178,12 +178,16 @@ class MemberfrontendController extends Controller
                 $data = http_build_query($data);
                 $data_encrypt = $this->my_simple_crypt($data);
                 $client = new Client();
-                // $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register&data=' . $data_encrypt);
-                $result = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register?data='. $data_encrypt);
-                $result = json_decode($result);
-                if($result->status == true){
-                    $member->sync_mongo = '1';
-                    $member->update();
+                try {
+                    $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register&data=' . $data_encrypt);
+                    $result = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/candidate_register?data='. $data_encrypt);
+                    $result = json_decode($result);
+                    if($result->status == true){
+                        $member->sync_mongo = '1';
+                        $member->update();
+                    }
+                } catch (Exception $e) {
+                    
                 }
                 if($member->is_reg==0){
                     $table = Table::find($table_id);  
@@ -284,10 +288,18 @@ class MemberfrontendController extends Controller
     }
 
     public function resultMember($member_id){
-        $client = new Client();
-        $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
-        $data_reponse = json_decode($res->getBody());
+        $data_reponse = array();
+        try {
+            $client = new Client();
+            $res = $client->request('GET', 'http://timhieubiendao.daknong.vn/admin/api/contest/get_contest_result?user_id='.$member_id);
+            $data_reponse = json_decode($res->getBody());
+        } catch (Exception $e) {
+            
+        }
         $member = Member::where('member_id', $member_id)->with('city','school','classes')->first();
+        if(empty($member)){
+            return redirect()->route('index');
+        }
         $data = [
             'member' => $member,
             'result' => $data_reponse
