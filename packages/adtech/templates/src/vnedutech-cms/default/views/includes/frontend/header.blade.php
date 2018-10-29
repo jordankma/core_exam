@@ -1,4 +1,5 @@
 @php
+
 function showCategories($categories, $parent_id = 0, $char = '')
 {
     // BƯỚC 2.1: LẤY DANH SÁCH CATE CON
@@ -10,7 +11,7 @@ function showCategories($categories, $parent_id = 0, $char = '')
         if ($item->parent == $parent_id)
         {
             $cate_child[] = $item;
-            unset($categories[$key]);
+            // unset($categories[$key]);
         }
     }
     // BƯỚC 2.2: HIỂN THỊ DANH SÁCH CHUYÊN MỤC CON NẾU CÓ
@@ -41,23 +42,23 @@ function showCategories($categories, $parent_id = 0, $char = '')
 			<div class="inner">
 				<div class="contact">
 					<p class="phone">Hỗ trợ: {{ $SETTING['phone'] }}</p>
-					<p class="email">Email:{{ $SETTING['email'] }}</p>
+					<p class="email">Email: {{ $SETTING['email'] }}</p>
 				</div> <!-- /top bar -->
 				<ul class="nav">
 					@if($USER_LOGGED)
 					<li class="nav-item dropdown">
 						<i class="ii ii-bachelor"></i>Vào thi
 						<ul class="sub-menu">
-							<li class="nav-item"><i class="fa fa-edit"></i><a href="{{ route('vne.index.try.exam') }}" class="nav-link">Thi Thử</a></li>
-							<li class="nav-item"><i class="ii ii-bachelor"></i><a href="{{ route('vne.index.real.exam') }}" class="nav-link">Thi Thật</a></li>
-							<li class="nav-item"><i class="fa fa-file-text"></i><a href="" class="nav-link">Tự Luận</a></li>
+							<a href="{{-- {{route('vne.index.try.exam')}} --}}" class="nav-link"><li class="nav-item"><i class="fa fa-edit"></i>Thi Thử</li></a>
+							<a href="{{ route('vne.index.real.exam') }}" class="nav-link"><li class="nav-item"><i class="ii ii-bachelor"></i>Thi Thật</li></a>
+							{{-- <li class="nav-item js-toggle-message"><i class="ii ii-bachelor"></i>Thi Thật</li></a> --}}
+							<li class="nav-item"><i class="fa fa-file-text"></i>Tự Luận</li>
 						</ul>
 					</li>
 						<a href="{{ route('vne.memberfrontend.result.member',$USER_LOGGED->member_id) }}" style="color: #fff;text-decoration: none;"><li class="nav-item"><i class="fa fa-user"></i> {{ $USER_LOGGED->u_name }}</li></a>
 						<a href="{{ route('vne.member.auth.logout') }}" style="color: #fff;text-decoration: none;"><li class="nav-item"><i class="fa fa-user"></i> Đăng xuất</li></a>
 					@else
 						<li class="nav-item js-toggle-login"><i class="fa fa-user"></i> Đăng nhập</li>
-						<li class="nav-item js-toggle-message"><i class="fa fa-bullhorn"></i>Thông báo</li>
 						<li class="nav-item js-toggle-registration"><i class="fa fa-user"></i> Đăng ký</li>
 					@endif
 				</ul> <!-- nav -->

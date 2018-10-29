@@ -288,7 +288,11 @@ class MemberController extends Controller
         $member_id = $request->input('member_id');
         $member = $this->member->find($member_id);
         if (null != $member) {
-            $member->status = 2;
+            if($member->is_lock==0){
+                $member->is_lock = 1;
+            }else{
+                $member->is_lock = 0;    
+            }
             $member->save();
             Cache::forget('member');
             activity('member')
@@ -296,9 +300,9 @@ class MemberController extends Controller
                 ->withProperties($request->all())
                 ->log('User: :causer.email - Block member - member_id: :properties.member_id, name: ' . $member->name);
 
-            return redirect()->route('dhcd.member.member.manage')->with('success', trans('dhcd-member::language.messages.success.block'));
+            return redirect()->route('vne.member.member.manage')->with('success', trans('vne-member::language.messages.success.block'));
         } else {
-            return redirect()->route('dhcd.member.member.manage')->with('error', trans('dhcd-member::language.messages.error.block'));
+            return redirect()->route('vne.member.member.manage')->with('error', trans('vne-member::language.messages.error.block'));
         }
     }
 
@@ -312,7 +316,7 @@ class MemberController extends Controller
         ], $this->messages);
         if (!$validator->fails()) {
             try {
-                $confirm_route = route('dhcd.member.member.block', ['member_id' => $request->input('member_id')]);
+                $confirm_route = route('vne.member.member.block', ['member_id' => $request->input('member_id')]);
                 return view('VNE-MEMBER::modules.member.modal.modal_confirmation', compact('error','type', 'model', 'confirm_route'));
             } catch (GroupNotFoundException $e) {
                 return view('VNE-MEMBER::modules.member.modal.modal_confirmation', compact('error','type', 'model', 'confirm_route'));
@@ -371,6 +375,10 @@ class MemberController extends Controller
                 }
                 if ($this->user->canAccess('vne.member.member.confirm-reset')) {
                     $actions .= '<a href=' . route('vne.member.member.confirm-reset', ['member_id' => $members->member_id]) . ' data-toggle="modal" data-target="#reset_confirm"><i class="livicon" data-name="reset" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="reset member"></i></a>
+                        ';
+                }
+                if ($this->user->canAccess('vne.member.member.confirm-block')) {
+                    $actions .= '<a href=' . route('vne.member.member.confirm-block', ['member_id' => $members->member_id]) . ' data-toggle="modal" data-target="#block_confirm"><i class="livicon" data-name="block" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="block member"></i></a>
                         ';
                 }
                 return $actions;
