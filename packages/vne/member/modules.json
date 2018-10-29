@@ -30,7 +30,9 @@
           "name": "Update",
           "routes": [
             "vne.member.member.show",
-            "vne.member.member.update"
+            "vne.member.member.update",
+            "vne.member.member.block",
+            "vne.member.member.confirm-block"
           ]
         },
         {

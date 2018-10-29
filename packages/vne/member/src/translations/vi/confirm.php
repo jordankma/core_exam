@@ -10,11 +10,11 @@ return [
     	],
         "block"=>[
             "title" => "Khóa người dùng",
-            "body" => "Bạn có chắc muốn xóa người dùng này?"
+            "body" => "Bạn có chắc muốn Khóa người dùng này?"
         ],
     	"reset"=>[
         	"title" => "Reset mật khẩu",
-        	"body" => "Bạn có chắc muốn xóa người dùng này? Sau khi reset mật khẩu người dùng sẽ mặc định về 12345678"
+        	"body" => "Bạn có chắc muốn reset mật khẩu cho người dùng này? Sau khi reset mật khẩu người dùng sẽ mặc định về 12345678"
     	]
     ],
     "group" => [

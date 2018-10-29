@@ -30,7 +30,7 @@
 
 </head>
 <body>
-<script src="{{ asset('client/cocos/res/loading.js') }}"></script>
+<script src="{{ asset('client/cocos_test/res/loading.js') }}"></script>
 <canvas id="gameCanvas" width="1140px" height="700px"></canvas>
 <button id="button_back"><a href="http://timhieubiendao.daknong.vn/">Trở về trang chủ</a></button>
 <input type="hidden" name="game_token" id="token_key" value="{{ $game_token }}"/>
@@ -40,6 +40,6 @@
 <input type="hidden" name="linkhome" id="link1" value="http://timhieubiendao.daknong.vn/"/>
 <input type="hidden" name="linkaudio" id="linkaudio" value="res/sound/"/>
 <input type="hidden" name="test" id="test" value="false"/>
-<script cocos src="{{ asset('client/cocos/game.min.js?v=0.0.12') }}"></script>
+<script cocos src="{{ asset('client/cocos_test/game.min.js?v=0.0.12') }}"></script>
 </body>
 </html>

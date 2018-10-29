@@ -103,31 +103,44 @@ class IndexController extends Controller
             Cache::put('list_district',$list_district);
         }
         
-        $list_member_exam_top_a = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=1');
-        $list_member_exam_top_a = json_decode($list_member_exam_top_a, true);
-        usort($list_member_exam_top_a, array($this, "cmp"));
-        if(!empty($list_member_exam_top_a) && !empty($list_district)){
-            foreach ($list_member_exam_top_a as $key => $value) {
-                foreach ($list_district as $key2 => $value2) {
-                    if($value['_id']['district_id'] == $value2->district_id){
-                        $list_member_exam_top_a[$key]['district_name'] = $value2->name;   
-                    }        
-                }    
+        if (Cache::has('list_member_exam_top_a')) {
+            $list_member_exam_top_a = Cache::get('list_member_exam_top_a');
+        } else {
+            $list_member_exam_top_a = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=1');
+            $list_member_exam_top_a = json_decode($list_member_exam_top_a, true);
+            usort($list_member_exam_top_a, array($this, "cmp"));
+            if(!empty($list_member_exam_top_a) && !empty($list_district)){
+                foreach ($list_member_exam_top_a as $key => $value) {
+                    foreach ($list_district as $key2 => $value2) {
+                        if($value['_id']['district_id'] == $value2->district_id){
+                            $list_member_exam_top_a[$key]['district_name'] = $value2->name;   
+                        }        
+                    }    
+                }
             }
+            Cache::put('list_member_exam_top_a',$list_member_exam_top_a,240);
         }
-        $list_member_exam_top_b = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=2');
-        $list_member_exam_top_b = json_decode($list_member_exam_top_b, true);
 
-        usort($list_member_exam_top_b, array($this, "cmp"));
-        if(!empty($list_member_exam_top_b) && !empty($list_district)){
-            foreach ($list_member_exam_top_b as $key => $value) {
-                foreach ($list_district as $key2 => $value2) {
-                    if($value['_id']['district_id'] == $value2->district_id){
-                        $list_member_exam_top_b[$key]['district_name'] = $value2->name;   
-                    }        
-                }    
+        if (Cache::has('list_member_exam_top_b')) {
+            $list_member_exam_top_b = Cache::get('list_member_exam_top_b');
+        } else {
+            $list_member_exam_top_b = file_get_contents('http://timhieubiendao.daknong.vn/admin/api/contest/get_top?top_type=district&table_id=2');
+            $list_member_exam_top_b = json_decode($list_member_exam_top_b, true);
+
+            usort($list_member_exam_top_b, array($this, "cmp"));
+            if(!empty($list_member_exam_top_b) && !empty($list_district)){
+                foreach ($list_member_exam_top_b as $key => $value) {
+                    foreach ($list_district as $key2 => $value2) {
+                        if($value['_id']['district_id'] == $value2->district_id){
+                            $list_member_exam_top_b[$key]['district_name'] = $value2->name;   
+                        }        
+                    }    
+                }
             }
+            Cache::put('list_member_exam_top_b',$list_member_exam_top_b,240);
         }
+
+       
         $data = [
             'banners' => $banners,
             'thong_bao_ban_to_chuc' => $thong_bao_ban_to_chuc,
@@ -183,8 +196,7 @@ class IndexController extends Controller
 
     public function getRealExam(Request $request){
         $uid = Auth::guard('member')->user()->member_id;
-        // if(in_array($uid, [4448,4450,4451,4452,4453,4628,4629,4630,4631,4632,4633])){
-        // if(Auth::guard('member')->user()->is_reg==2){
+        if(Auth::guard('member')->user()->is_reg==2){
             $game_token = Auth::guard('member')->user()->token;
             // $game_token = 'minhnt'.$uid;
             $url_result = route('vne.memberfrontend.result.member',$uid);
@@ -199,10 +211,10 @@ class IndexController extends Controller
                 'url_result' => $url_result
             ];
             return view('VNE-INDEX::modules.index.contest.index_real',$data);
-        // }
-        // else {
-        //     return redirect()->route('index');
-        // }
+        }
+        else {
+            return redirect()->route('index');
+        }
     }
 
     public function getTestExam(Request $request){
