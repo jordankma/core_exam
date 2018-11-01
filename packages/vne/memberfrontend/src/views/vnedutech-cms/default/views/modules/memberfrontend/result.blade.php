@@ -71,6 +71,10 @@
 									<input type="name" class="form-control" value="{{$params['name']}}" placeholder="Họ tên" name="name">
 								</div>
 								<div class="form-group col-md-4">
+									<label for="name">Tên tài khoản</label>
+									<input type="text" class="form-control" value="{{$params['u_name']}}" placeholder="Tên tài khoản" name="u_name">
+								</div>
+								<div class="form-group col-md-4">
 									<label for="provinceCity">Chọn tỉnh/thành phố</label>
 									<select class="form-control" name="city_id">
 										<option value="0">Chọn tỉnh/thành phố</option>

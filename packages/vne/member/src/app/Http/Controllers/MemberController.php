@@ -170,6 +170,7 @@ class MemberController extends Controller
 
             $member_id = $request->input('member_id');
             $table_id = $request->input('table_id');
+            $change_pass = $request->input('change_pass');
             $member = $this->member->find($member_id);
             $member->school_id = null;
             $member->class_id = null;
@@ -188,6 +189,9 @@ class MemberController extends Controller
                 $member->class_id = $request->input('class_id');
             } elseif($table_id==2){
                 $member->don_vi = $request->input('don_vi');
+            }
+            if($change_pass==1){
+                $member->password = bcrypt($request->input('password'));    
             }
             $member->updated_at = new DateTime();
 

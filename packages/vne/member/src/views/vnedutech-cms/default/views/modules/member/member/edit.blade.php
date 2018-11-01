@@ -70,12 +70,16 @@
                                         <input type="text" name="u_name" value="{{ $member->u_name }}" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.u_name')}}" disabled="">
                                     </div>
                                     <div class="form-group">
+                                        <input type="checkbox" name="change_pass" value="0" id="change-pass">
+                                        <label for="change-pass"> Tích vào đây để đổi mật khẩu </label>
+                                    </div>
+                                    <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.password') }} <span style="color: red">(*)</span></label>
-                                        <input type="password" name="password" value="{{ $member->password }}" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.password')}}" disabled="">
+                                        <input type="password" name="password" value="{{ $member->password }}" class="form-control password" placeholder="{{trans('vne-member::language.placeholder.member.password')}}" disabled="">
                                     </div>
                                     <div class="form-group">
                                         <label>{{trans('vne-member::language.form.title.conf_password') }} <span style="color: red">(*)</span></label>
-                                        <input type="password" name="conf_password" value="{{ $member->password }}" class="form-control" placeholder="{{trans('vne-member::language.placeholder.member.conf_password')}}" disabled="">
+                                        <input type="password" name="conf_password" value="{{ $member->password }}" class="form-control password" placeholder="{{trans('vne-member::language.placeholder.member.conf_password')}}" disabled="">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -239,6 +243,17 @@
     <!--end of page js-->
     <script>
         $(function () {
+            $("body").on('click', '#change-pass', function () {
+                var change_pass = $('input[name=change_pass]').val();
+                console.log(change_pass);
+                if(change_pass==1){
+                    $('.password').attr('disabled',"");
+                    $('input[name=change_pass]').val(0);    
+                } else {
+                    $('.password').removeAttr('disabled');
+                    $('input[name=change_pass]').val(1);
+                }
+            });
             // var domain = "/admin/laravel-filemanager/";
             $('#lfm').filemanager('image');
             $('#form-add-member').bootstrapValidator({
