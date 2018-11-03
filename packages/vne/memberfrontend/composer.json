@@ -1,32 +1,32 @@
-// {
-//     "name": "vne/memberfrontend",
-//     "description": "memberfrontend",
-//     "license": "MIT",
-//     "authors": [
-//         {
-//             "name": "electric",
-//             "email": "huydien.it@gmail.com"
-//         }
-//     ],
-//     "minimum-stability": "dev",
-//     "require": {
+{
+    "name": "vne/memberfrontend",
+    "description": "memberfrontend",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "electric",
+            "email": "huydien.it@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
 
-//     },
-//     "require-dev": {
+    },
+    "require-dev": {
 
-//     },
-//     "autoload": {
-//         "psr-4": {
-//             "Vne\\Memberfrontend\\": "src"
-//         }
-//     },
-//     "autoload-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Vne\\Memberfrontend\\": "src"
+        }
+    },
+    "autoload-dev": {
 
-//     },
-//     "scripts": {
-//         "test": "vendor/bin/phpunit"
-//     },
-//     "config": {
-//         "sort-packages": true
-//     }
-// }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

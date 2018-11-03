@@ -9,7 +9,7 @@ use Vne\Essay\App\Models\EssayTopic;
 use Vne\Essay\App\Models\Essay;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\Datatables\Datatables;
-use Validator;
+use Validator,Storage;
 
 class EssayTopicController extends Controller
 {
@@ -18,6 +18,11 @@ class EssayTopicController extends Controller
         'required' => "Bắt buộc",
         'numeric'  => "Phải là số"
     );
+
+    public function testUploadGG(){
+        Storage::disk('google')->put('test.txt', 'Hello World');
+        return 'File was saved to Google Drive';
+    }
 
     public function __construct(EssayTopicRepository $essayTopicRepository)
     {

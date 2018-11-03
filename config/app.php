@@ -187,7 +187,8 @@ return [
          */
         Collective\Html\HtmlServiceProvider::class,
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
-        Spatie\Analytics\AnalyticsServiceProvider::class
+        Spatie\Analytics\AnalyticsServiceProvider::class,
+        App\Providers\GoogleDriveServiceProvider::class,
     ],
 
     /*

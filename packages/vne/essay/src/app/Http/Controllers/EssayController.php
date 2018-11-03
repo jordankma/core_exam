@@ -159,4 +159,5 @@ class EssayController extends Controller
             ->rawColumns(['actions'])
             ->make();
     }
+
 }
