@@ -20,7 +20,8 @@ class EssayTopicController extends Controller
     );
 
     public function testUploadGG(){
-        Storage::disk('google')->put('test.txt', 'Hello World');
+        dd('1');
+        dd(Storage::disk('google')->put('test.txt', 'Hello World'));
         return 'File was saved to Google Drive';
     }
 
