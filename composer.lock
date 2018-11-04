@@ -1,14 +1,14 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "53f9d05d1352dc8ff6e9ebbe6423fca0",
     "packages": [
         {
             "name": "adtech/core",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "packages/adtech/core",
@@ -5109,7 +5109,7 @@
         },
         {
             "name": "vne/banner",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "packages/vne/banner",
@@ -5143,7 +5143,7 @@
         },
         {
             "name": "vne/contact",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "packages/vne/contact",
@@ -5177,7 +5177,7 @@
         },
         {
             "name": "vne/contactfrontend",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "packages/vne/contactfrontend",
@@ -5211,7 +5211,7 @@
         },
         {
             "name": "vne/index",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "packages/vne/index",
@@ -5245,7 +5245,7 @@
         },
         {
             "name": "vne/news",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "packages/vne/news",
@@ -5279,7 +5279,7 @@
         },
         {
             "name": "vne/newsfrontend",
-            "version": "dev-master",
+            "version": "9999999-dev",
             "dist": {
                 "type": "path",
                 "url": "packages/vne/newsfrontend",
