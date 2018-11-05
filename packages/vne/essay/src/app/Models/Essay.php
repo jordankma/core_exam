@@ -19,4 +19,11 @@ class Essay extends Model {
     protected $fillable = ['name'];
 
     protected $dates = ['deleted_at'];
+
+    public function member(){
+        return $this->hasOne('Vne\Member\App\Models\Member', 'member_id', 'member_id');
+    }
+    public function essayTopic(){
+        return $this->hasOne('Vne\Essay\App\Models\EssayTopic', 'essay_topic_id', 'essay_topic_id');
+    }
 }

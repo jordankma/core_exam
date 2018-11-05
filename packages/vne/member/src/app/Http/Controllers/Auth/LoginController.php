@@ -39,6 +39,9 @@ class LoginController extends Controller
         $password = $request->input('password');
         $remember = $request->input('remember', false);
         $member = Member::where('u_name',$u_name)->first();
+        if(empty($member)) {
+            return json_encode($data);   
+        }
         if($member->is_lock==1){
             $data['status'] = false;
             $data['messeger'] = "Tài khoản bạn hiện đang bị khóa!";   

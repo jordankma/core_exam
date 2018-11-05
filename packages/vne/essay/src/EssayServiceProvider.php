@@ -67,6 +67,6 @@ class EssayServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register('Vne\Essay\GoogleDriveServiceProvider');
     }
 }

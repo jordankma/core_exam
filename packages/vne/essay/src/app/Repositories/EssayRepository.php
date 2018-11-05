@@ -22,7 +22,7 @@ class EssayRepository extends Repository
 
     public function findAll() {
 
-        $result = $this->model::query();
+        $result = $this->model::query()->with('member','essayTopic');
         return $result;
     }
 }

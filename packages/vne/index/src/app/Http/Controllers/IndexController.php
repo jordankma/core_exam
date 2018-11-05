@@ -219,8 +219,7 @@ class IndexController extends Controller
 
     public function getTestExam(Request $request){
         $uid = Auth::guard('member')->user()->member_id;
-        // if(in_array($uid, [4448,4450,4451,4452,4453,4628,4629,4630,4631,4632,4633])){
-        if(Auth::guard('member')->user()->is_reg==2){
+        // if(Auth::guard('member')->user()->is_reg==2){
             $game_token = Auth::guard('member')->user()->token;
             // $game_token = 'minhnt'.$uid;
             $url_result = route('vne.memberfrontend.result.member',$uid);
@@ -235,9 +234,9 @@ class IndexController extends Controller
                 'url_result' => $url_result
             ];
             return view('VNE-INDEX::modules.index.contest.index_test',$data);
-        }
-        else {
-            return redirect()->route('index');
-        }
+        // }
+        // else {
+        //     return redirect()->route('index');
+        // }
     }
 }

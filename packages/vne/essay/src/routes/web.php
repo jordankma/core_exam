@@ -31,3 +31,8 @@ Route::group(array('prefix' => $adminPrefix), function() {
         });
     });
 });
+
+Route::group(array('prefix' => ''), function() {
+    Route::get('tu-luan', 'EssayFrontendController@show')->name('vne.frontend.essay.show')->where('as','Frontend- Tự luận');
+    Route::post('tu-luan', 'EssayFrontendController@save')->name('vne.frontend.essay.save');
+});
