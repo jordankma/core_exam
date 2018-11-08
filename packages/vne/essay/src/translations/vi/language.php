@@ -8,6 +8,7 @@ return [
             "manage" => "Quản lý đề tài"
         ],
         "essay" => [
+            "create" => "Thêm bài thi",
             "update" => "Cập nhật bài thi thành công",
             "manage" => "Quản lý bài thi"
         ]
@@ -18,7 +19,7 @@ return [
         "updated_at" => "Updated at",
         "action" => "Actions",
         "essay" => [
-            "name" => "Tên bafi thi",
+            "name" => "Tiêu đề",
             "name_topic" => "Tên đề tài",
             "name_member_exam" => "Tên thí sinh"
         ],
@@ -34,14 +35,20 @@ return [
     "placeholder" => [
         "topic" => [
             "name_here" => "Nhập tên..."
-        ]
+        ],
+        "essay" => [
+            "name_here" => "Nhập tiêu đề...",
+            "note" => "Nhập chú ý..."
+        ],
     ],
     "label" => [
         "topic" => [
             "name" => "Nhập tên"
         ],
         "essay" => [
-            "name" => "Nhập tên"
+            "name" => "Tiêu đề",
+            "upload_icon" => "Upload logo",
+            "upload_essay" => "Upload bài thi"
         ]
     ],
     "messages" => [

@@ -19,22 +19,6 @@ class EssayTopicController extends Controller
         'numeric'  => "Phải là số"
     );
 
-    public function testUploadGG(){
-        Storage::disk('google')->put('test2.docx', 'test4.txt');
-        $filename = 'test2.docx';
-        $dir = '/';
-        $recursive = false; // Có lấy file trong các thư mục con không?
-        $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
-        $file = $contents
-            ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
-            ->first(); // có thể bị trùng tên file với nhau!
-        //return $file; // array with file info
-        dd($file);
-        return 'File was saved to Google Drive';
-    }
-
     public function __construct(EssayTopicRepository $essayTopicRepository)
     {
         parent::__construct();

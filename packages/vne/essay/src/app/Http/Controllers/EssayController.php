@@ -8,7 +8,7 @@ use Vne\Essay\App\Repositories\EssayRepository;
 use Vne\Essay\App\Models\Essay;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\Datatables\Datatables;
-use Validator,Storage;
+use Validator,Storage,File;
 
 class EssayController extends Controller
 {
@@ -24,15 +24,53 @@ class EssayController extends Controller
         $this->essay = $essayRepository;
     }
 
+    public function test()
+    {
+        return view('VNE-ESSAY::modules.essay.essay.test');
+    }
     public function manage()
     {
         return view('VNE-ESSAY::modules.essay.essay.manage');
     }
 
-    public function show(Request $request)
+    public function create()
+    {
+        return view('VNE-ESSAY::modules.essay.essay.create');
+    }
+
+    public function add(Request $request)
     {
         
+        $target_dir = "uploads/essay/";
+        $file_name = 'test';
+
+        $file = $request->file('fileToUpload');
+        Storage::disk('google')->put('text2.txt', file_get_contents($file));
+        dd($file);
+        $file->move($target_dir, $file_name);
+        dd($_FILES["fileToUpload"]);
+        $name = $request->input('name');
+        $essay = new Essay();
+        $essay->name = $name;
+        $essay->alias = self::to_slug($name);
+
+        if ($essay->save()) {
+
+            activity('essay')
+                ->performedOn($essay)
+                ->withProperties($request->all())
+                ->log('User: :causer.email - Add essay - name: :properties.name, essay_id: ' . $essay->essay_id);
+
+            return redirect()->route('vne.essay.essay.manage')->with('success', trans('vne-essay::language.messages.success.create'));
+        } else {
+            return redirect()->route('vne.essay.essay.manage')->with('error', trans('vne-essay::language.messages.error.create'));
+        }
+    }
+
+    public function show(Request $request)
+    {
         $filename = 'test_word.pdf';
+        // Storage::disk('google')->put($filename, 'test2 docx');
         $dir = '/';
         $recursive = false; // Có lấy file trong các thư mục con không?
         $contents = collect(Storage::disk('google')->listContents($dir, $recursive));

@@ -16,9 +16,21 @@ class CreateVneEssayTable extends Migration
         Schema::create('vne_essay', function (Blueprint $table) {
             $table->increments('essay_id');
             $table->string('name')->nullable();
+            $table->string('type')->nullable();
+            $table->string('path')->nullable();
+            $table->string('filename')->nullable();
             $table->string('alias')->nullable();
+            $table->string('extension')->nullable();
+            $table->string('timestamp')->nullable();
+            $table->string('size')->nullable();
+            $table->string('dirname')->nullable();
+            $table->string('basename')->nullable();
             $table->string('image')->nullable();
-            $table->string('path_file')->nullable();
+            $table->logText('note')->nullable();
+            
+            $table->integer('point')->nullable();
+            $table->integer('is_point')->default(0);
+
             $table->integer('essay_topic_id',false,true)->nullable();
             $table->integer('member_id',false,true)->nullable();
 
