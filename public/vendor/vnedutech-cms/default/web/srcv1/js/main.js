@@ -215,18 +215,3 @@ if ($(window).width() <= 1024) {
   $('.menu-responsive>.group>.inner').prepend($('#nav2'));
   $('.menu-responsive .group .top').prepend($('#nav2 .nav-item:nth-child(1) .nav-link'));
 }
-
-// 
-var btnUploadNotification = $('.upload-notification .btn-closed');
-var CLASS_ACTIVE_UPLOAD_NOTIFICATION = 'active-upload-notification';
-
-if (btnUploadNotification) {
-  btnUploadNotification.on('click', function () {
-    body.removeClass(CLASS_ACTIVE_UPLOAD_NOTIFICATION);
-  });
-  
-  bodyOvarlay.on('click', function () {
-    body.removeClass(CLASS_ACTIVE_UPLOAD_NOTIFICATION);
-  });
-}
-

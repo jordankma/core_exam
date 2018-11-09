@@ -13,6 +13,8 @@ Route::group(array('prefix' => $adminPrefix), function() {
             Route::get('delete', 'EssayController@delete')->name('vne.essay.essay.delete');
             Route::get('confirm-delete', 'EssayController@getModalDelete')->name('vne.essay.essay.confirm-delete');
 
+            Route::post('check-name-exist', 'EssayController@checkNameExist')->name('vne.essay.essay.check.name.exist');
+
             Route::get('test', 'EssayController@test');
         }); 
 

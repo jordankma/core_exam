@@ -5,69 +5,72 @@
 
 @section('content')
 	<!-- main -->
-		<main class="main">
+	<main class="main">
+	<!-- breadcrumb -->
+	<nav class="section breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb-list">
+				<li class="breadcrumb-item">
+					<a class="breadcrumb-link" href="#">Trang chủ</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a class="breadcrumb-link" href="#">Tự luận</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a class="breadcrumb-link" href="#">Danh sách bài thi</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<!-- breadcrumb end -->
 
-			<!-- breadcrumb -->
-			<nav class="section breadcrumb">
-				<div class="container">
-					<ul class="breadcrumb-list">
-						<li class="breadcrumb-item">
-							<a class="breadcrumb-link" href="#">Trang chủ</a>
-						</li>
-						<li class="breadcrumb-item">
-							<a class="breadcrumb-link" href="#">Trang tải bài tự luận</a>
-						</li>
-					</ul>
+	<section class="section upload-file">
+		<div class="container">
+			<div class="inner">
+				<h1 class="headline">Gửi bài thi</h1>
+				<form class="upload">
+					<div class="form-group">
+						<label for="title">Tiêu đề</label>
+						<input type="title" class="form-control" placeholder="Nhập vào tiêu đề bài thi">
+					</div>
+					<div class="form-group">
+						<label for="fileLogo">Upload logo</label>
+						<span class="btn-upload btn-upload-logo">
+							<span>Upload</span>
+							<input type="file" class="form-control-file">
+						</span>
+						<div class="form-text">Chấp nhận file: jpg, jpge, png, gif. Kích thước file không quá 1024px, dung lượng
+							không quá 2MB</div>
+						<div class="show-logo">
+							<img src="https://thuthuatnhanh.com/wp-content/uploads/2018/07/anh-avatar-dep.jpg" alt="">
+							<span>x 87 KB</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" rows="24" placeholder="Ghi chú"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="fileContest">Upload file dự thi</label>
+						<div class="btn-upload btn-upload-contest">
+							<span>Upload</span>
+							<input type="file" class="form-control-file">
+						</div>
+					</div>
+					<button type="submit" class="btn">Gửi bài thi</button>
+				</form>
+				<div class="upload-notification">
+					<div class="inner">
+						<div class="title">Thông báo</div>
+						<p>Đã xảy ra lỗi trong quá trình gửi bài thi. <br>Bạn hãy kiểm tra và gửi lại bài. Ấn Ok để đóng thông báo</p>
+						<button class="btn btn-closed">OK</button>
+					</div>
 				</div>
-			</nav>
-			<!-- breadcrumb end -->
+			</div>
+		</div>
+	</section>
 
-			<!-- essay -->
-			<section class="section essay registration">
-				<div class="container">
-                    <div class="inner">
-                        <h1 class="headline">Thông tin bài tự luận</h1>
-                        <form>
-                            <div class="form-group">
-                                <label>Tên bài</label>
-                                <div class="input">
-                                    <input class="form-control" type="name">
-                                    <small class="text-muted">*</small>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Ảnh đại diện</label>
-                                <div class="input">
-                                    <input class="form-control" type="name">
-                                    <small class="text-muted">*</small>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Đề tài</label>
-                                <div class="input">
-                                    <select class="form-control">
-                                        @if(!empty($essay_topic))
-                                        @foreach($essay_topic as $element)
-                                            <option value="{{ $element->essay_topic_id }}">{{ $element->name }}</option>
-                                        @endforeach
-                                        @endif
-                                    </select>
-                                    <small class="text-muted">*</small>
-                                </div>
-                            </div>
-                            <div class="btn-group">
-                                <button type="submit" class="btn btn-save">Lưu</button>
-                                <a class="btn btn-exit" href="">Bỏ qua</a>
-                            </div>
-                        </form>
-                    </div>
-				</div>
-
-			</section>
-			<!-- essay end -->
-
-		</main>
-		<!-- main end -->
+</main>
+<!-- main end -->
 
 @stop
 

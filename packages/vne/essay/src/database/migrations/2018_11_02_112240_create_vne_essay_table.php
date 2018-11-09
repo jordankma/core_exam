@@ -21,6 +21,7 @@ class CreateVneEssayTable extends Migration
             $table->string('filename')->nullable();
             $table->string('alias')->nullable();
             $table->string('extension')->nullable();
+            $table->string('mimetype')->nullable();
             $table->string('timestamp')->nullable();
             $table->string('size')->nullable();
             $table->string('dirname')->nullable();
@@ -30,6 +31,7 @@ class CreateVneEssayTable extends Migration
             
             $table->integer('point')->nullable();
             $table->integer('is_point')->default(0);
+            $table->integer('is_upload')->default(0);
 
             $table->integer('essay_topic_id',false,true)->nullable();
             $table->integer('member_id',false,true)->nullable();

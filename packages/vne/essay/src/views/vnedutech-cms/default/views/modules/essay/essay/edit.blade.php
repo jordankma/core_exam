@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 {{-- Page title --}}
-@section('title'){{ $title = trans('vne-essay::language.titles.topic.update') }}@stop
+@section('title'){{ $title = trans('vne-essay::language.titles.essay.update') }}@stop
 
 {{-- page styles --}}
 @section('header_styles')
@@ -31,15 +31,18 @@
         <div class="row">
             <div class="the-box no-border">
                 <!-- errors -->
-                <form action="{{ route('vne.essay.topic.update') }}" method="post">
+                <form action="{{ route('vne.essay.essay.update') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-                    <input type="hidden" name="essay_topic_id" value="{{ $essay_topic->essay_topic_id }}"/>
+                    <input type="hidden" name="essay_id" value="{{ $essay->essay_id }}"/>
                     <div class="row">
                         <div class="col-sm-8">
-                            <label> {{ trans('vne-essay::language.label.topic.name') }} </label>
+                            <label> {{ trans('vne-essay::language.label.essay.name') }} </label>
                             <div class="form-group {{ $errors->first('name', 'has-error') }}">
-                                <input type="text" name="name" class="form-control" placeholder="{{ trans('vne-essay::language.placeholder.topic.name_here') }}" value="{{ $essay_topic->name }}">
+                                <input type="text" name="name" class="form-control" placeholder="{{ trans('vne-essay::language.placeholder.essay.name_here') }}" value="{{ $essay_essay->name }}">
                                 <span class="help-block">{{ $errors->first('name', ':message') }}</span>
+                            </div>
+                            <div class="form-group {{ $errors->first('name', 'has-error') }}">
+                                <iframe src=" {{ $path }} " width="100%" height="480"></iframe>
                             </div>
                         </div>
                         <!-- /.col-sm-8 -->
@@ -48,7 +51,7 @@
                                 <label for="blog_category" class="">Actions</label>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success">{{ trans('vne-essay::language.buttons.update') }}</button>
-                                    <a href="{{ route('vne.essay.topic.manage') }}"
+                                    <a href="{{ route('vne.essay.essay.manage') }}"
                                        class="btn btn-danger">{{ trans('vne-essay::language.buttons.discard') }}</a>
                                 </div>
                             </div>

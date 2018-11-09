@@ -8,7 +8,7 @@ use Vne\Essay\App\Repositories\EssayRepository;
 use Vne\Essay\App\Models\Essay;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\Datatables\Datatables;
-use Validator,Storage,File;
+use Validator,Storage,File,Auth;
 
 class EssayController extends Controller
 {
@@ -33,68 +33,98 @@ class EssayController extends Controller
         return view('VNE-ESSAY::modules.essay.essay.manage');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('VNE-ESSAY::modules.essay.essay.create');
+        $name = $note = '';
+        $data = [
+            'name' => !empty($request->input('name')) ? $request->input('name') : '',
+            'note' => !empty($request->input('note')) ? $request->input('note') : ''
+        ];
+        return view('VNE-ESSAY::modules.essay.essay.create',$data);
     }
 
     public function add(Request $request)
     {
-        
-        $target_dir = "uploads/essay/";
-        $file_name = 'test';
-
-        $file = $request->file('fileToUpload');
-        Storage::disk('google')->put('text2.txt', file_get_contents($file));
-        dd($file);
-        $file->move($target_dir, $file_name);
-        dd($_FILES["fileToUpload"]);
+        $member_id = Auth::user()->user_id;
         $name = $request->input('name');
-        $essay = new Essay();
-        $essay->name = $name;
-        $essay->alias = self::to_slug($name);
+        $alias_name = self::to_slug($name) .'-'. $member_id;
+        $note = $request->input('note');
+        $data = [
+            'name' => $name,
+            'note' => $note
+        ];
+        $messages = "File không đúng định dạng";
+        $folder_upload_essay = "uploads/essay/essay";
+        $folder_upload_essay_icon = "uploads/essay/icon";
 
-        if ($essay->save()) {
-
-            activity('essay')
-                ->performedOn($essay)
-                ->withProperties($request->all())
-                ->log('User: :causer.email - Add essay - name: :properties.name, essay_id: ' . $essay->essay_id);
-
-            return redirect()->route('vne.essay.essay.manage')->with('success', trans('vne-essay::language.messages.success.create'));
-        } else {
-            return redirect()->route('vne.essay.essay.manage')->with('error', trans('vne-essay::language.messages.error.create'));
+        $file_to_upload = $request->file('fileToUpload');
+        $file_name = $file_to_upload->getClientOriginalName();
+        $file_tmp = explode('.', $file_name);
+        $file_extension = end($file_tmp);
+        if($file_extension != 'pdf' && $file_extension != 'docx' && $file_extension != 'pptx' && $file_extension != 'txt'){
+            return redirect()->route('vne.essay.essay.create',$data)->with('error', 'Sai định dạng file tải lên');   
         }
+        $icon_to_upload = $request->file('image');
+        $icon_name = $icon_to_upload->getClientOriginalName();
+        $icon_tmp = explode('.', $icon_name);
+        $icon_extension = end($icon_tmp);
+        if($icon_extension != 'png' && $icon_extension != 'jpg'){
+            return redirect()->route('vne.essay.essay.create',$data)->with('error', 'Sai định dạng file ảnh tải lên');   
+        }
+
+        $file_name_full = $alias_name .'.'. $file_extension;
+        $icon_name_full = $alias_name .'.'. $icon_extension;
+
+        if(Storage::disk('google')->put($alias_name .'.'. $file_extension, file_get_contents($file_to_upload))){
+            $file_to_upload->move($folder_upload_essay, $file_name_full);
+            $icon_to_upload->move($folder_upload_essay_icon, $icon_name_full);
+            //get info file from gg drive 
+            $dir = '/';
+            $recursive = false;
+            $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+            $file = $contents
+                ->where('type', '=', 'file')
+                ->where('filename', '=', pathinfo($file_name_full, PATHINFO_FILENAME))
+                ->where('extension', '=', pathinfo($file_name_full, PATHINFO_EXTENSION))
+                ->first();
+            $essay = new Essay();
+            $essay->name = $name;
+            //info from gg drive
+            $essay->type = $file['type'];
+            $essay->path = $file['path'];
+            $essay->filename = $file['filename'];
+            $essay->extension = $file['extension'];
+            $essay->timestamp = $file['timestamp'];
+            $essay->mimetype = $file['mimetype'];
+            $essay->dirname = $file['dirname'];
+            $essay->basename = $file['basename'];
+            //
+            $essay->member_id = $member_id;
+            $essay->note = $note;
+            $essay->path_local = $folder_upload_essay . '/' . $file_name_full;
+            $essay->image = $folder_upload_essay_icon . '/' . $icon_name_full;
+            if ($essay->save()) {
+                activity('essay')
+                    ->performedOn($essay)
+                    ->withProperties($request->all())
+                    ->log('User: :causer.email - Add essay - name: :properties.name, essay_id: ' . $essay->essay_id);
+
+                return redirect()->route('vne.essay.essay.create')->with('success', trans('vne-essay::language.messages.success.create'));
+            } else {
+                return redirect()->route('vne.essay.essay.create')->with('error', trans('vne-essay::language.messages.error.create'));
+            }
+        }
+        
     }
 
     public function show(Request $request)
     {
-        $filename = 'test_word.pdf';
-        // Storage::disk('google')->put($filename, 'test2 docx');
-        $dir = '/';
-        $recursive = false; // Có lấy file trong các thư mục con không?
-        $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
-        $file = $contents
-            ->where('type', '=', 'file')
-            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
-            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
-            ->first(); // có thể bị trùng tên file với nhau!
-        //return $file; // array with file info
-        dd($file);
-        if($file!=null){
-        $rawData = Storage::disk('google')->get($file['path']);
-        // dd($rawData);
-            return response($rawData, 200)
-                ->header('Content-Type', $file['mimetype'])
-                ->header('Content-Disposition', "attachment; filename='$filename'");
-        }
         $essay_id = $request->input('essay_id');
         $essay = $this->essay->find($essay_id);
-        dd($essay);
         $data = [
-            'essay' => $essay
+            'essay' => $essay,
+            'path' => 'https://drive.google.com/file/d/'. $essay->path .'/preview'
         ];
-        
         return view('VNE-ESSAY::modules.essay.essay.edit', $data);
     }
 
@@ -224,4 +254,15 @@ class EssayController extends Controller
             ->make();
     }
 
+    public function checkNameExist(Request $request){
+        $data['valid'] = true;
+        if ($request->ajax()) {
+            $name_alias = self::to_slug($request->input('name'));
+            $essay =  Essay::where(['alias' => $name_alias])->first();
+            if ($essay) {
+                $data['valid'] = false; // true là có user
+            }
+        }
+        echo json_encode($data);
+    }
 }

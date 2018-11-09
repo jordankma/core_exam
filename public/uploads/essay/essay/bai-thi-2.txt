@@ -1,0 +1,37 @@
+api get list tin tức
+method : GET
+params : page
+http://gthd.vnedutech.vn/resource/dev/get/news/list?page=1
+
+api get detail tin tức
+method : GET
+params : id tin tức
+http://gthd.vnedutech.vn/resource/dev/get/news/detail?id=
+
+api get list tin tức theo box
+method : GET
+params : page, alias
+http://gthd.vnedutech.vn/resource/dev/get/news/list-by-box?page=1&alias=thong-bao-btc
+
+api post liên hệ
+method : POST
+params : name, email_contact, content
+http://gthd.vnedutech.vn/resource/dev/get/contact/send
+
+api get banner
+method : GET
+params : position_id
+http://gthd.vnedutech.vn/resource/dev/get/banner/list?position_id=1
+
+api get top
+
+
+top đã thi
+api/contest/get/top/candidate?top_type=district&top=10&page=1&table_id=2&round_id=4&topic_id=5
+
+top kết quả (theo tuần)
+api/contest/get/top/result?top_type=district&top=10&page=1&table_id=2&round_id=4&topic_id=5
+
+tách thành 2 api nhé
+candidate là top thí sinh
+còn result là top kết quả

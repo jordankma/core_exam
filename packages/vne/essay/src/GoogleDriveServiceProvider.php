@@ -12,7 +12,7 @@ class GoogleDriveServiceProvider extends ServiceProvider
     {
         \Storage::extend('google', function($app, $config) {
             $config['accessToken'] 
-            = 'ya29.GltOBmt6zekzMKPGJZOymQh9Hoz0yxLZrUWup_JZ7wrXXtrcNob-XeRMtFFcyVW6mIu12vb3XjJKLozEykQKIy1M_AHLMw10ptm94Mr7MBYm4MF2ROK29HXkipY9';
+            = 'ya29.GltPBrvp0w7EgB6V5dENBv41kmUlbQA1ZmTF-mJwisGRitnlXnQe851ivCfC22f6X8WgiRHqf_xuF-9xZUk_lKfRED0Vqy_UPbNg3NCu--gaZxITep1WWSNK6OIA';
             $client = new \Google_Client();
             $client->setClientId($config['clientId']);
             $client->setClientSecret($config['clientSecret']);

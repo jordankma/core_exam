@@ -31,29 +31,21 @@
         <div class="row">
             <div class="the-box no-border">
                 <!-- errors -->
-                <form action="{{ route('vne.essay.essay.add') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('vne.essay.essay.add') }}" method="post" enctype="multipart/form-data" id="form-add-essay">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
                     <div class="row">
                         <div class="col-sm-8">
                             <label> {{ trans('vne-essay::language.label.essay.name') }} </label>
                             <div class="form-group {{ $errors->first('name', 'has-error') }}">
-                                <input type="text" name="name" class="form-control" placeholder="{{ trans('vne-essay::language.placeholder.essay.name_here') }}">
+                            <input type="text" name="name" class="form-control" value="{{ $name }}" placeholder="{{ trans('vne-essay::language.placeholder.essay.name_here') }}">
                                 <span class="help-block">{{ $errors->first('name', ':message') }}</span>
                             </div>
-                            <label>{{ trans('vne-essay::language.label.essay.upload_icon') }}</label>
                             <div class="form-group">
-                                <div class=" input-group">
-                                    <span class="input-group-btn">
-                                        <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                                            <i class="fa fa-picture-o"></i> {{ trans('vne-essay::language.label.essay.upload_icon') }}
-                                        </a>
-                                    </span>
-                                    <input id="thumbnail" class="form-control" type="text" name="image">
-                                </div>
-                                <img id="holder" style="margin-top:15px;max-height:100px;">
+                                <label>{{ trans('vne-essay::language.label.essay.upload_icon') }}</label>  
+                                <input type="file" name="image" id="imageUpload">
                             </div>
                             <div class="form-group">
-                                <textarea name="note" class="form-control" rows="7">{{ trans('vne-essay::language.placeholder.essay.note') }}</textarea>
+                                <textarea name="note" class="form-control" rows="7">{{ $note }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label>{{ trans('vne-essay::language.label.essay.upload_essay') }}</label>    
@@ -85,14 +77,49 @@
     <!-- begining of page js -->
     <script src="{{ config('site.url_static') . '/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrap-switch/js/bootstrap-switch.js' }}" type="text/javascript"></script>
     <script src="{{ config('site.url_static') . '/vendor/' . $group_name . '/' . $skin . '/vendors/bootstrapvalidator/js/bootstrapValidator.min.js' }}" type="text/javascript"></script>
-    <script src="{{ asset('/vendor/laravel-filemanager/js/lfm.js') }}" type="text/javascript" ></script>
     <!--end of page js-->
     <script>
         $(function () {
             $("[name='permission_locked']").bootstrapSwitch();
         })
         $(document).ready(function () {
-            $('#lfm').filemanager('image');
+            $('#form-add-essay').bootstrapValidator({
+                feedbackIcons: {
+                    // validating: 'glyphicon glyphicon-refresh'
+                },
+                fields: {
+                    name: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Bạn chưa nhập tên tên'
+                            },
+                            stringLength: {
+                                max: 150,
+                                message: 'Tên không được quá dài'
+                            }
+                        }
+                    },
+                    image: {
+                        validators: {
+                            file: {
+                                extension: 'png,jpg',
+                                message: 'Chọn sai định dạng ảnh'
+                            }
+                        }
+                    },
+                    fileToUpload: {
+                        validators: {
+                            notEmpty: {
+                                message: 'Bạn chưa chọn bài thi để tải lên'
+                            },
+                            file: {
+                                extension: 'pdf,pptx,txt',
+                                message: 'Chọn sai định dạng file'
+                            }
+                        }
+                    },
+                }
+            }); 
         });
     </script>
 @stop
