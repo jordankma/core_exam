@@ -68,11 +68,12 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        if (Auth::check()) {
+        
+        if (Auth::guard('member')->check()) {
             $data['status'] = true;
             return json_encode($data);
         }
-
+        // dd('2');
         if ($request->isMethod('post')) {
             return $this->_authenticate($request);
         }

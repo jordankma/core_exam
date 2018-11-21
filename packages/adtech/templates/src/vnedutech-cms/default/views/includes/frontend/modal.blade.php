@@ -58,7 +58,7 @@
 
 		<div class="form-user message js-message">
             <div class="logo">
-                <img src="src/images/egroup-logo.png" alt="">
+                <img src="{{ asset('/vendor/' . $group_name . '/' . $skin . '/web/src/images/egroup-logo.png?t=').time() }}" alt="">
             </div>
             <div class="inner-message">
                 <h4>Cuộc thi đã kết thúc.</h4>

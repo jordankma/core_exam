@@ -217,16 +217,16 @@ if ($(window).width() <= 1024) {
 }
 
 // 
-var btnUploadNotification = $('.upload-notification .btn-closed');
-var CLASS_ACTIVE_UPLOAD_NOTIFICATION = 'active-upload-notification';
+// var btnUploadNotification = $('.upload-notification .btn-closed');
+// var CLASS_ACTIVE_UPLOAD_NOTIFICATION = 'active-upload-notification';
 
-if (btnUploadNotification) {
-  btnUploadNotification.on('click', function () {
-    body.removeClass(CLASS_ACTIVE_UPLOAD_NOTIFICATION);
-  });
+// if (btnUploadNotification) {
+//   btnUploadNotification.on('click', function () {
+//     body.removeClass(CLASS_ACTIVE_UPLOAD_NOTIFICATION);
+//   });
   
-  bodyOvarlay.on('click', function () {
-    body.removeClass(CLASS_ACTIVE_UPLOAD_NOTIFICATION);
-  });
-}
+//   bodyOvarlay.on('click', function () {
+//     body.removeClass(CLASS_ACTIVE_UPLOAD_NOTIFICATION);
+//   });
+// }
 

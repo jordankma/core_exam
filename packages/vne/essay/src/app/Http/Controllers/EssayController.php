@@ -56,7 +56,7 @@ class EssayController extends Controller
         $messages = "File không đúng định dạng";
         $folder_upload_essay = "uploads/essay/essay";
         $folder_upload_essay_icon = "uploads/essay/icon";
-
+        //file upload
         $file_to_upload = $request->file('fileToUpload');
         $file_name = $file_to_upload->getClientOriginalName();
         $file_tmp = explode('.', $file_name);
@@ -64,6 +64,7 @@ class EssayController extends Controller
         if($file_extension != 'pdf' && $file_extension != 'docx' && $file_extension != 'pptx' && $file_extension != 'txt'){
             return redirect()->route('vne.essay.essay.create',$data)->with('error', 'Sai định dạng file tải lên');   
         }
+        //icon upload
         $icon_to_upload = $request->file('image');
         $icon_name = $icon_to_upload->getClientOriginalName();
         $icon_tmp = explode('.', $icon_name);
@@ -71,7 +72,7 @@ class EssayController extends Controller
         if($icon_extension != 'png' && $icon_extension != 'jpg'){
             return redirect()->route('vne.essay.essay.create',$data)->with('error', 'Sai định dạng file ảnh tải lên');   
         }
-
+        
         $file_name_full = $alias_name .'.'. $file_extension;
         $icon_name_full = $alias_name .'.'. $icon_extension;
 
