@@ -33,7 +33,7 @@
 
 	<section class="section upload-file">
 		<div class="container">
-			<div class="inner">
+			{{-- <div class="inner">
 				<h1 class="headline">Gửi bài thi</h1>
 				<form class="upload" action="{{ route('vne.frontend.essay.save') }}" method="post" enctype="multipart/form-data" id="form-add-essay">
 					<div class="form-group">
@@ -74,6 +74,9 @@
 						<a href="" class="btn-ok"> <button class="btn btn-closed">Đồng ý</button></a>
 					</div>
 				</div>
+			</div> --}}
+			<div class="inner">
+				{!! $data_file !!}
 			</div>
 		</div>
 	</section>

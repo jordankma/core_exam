@@ -31,6 +31,9 @@ class EssayFrontendController extends Controller
 
     public function show(Request $request)
     {
+        $data_file = file_get_contents('https://drive.google.com/file/d/1B8AwYmZQFw_Xl6YW5eFaV-s9SR_QOy0c/preview');
+
+        // dd($data);
         $member_id = $this->_guard->user()->member_id;
         if(self::checkOnlySubmitEssay($member_id)){
             return redirect()->route('index');
@@ -41,7 +44,8 @@ class EssayFrontendController extends Controller
             'name' => !empty($request->input('name')) ? $request->input('name') : '',
             'note' => !empty($request->input('note')) ? $request->input('note') : '',
             'flag' => $flag,
-            'message' => $message
+            'message' => $message,
+            'data_file' => $data_file
         ];
         return view('VNE-ESSAY::modules.essay.frontend.show',$data);
     }
@@ -52,7 +56,7 @@ class EssayFrontendController extends Controller
         if(self::checkOnlySubmitEssay($member_id)){
             return redirect()->route('index');
         }
-        
+
         $flag = '';
         $name = $request->input('name');
         $alias_name = self::to_slug($name) .'-'. $member_id .'-'. time();
