@@ -373,6 +373,9 @@ class MemberController extends Controller
                 if ($this->user->canAccess('vne.member.member.show')) {
                     $actions .='<a href=' . route('vne.member.member.show', ['member_id' => $members->member_id]) . '><i class="livicon" data-name="edit" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="update member"></i></a>';
                 }
+                if ($this->user->canAccess('vne.essay.essay.create') && $members->is_essay != 1) {
+                    $actions .='<a href=' . route('vne.essay.essay.create', ['member_id' => $members->member_id]) . '><i class="livicon" data-name="upload" data-size="18" data-loop="true" data-c="#428BCA" data-hc="#428BCA" title="tai bai thi len"></i></a>';
+                }
                 if ($this->user->canAccess('vne.member.member.confirm-delete')) {
                     $actions .= '<a href=' . route('vne.member.member.confirm-delete', ['member_id' => $members->member_id]) . ' data-toggle="modal" data-target="#delete_confirm"><i class="livicon" data-name="trash" data-size="18" data-loop="true" data-c="#f56954" data-hc="#f56954" title="delete member"></i></a>
                         ';

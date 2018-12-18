@@ -13,7 +13,7 @@ class CreateVneEssayTable extends Migration
      */
     public function up()
     {
-        Schema::create('vne_essay', function (Blueprint $table) {
+        Schema::connection('mysql_vne')->create('vne_essay', function (Blueprint $table) {
             $table->increments('essay_id');
             $table->string('name')->nullable();
             $table->string('type')->nullable();
@@ -51,6 +51,6 @@ class CreateVneEssayTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vne_essay');
+        Schema::connection('mysql_vne')->dropIfExists('vne_essay');
     }
 }

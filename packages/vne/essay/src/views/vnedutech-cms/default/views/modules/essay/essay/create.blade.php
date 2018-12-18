@@ -33,6 +33,7 @@
                 <!-- errors -->
                 <form action="{{ route('vne.essay.essay.add') }}" method="post" enctype="multipart/form-data" id="form-add-essay">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
+                    <input type="hidden" name="member_id" value="{{ $member_id }}"/>
                     <div class="row">
                         <div class="col-sm-8">
                             <label> {{ trans('vne-essay::language.label.essay.name') }} </label>
@@ -113,7 +114,7 @@
                                 message: 'Bạn chưa chọn bài thi để tải lên'
                             },
                             file: {
-                                extension: 'pdf,pptx,txt',
+                                extension: 'pdf,pptx,txt,docx',
                                 message: 'Chọn sai định dạng file'
                             }
                         }

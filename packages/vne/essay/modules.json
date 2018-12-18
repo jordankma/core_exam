@@ -1,70 +1,38 @@
 {
-  "package": "package",
-  "module": "module",
+  "package": "vne",
+  "module": "essay",
   "description": "Permission route by group",
   "details": [
     {
-      "name": "Controller 01",
+      "name": "Quản lý bài thi",
       "groups": [
         {
           "name": "View list",
           "routes": [
-            "package.module.controller.method",
-            "router name 02"
+            "vne.essay.essay.log",
+            "vne.essay.essay.data",
+            "vne.essay.essay.manage"
           ]
         },
         {
           "name": "Create",
           "routes": [
-            "router name 03",
-            "router name 04"
+            "vne.essay.essay.create",
+            "vne.essay.essay.add"
           ]
         },
         {
           "name": "Update",
           "routes": [
-            "router name 05",
-            "router name 06"
+            "vne.essay.essay.show",
+            "vne.essay.essay.update"
           ]
         },
         {
           "name": "Delete",
           "routes": [
-            "router name 07",
-            "router name 08"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "Controller 02",
-      "groups": [
-        {
-          "name": "View list",
-          "routes": [
-            "router name 11",
-            "router name 12"
-          ]
-        },
-        {
-          "name": "Create",
-          "routes": [
-            "router name 13",
-            "router name 14"
-          ]
-        },
-        {
-          "name": "Update",
-          "routes": [
-            "router name 15",
-            "router name 16"
-          ]
-        },
-        {
-          "name": "Delete",
-          "routes": [
-            "router name 17",
-            "router name 18"
+            "vne.essay.essay.delete",
+            "vne.essay.essay.confirm-delete"
           ]
         }
       ]

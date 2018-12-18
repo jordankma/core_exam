@@ -34,13 +34,13 @@
                         <i class="livicon" data-name="users" data-size="16" data-loop="true" data-c="#fff" data-hc="white"></i>
                         {{ $title }}
                     </h4>
-                    <div class="pull-right">
+                    {{-- <div class="pull-right">
                         @if ($USER_LOGGED->canAccess('vne.essay.essay.create'))
                         <a href="{{ route('vne.essay.essay.create') }}" class="btn btn-sm btn-default">
                             <span class="glyphicon glyphicon-plus"></span> {{ trans('vne-essay::language.buttons.create') }}
                         </a>
                         @endif
-                    </div>
+                    </div> --}}
                 </div>
                 <br/>
                 <div class="panel-body">
@@ -50,7 +50,7 @@
                             <tr class="filters">
                                 <th class="fit-content">{{ trans('adtech-core::common.sequence') }}</th>
                                 <th>{{ trans('vne-essay::language.table.essay.name') }}</th>
-                                <th>{{ trans('vne-essay::language.table.essay.name_topic') }}</th>
+                                {{-- <th>{{ trans('vne-essay::language.table.essay.name_topic') }}</th> --}}
                                 <th>{{ trans('vne-essay::language.table.essay.name_member_exam') }}</th>
                                 <th style="width: 120px">{{ trans('vne-essay::language.table.created_at') }}</th>
                                 <th style="width: 120px">{{ trans('vne-essay::language.table.updated_at') }}</th>
@@ -79,7 +79,7 @@
                 columns: [
                     { data: 'DT_Row_Index', name: 'essay_id' },
                     { data: 'name', name: 'name' },
-                    { data: 'essay_topic', name: 'essay_topic' },
+                    // { data: 'essay_topic', name: 'essay_topic' },
                     { data: 'member', name: 'member' },
                     { data: 'created_at', name: 'created_at'},
                     { data: 'updated_at', name: 'updated_at'},

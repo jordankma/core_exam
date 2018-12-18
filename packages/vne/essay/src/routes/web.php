@@ -33,6 +33,8 @@ Route::group(array('prefix' => $adminPrefix), function() {
 });
 
 Route::group(array('prefix' => ''), function() {
+    Route::get('danh-sach-bai-tu-luan', 'EssayFrontendController@list')->name('vne.frontend.essay.list')->where('as','Frontend- Danh sách bài Tự luận');
+    Route::get('bai-thi-tu-luan', 'EssayFrontendController@detail')->name('vne.frontend.essay.detail');
     Route::group(['middleware' => ['register']], function () {
         Route::get('tu-luan', 'EssayFrontendController@show')->name('vne.frontend.essay.show')->where('as','Frontend- Tự luận');
         Route::post('tu-luan', 'EssayFrontendController@save')->name('vne.frontend.essay.save');   

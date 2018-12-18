@@ -138,6 +138,26 @@ class EssayFrontendController extends Controller
         return view('VNE-ESSAY::modules.essay.frontend.show',$data);
     }
 
+    public function list(Request $request){
+        $list_essay = Essay::paginate(10);
+        $data = [
+            'list_essay' => $list_essay
+        ];
+        return view('VNE-ESSAY::modules.essay.frontend.list',$data);
+    }
+    public function detail(Request $request){
+
+        $essay = Essay::find($request->input('essay_id'));
+        $file = $essay->path_local;
+        $data = [
+            'essay' => $essay,
+            'file' => $file
+        ];
+        // return response()->file($file,[
+        //     'Content/Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        // ]);
+        return view('VNE-ESSAY::modules.essay.frontend.detail',$data);
+    }
     function checkOnlySubmitEssay($member_id){
         $essay = Essay::where('member_id', $member_id)->first();
         if($essay){
