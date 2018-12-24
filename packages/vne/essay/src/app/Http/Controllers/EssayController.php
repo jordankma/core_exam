@@ -58,6 +58,7 @@ class EssayController extends Controller
         ], $this->messages);
         if (!$validator->fails()) {
             $member_id = $request->input('member_id');
+            $member = Member::find($member_id);
             $name = $request->input('name');
             $alias_name = self::to_slug($name) .'-'. $member_id . '-' . time();
             $note = $request->input('note');
@@ -73,7 +74,7 @@ class EssayController extends Controller
             $file_name = $file_to_upload->getClientOriginalName();
             $file_tmp = explode('.', $file_name);
             $file_extension = end($file_tmp);
-            if($file_extension != 'pdf' && $file_extension != 'docx' && $file_extension != 'pptx' && $file_extension != 'txt'){
+            if($file_extension != 'pdf'){
                 return redirect()->route('vne.essay.essay.create',$data)->with('error', 'Sai định dạng file tải lên');   
             }
             $file_name_full = $alias_name .'.'. $file_extension;
@@ -115,6 +116,9 @@ class EssayController extends Controller
                 $essay->basename = $file['basename'];
                 //
                 $essay->member_id = $member_id;
+                $essay->table_id = $member->table_id;
+                $essay->u_name = $member->u_name;
+                $essay->member_name = $member->name;
                 $essay->note = $note;
                 $essay->path_local = $folder_upload_essay . '/' . $file_name_full;
                 if($request->has('image')){
@@ -269,10 +273,10 @@ class EssayController extends Controller
     {
         $essay_id = $request->input('essay_id');
         $essay = $this->essay->find($essay_id);
-
+        $member_id = $essay->member_id;
         if (null != $essay) {
             $this->essay->delete($essay_id);
-
+            Member::where('member_id', $member_id)->update(['is_essay' => 0]);
             activity('essay')
                 ->performedOn($essay)
                 ->withProperties($request->all())

@@ -9,7 +9,7 @@ return [
         ],
         "essay" => [
             "create" => "Thêm bài thi",
-            "update" => "Cập nhật bài thi thành công",
+            "update" => "Cập nhật bài thi",
             "manage" => "Quản lý bài thi"
         ]
     ],
@@ -28,7 +28,7 @@ return [
         ]
     ],
     "buttons" => [
-        "create" => "Thêm",
+        "create" => "Tải bài thi lên",
         "discard" => "Hủy",
         "update" => "Cập nhật",
     ],

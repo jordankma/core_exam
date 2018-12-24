@@ -26,4 +26,5 @@ class Essay extends Model {
     public function essayTopic(){
         return $this->hasOne('Vne\Essay\App\Models\EssayTopic', 'essay_topic_id', 'essay_topic_id');
     }
+
 }

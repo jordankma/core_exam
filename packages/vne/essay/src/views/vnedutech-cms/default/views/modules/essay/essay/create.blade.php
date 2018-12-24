@@ -36,7 +36,7 @@
                     <input type="hidden" name="member_id" value="{{ $member_id }}"/>
                     <div class="row">
                         <div class="col-sm-8">
-                            <label> {{ trans('vne-essay::language.label.essay.name') }} </label>
+                            <label> {{ trans('vne-essay::language.label.essay.name') }} <span style="color: red">(*)</span> </label>
                             <div class="form-group {{ $errors->first('name', 'has-error') }}">
                             <input type="text" name="name" class="form-control" value="{{ $name }}" placeholder="{{ trans('vne-essay::language.placeholder.essay.name_here') }}">
                                 <span class="help-block">{{ $errors->first('name', ':message') }}</span>
@@ -49,7 +49,7 @@
                                 <textarea name="note" class="form-control" rows="7">{{ $note }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('vne-essay::language.label.essay.upload_essay') }}</label>    
+                                <label>{{ trans('vne-essay::language.label.essay.upload_essay') }} <span style="color: red">(*)</span></label>    
                                 <input type="file" name="fileToUpload" id="fileToUpload">
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                             <div class="form-group col-xs-12">
                                 <label for="blog_category" class="">Actions</label>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-success">{{ trans('adtech-core::buttons.create') }}</button>
+                                    <button type="submit" class="btn btn-success">{{ trans('vne-essay::language.buttons.create') }}</button>
                                     <a href="{{ route('vne.essay.essay.manage') }}"
                                        class="btn btn-danger">{{ trans('vne-essay::language.buttons.discard') }}</a>
                                 </div>
@@ -114,8 +114,8 @@
                                 message: 'Bạn chưa chọn bài thi để tải lên'
                             },
                             file: {
-                                extension: 'pdf,pptx,txt,docx',
-                                message: 'Chọn sai định dạng file'
+                                extension: 'pdf',
+                                message: 'Chọn sai định dạng file vui lòng chọn file pdf'
                             }
                         }
                     },

@@ -34,7 +34,8 @@
                         <p class="date">{{ date_format($essay->created_at,"d/m/Y H:i:s") }}</p>
                         <div class="content">
                             <p>{{ $essay->note }}</p>
-                            <iframe src="{{ $file }}" height="300px" width="300px"></iframe>
+                            <iframe src="{{ $file }}" height="800px" width="100%"></iframe>
+                            {{-- <embed src="{{ $file }}#toolbar=0" width="100%" height="1200px"> --}}
                         </div>
                     </div>
                 </div>
